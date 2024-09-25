@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -24,10 +26,28 @@ public class Login extends javax.swing.JFrame {
         
         setTitle("Kapelicious");
         
-        ImageIcon icon = new ImageIcon("src/icon/kape.png");
+        ImageIcon icon = IconLoader.getIcon();
         Image img = icon.getImage();
         
         setIconImage(img);
+        
+        username.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()== KeyEvent.VK_ENTER) {
+                    btnSignInActionPerformed(null);
+                }
+            }
+        });
+        password.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    // Trigger the login action when Enter is pressed
+                    btnSignInActionPerformed(null);
+                }
+            }
+        });
     }
 
     /**
@@ -57,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 350));
 
-        jPanel2.setBackground(new java.awt.Color(142, 122, 69));
+        jPanel2.setBackground(new java.awt.Color(142, 104, 69));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/kapelicious.png"))); // NOI18N
@@ -146,13 +166,18 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnSignIn.setBackground(new java.awt.Color(142, 122, 69));
+        btnSignIn.setBackground(new java.awt.Color(142, 104, 69));
         btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSignIn.setForeground(new java.awt.Color(255, 245, 238));
         btnSignIn.setText("Sign In");
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignInActionPerformed(evt);
+            }
+        });
+        btnSignIn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnSignInKeyPressed(evt);
             }
         });
 
@@ -283,6 +308,10 @@ public class Login extends javax.swing.JFrame {
             password.setForeground(new Color(205,186,136));
         }
     }//GEN-LAST:event_passwordFocusLost
+
+    private void btnSignInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSignInKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSignInKeyPressed
 
     /**
      * @param args the command line arguments
