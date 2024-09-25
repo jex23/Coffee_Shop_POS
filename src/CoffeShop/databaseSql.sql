@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS tbl_products (
 -- Create tbl_employees (store employee details)
 CREATE TABLE IF NOT EXISTS tbl_employees (
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_username VARCHAR(255) NOT NULL, 
+    employee_passsword VARCHAR(255) NOT NULL,  
     employee_name VARCHAR(255) NOT NULL, 
     employee_role VARCHAR(255) NOT NULL,  
     employee_date_of_employment TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
