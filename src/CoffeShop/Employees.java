@@ -42,7 +42,7 @@ public class Employees extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
+                .addContainerGap(897, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(68, 68, 68))
         );
@@ -51,10 +51,11 @@ public class Employees extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
                 .addComponent(jButton1)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(691, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1106, 835));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

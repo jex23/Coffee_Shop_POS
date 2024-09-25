@@ -42,7 +42,7 @@ public class Products extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(233, Short.MAX_VALUE)
+                .addContainerGap(923, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(42, 42, 42))
         );
@@ -51,10 +51,11 @@ public class Products extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addComponent(jButton1)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(718, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1106, 835));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
