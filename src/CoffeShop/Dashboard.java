@@ -81,6 +81,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Reports");
         jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Menu");
@@ -264,6 +269,12 @@ public class Dashboard extends javax.swing.JFrame {
         callEmployees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       Reports callReports = new Reports();
+       callReports.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
