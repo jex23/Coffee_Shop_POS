@@ -16,11 +16,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 public class Dashboard extends javax.swing.JFrame {
 
     /**
@@ -247,7 +250,7 @@ public class Dashboard extends javax.swing.JFrame {
             searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchBarLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jTextField1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addContainerGap())
@@ -272,7 +275,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
                     .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -450,7 +453,7 @@ public class Dashboard extends javax.swing.JFrame {
     gridPanel.removeAll(); // Clear existing components in the gridPanel
 
     // Iterate over the products list and create UI components for each product
-        for (Product product : products) {
+       for (Product product : products) {
         // Create a new panel for each product
         JPanel productPanel = new JPanel();
         
@@ -465,81 +468,50 @@ public class Dashboard extends javax.swing.JFrame {
         imageLabel.setHorizontalAlignment(JLabel.CENTER); // Center the image
 
         JLabel nameLabel = new JLabel(product.getProductName());
-        JLabel priceLabel = new JLabel("₱" + product.getProductPrice());
+        JLabel priceLabel = new JLabel("$" + product.getProductPrice());
 
-        // Create quantity components
-        JButton minusButton = new JButton("-");
-        JButton plusButton = new JButton("+");
-        JTextField quantityField = new JTextField("1", 3); // Default quantity is 1
-        quantityField.setHorizontalAlignment(JTextField.CENTER);
-        
-        // Store quantity as an integer and initialize with 1
-        final int[] quantity = {1};
-
-        // Add action listeners to update quantity
-        minusButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (quantity[0] > 1) { // Ensure quantity is at least 1
-                    quantity[0]--;
-                    quantityField.setText(String.valueOf(quantity[0]));
-                }
-            }
-        });
-
-        plusButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quantity[0]++;
-                quantityField.setText(String.valueOf(quantity[0]));
-            }
-        });
+        // Create a JSpinner for quantity
+        JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // Min: 1, Max: 100, Step: 1
 
         JButton addButton = new JButton("Add");
 
         // Create a GroupLayout for the product panel
-        javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
+        GroupLayout productPanelLayout = new GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
 
         // Horizontal group layout
         productPanelLayout.setHorizontalGroup(
-            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE) // Center image
+                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE) // Center image
                     .addGroup(productPanelLayout.createSequentialGroup()
-                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE) // Top left: Name
+                        .addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE) // Top left: Name
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)) // Top left: Price
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
-                        .addComponent(minusButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(plusButton)
+                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)) // Top left: Price
+                    .addGroup(GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
+                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Center: Quantity spinner
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))) // Bottom: Quantity controls and Add button
+                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))) // Bottom: Add button
                 .addContainerGap())
         );
 
         // Vertical group layout
         productPanelLayout.setVerticalGroup(
-            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel) // Top left: Name
                     .addComponent(priceLabel)) // Top left: Price
                 .addGap(18, 18, 18)
-                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE) // Center: Image
+                .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Center: Image
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(minusButton) // Bottom left: Minus button
-                    .addComponent(quantityField) // Center: Quantity field
-                    .addComponent(plusButton) // Bottom right: Plus button
+                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantitySpinner) // Center: Quantity spinner
                     .addComponent(addButton)) // Bottom: Add button
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         // Add the product panel to the gridPanel
