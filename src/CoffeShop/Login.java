@@ -132,7 +132,7 @@ public class Login extends javax.swing.JFrame {
         username.setForeground(new java.awt.Color(205, 186, 136));
         username.setText("Username");
         username.setToolTipText("");
-        username.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        username.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         username.setPreferredSize(new java.awt.Dimension(300, 40));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -156,6 +156,7 @@ public class Login extends javax.swing.JFrame {
         password.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         password.setForeground(new java.awt.Color(205, 186, 136));
         password.setText("Password");
+        password.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         password.setPreferredSize(new java.awt.Dimension(300, 40));
         password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -170,6 +171,7 @@ public class Login extends javax.swing.JFrame {
         btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSignIn.setForeground(new java.awt.Color(255, 245, 238));
         btnSignIn.setText("Sign In");
+        btnSignIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignInActionPerformed(evt);
