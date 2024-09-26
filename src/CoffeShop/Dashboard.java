@@ -169,7 +169,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
 
-        itemDetails.setBackground(new java.awt.Color(204, 255, 255));
+        itemDetails.setBackground(new java.awt.Color(255, 245, 238));
 
         centerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
