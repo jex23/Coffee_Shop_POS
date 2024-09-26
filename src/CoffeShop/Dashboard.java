@@ -23,7 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 public class Dashboard extends javax.swing.JFrame {
 
     /**
@@ -62,11 +64,16 @@ public class Dashboard extends javax.swing.JFrame {
         searchBar = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        coffeeGrid = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        gridPanel = new javax.swing.JPanel();
+        teaGrid = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        snackGrid = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         productTable = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        orderTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -95,7 +102,7 @@ public class Dashboard extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(829, Short.MAX_VALUE)
+                .addContainerGap(987, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -250,7 +257,7 @@ public class Dashboard extends javax.swing.JFrame {
             searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchBarLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jTextField1)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addContainerGap())
@@ -265,8 +272,20 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
-        gridPanel.setLayout(new java.awt.GridLayout(0, 3));
-        jScrollPane2.setViewportView(gridPanel);
+        coffeeGrid.setLayout(new java.awt.GridLayout(0, 3));
+        jScrollPane1.setViewportView(coffeeGrid);
+
+        jTabbedPane2.addTab("Coffee", jScrollPane1);
+
+        teaGrid.setLayout(new java.awt.GridLayout(0, 3));
+        jScrollPane2.setViewportView(teaGrid);
+
+        jTabbedPane2.addTab("Tea", jScrollPane2);
+
+        snackGrid.setLayout(new java.awt.GridLayout(0, 3));
+        jScrollPane3.setViewportView(snackGrid);
+
+        jTabbedPane2.addTab("Snacks", jScrollPane3);
 
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
@@ -274,8 +293,8 @@ public class Dashboard extends javax.swing.JFrame {
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTabbedPane2)
                     .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -284,20 +303,17 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Product Name", "QTY", "Price"
+                "Product Name", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -308,7 +324,12 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        productTable.setViewportView(jTable4);
+        productTable.setViewportView(orderTable);
+        if (orderTable.getColumnModel().getColumnCount() > 0) {
+            orderTable.getColumnModel().getColumn(0).setResizable(false);
+            orderTable.getColumnModel().getColumn(1).setResizable(false);
+            orderTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLabel2.setText("Total:");
 
@@ -332,7 +353,6 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(productTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -354,7 +374,11 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jButton8)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,12 +421,12 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1106, 786));
+        setSize(new java.awt.Dimension(1262, 786));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -445,25 +469,26 @@ public class Dashboard extends javax.swing.JFrame {
      
     
     
-    private void GridlayoutDisplay() {
+private void GridlayoutDisplay() {
     // Create an instance of ProductMethods to fetch products from the database
     ProductMethods productMethods = new ProductMethods();
     List<Product> products = productMethods.productMethod(); // Fetch products from the database
 
-    gridPanel.removeAll(); // Clear existing components in the gridPanel
+    // Clear existing components in each grid
+    coffeeGrid.removeAll();
+    teaGrid.removeAll();
+    snackGrid.removeAll();
 
     // Iterate over the products list and create UI components for each product
-       for (Product product : products) {
+    for (Product product : products) {
         // Create a new panel for each product
         JPanel productPanel = new JPanel();
-        
-        // Add a line border with thickness 1
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); // Add a line border
 
         // Create components for the product details
         JLabel imageLabel = new JLabel();
         ImageIcon productImage = new ImageIcon(new ImageIcon(product.getProductImagePath())
-                .getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)); // Resize the image
+                .getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH)); // Resize the image
         imageLabel.setIcon(productImage); // Set the resized image
         imageLabel.setHorizontalAlignment(JLabel.CENTER); // Center the image
 
@@ -475,11 +500,25 @@ public class Dashboard extends javax.swing.JFrame {
 
         JButton addButton = new JButton("Add");
 
+        // ActionListener for the Add button
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Retrieve product details
+                String productName = product.getProductName(); // Correctly get the product name
+                double productPrice = product.getProductPrice(); // Get product price
+                int quantity = (int) quantitySpinner.getValue(); // Get the quantity from the spinner
+
+                // Pass productName, quantity, and productPrice to addToOrderTable
+                addToOrderTable(productName, quantity, productPrice);
+            }
+        });
+
         // Create a GroupLayout for the product panel
         GroupLayout productPanelLayout = new GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
 
-        // Horizontal group layout
+        // Set up horizontal and vertical groups for layout
         productPanelLayout.setHorizontalGroup(
             productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
@@ -487,39 +526,78 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE) // Center image
                     .addGroup(productPanelLayout.createSequentialGroup()
-                        .addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE) // Top left: Name
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)) // Top left: Price
+                        .addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE) // Name
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)) // Price
                     .addGroup(GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
-                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Center: Quantity spinner
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))) // Bottom: Add button
+                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Quantity spinner
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))) // Add button
                 .addContainerGap())
         );
 
-        // Vertical group layout
         productPanelLayout.setVerticalGroup(
-            productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(productPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel) // Top left: Name
-                    .addComponent(priceLabel)) // Top left: Price
-                .addGap(18, 18, 18)
-                .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Center: Image
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantitySpinner) // Center: Quantity spinner
-                    .addComponent(addButton)) // Bottom: Add button
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            productPanelLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(nameLabel) // Product Name
+                .addComponent(priceLabel)) // Product Price
+            .addGap(18, 18, 18)
+            .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Image
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(quantitySpinner) // Quantity spinner
+                .addComponent(addButton)) // Add button
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        // Add the product panel to the gridPanel
-        gridPanel.add(productPanel);
+        // Add the product panel to the corresponding grid based on the category
+        switch (product.getProductCategory()) {
+            case "Coffee":
+                coffeeGrid.add(productPanel);
+                break;
+            case "Tea":
+                teaGrid.add(productPanel);
+                break;
+            case "Snacks":
+                snackGrid.add(productPanel);
+                break;
+            default:
+                // Handle unknown categories if necessary
+                break;
+        }
     }
 
-    gridPanel.revalidate(); // Refresh the gridPanel
-    gridPanel.repaint(); // Redraw the gridPanel
+    // Refresh each grid panel
+    coffeeGrid.revalidate();
+    coffeeGrid.repaint();
+    teaGrid.revalidate();
+    teaGrid.repaint();
+    snackGrid.revalidate();
+    snackGrid.repaint();
+}
+
+private void addToOrderTable(String productName, int quantity, double price) {
+    // Assuming you have a JTable named orderTable
+    DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+
+    // Debugging: Log the values being added to the order table
+    System.out.println("Adding to order table:");
+    System.out.println("Product Name: " + productName);
+    System.out.println("Quantity: " + quantity);
+    System.out.println("Price per item: " + price); // Price per item
+
+    // Calculate total price
+    double totalPrice = quantity * price; // Calculate total price
+    System.out.println("Total Price: " + totalPrice);
+
+    // Add new row to the order table
+    model.addRow(new Object[]{
+//        model.getRowCount() + 1, // ID: simple row count
+        productName,              // Product Name
+        quantity,                 // Quantity
+        totalPrice                // Total Price
+    });
 }
 
     /**
@@ -560,7 +638,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnOption;
     private javax.swing.JPanel centerPanel;
-    private javax.swing.JPanel gridPanel;
+    private javax.swing.JPanel coffeeGrid;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
     private javax.swing.JButton jButton1;
@@ -576,14 +654,19 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel navbarLeft;
+    private javax.swing.JTable orderTable;
     private javax.swing.JScrollPane productTable;
     private javax.swing.JPanel searchBar;
+    private javax.swing.JPanel snackGrid;
+    private javax.swing.JPanel teaGrid;
     // End of variables declaration//GEN-END:variables
 }
