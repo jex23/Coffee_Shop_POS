@@ -226,8 +226,8 @@ public class Employees extends javax.swing.JFrame {
             .addGroup(tblEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(tblEmployeesLayout.createSequentialGroup()
                     .addGap(82, 82, 82)
-                    .addComponent(employeeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(53, Short.MAX_VALUE)))
+                    .addComponent(employeeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(48, Short.MAX_VALUE)))
         );
 
         crudOption.setBackground(new java.awt.Color(255, 245, 238));
