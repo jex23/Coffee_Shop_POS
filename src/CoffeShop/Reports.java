@@ -4,6 +4,9 @@
  */
 package CoffeShop;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author jenal
@@ -15,6 +18,13 @@ public class Reports extends javax.swing.JFrame {
      */
     public Reports() {
         initComponents();
+        
+        setTitle("Reports");
+        
+        ImageIcon icon = IconLoader.getIcon();
+        Image img = icon.getImage();
+        
+        setIconImage(img);
     }
 
     /**
