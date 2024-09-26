@@ -8,8 +8,19 @@ package CoffeShop;
  *
  * @author James
  */
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 public class Dashboard extends javax.swing.JFrame {
 
     /**
@@ -48,6 +59,8 @@ public class Dashboard extends javax.swing.JFrame {
         searchBar = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        gridPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         productTable = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -62,6 +75,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         header.setBackground(new java.awt.Color(175, 145, 145));
 
@@ -184,7 +202,7 @@ public class Dashboard extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 517, Short.MAX_VALUE))
+                .addGap(0, 470, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -229,10 +247,10 @@ public class Dashboard extends javax.swing.JFrame {
             searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchBarLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         searchBarLayout.setVerticalGroup(
             searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -244,13 +262,18 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        gridPanel.setLayout(new java.awt.GridLayout(0, 3));
+        jScrollPane2.setViewportView(gridPanel);
+
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
         centerPanelLayout.setHorizontalGroup(
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         centerPanelLayout.setVerticalGroup(
@@ -258,7 +281,9 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(668, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -326,7 +351,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jButton8)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +399,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1106, 835));
+        setSize(new java.awt.Dimension(1106, 786));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -409,6 +434,121 @@ public class Dashboard extends javax.swing.JFrame {
        callReports.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        GridlayoutDisplay();
+    }//GEN-LAST:event_formWindowOpened
+     
+    
+    
+    private void GridlayoutDisplay() {
+    // Create an instance of ProductMethods to fetch products from the database
+    ProductMethods productMethods = new ProductMethods();
+    List<Product> products = productMethods.productMethod(); // Fetch products from the database
+
+    gridPanel.removeAll(); // Clear existing components in the gridPanel
+
+    // Iterate over the products list and create UI components for each product
+        for (Product product : products) {
+        // Create a new panel for each product
+        JPanel productPanel = new JPanel();
+        
+        // Add a line border with thickness 1
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+
+        // Create components for the product details
+        JLabel imageLabel = new JLabel();
+        ImageIcon productImage = new ImageIcon(new ImageIcon(product.getProductImagePath())
+                .getImage().getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH)); // Resize the image
+        imageLabel.setIcon(productImage); // Set the resized image
+        imageLabel.setHorizontalAlignment(JLabel.CENTER); // Center the image
+
+        JLabel nameLabel = new JLabel(product.getProductName());
+        JLabel priceLabel = new JLabel("₱" + product.getProductPrice());
+
+        // Create quantity components
+        JButton minusButton = new JButton("-");
+        JButton plusButton = new JButton("+");
+        JTextField quantityField = new JTextField("1", 3); // Default quantity is 1
+        quantityField.setHorizontalAlignment(JTextField.CENTER);
+        
+        // Store quantity as an integer and initialize with 1
+        final int[] quantity = {1};
+
+        // Add action listeners to update quantity
+        minusButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (quantity[0] > 1) { // Ensure quantity is at least 1
+                    quantity[0]--;
+                    quantityField.setText(String.valueOf(quantity[0]));
+                }
+            }
+        });
+
+        plusButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quantity[0]++;
+                quantityField.setText(String.valueOf(quantity[0]));
+            }
+        });
+
+        JButton addButton = new JButton("Add");
+
+        // Create a GroupLayout for the product panel
+        javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
+        productPanel.setLayout(productPanelLayout);
+
+        // Horizontal group layout
+        productPanelLayout.setHorizontalGroup(
+            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(productPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE) // Center image
+                    .addGroup(productPanelLayout.createSequentialGroup()
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE) // Top left: Name
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)) // Top left: Price
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
+                        .addComponent(minusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(plusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))) // Bottom: Quantity controls and Add button
+                .addContainerGap())
+        );
+
+        // Vertical group layout
+        productPanelLayout.setVerticalGroup(
+            productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(productPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel) // Top left: Name
+                    .addComponent(priceLabel)) // Top left: Price
+                .addGap(18, 18, 18)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE) // Center: Image
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(minusButton) // Bottom left: Minus button
+                    .addComponent(quantityField) // Center: Quantity field
+                    .addComponent(plusButton) // Bottom right: Plus button
+                    .addComponent(addButton)) // Bottom: Add button
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        // Add the product panel to the gridPanel
+        gridPanel.add(productPanel);
+    }
+
+    gridPanel.revalidate(); // Refresh the gridPanel
+    gridPanel.repaint(); // Redraw the gridPanel
+}
 
     /**
      * @param args the command line arguments
@@ -448,6 +588,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnOption;
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JPanel gridPanel;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
     private javax.swing.JButton jButton1;
@@ -463,6 +604,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

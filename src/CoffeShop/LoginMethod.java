@@ -33,5 +33,18 @@ public class LoginMethod {
       //for testing inser this 
 // INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath)
 //VALUES ('admin', 'password', 'Admin User', 'Administrator', 'path/to/image.png');
+     // Main method to test the LoginMethod class
+    public static void main(String[] args) {
+        LoginMethod loginMethod = new LoginMethod();
+        String testUsername = "admin"; // Test username
+        String testPassword = "password"; // Test password
+
+        // Attempt to authenticate the user
+        if (loginMethod.authenticate(testUsername, testPassword)) {
+            System.out.println("Login successful!"); // Successful login message
+        } else {
+            System.out.println("Login failed. Invalid username or password."); // Failed login message
+        }
+    }
 
 }

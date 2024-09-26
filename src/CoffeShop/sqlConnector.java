@@ -1,4 +1,3 @@
-
 package CoffeShop;
 
 import java.sql.Connection;
@@ -15,9 +14,9 @@ public class sqlConnector {
     private String userName = "root";
     private String passWord = "";
     
+    // Method to create a connection to the database
     public Connection createConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(connString, userName, passWord);
-        return conn;
+        return DriverManager.getConnection(connString, userName, passWord);
     }
     
     
