@@ -493,7 +493,7 @@ private void GridlayoutDisplay() {
         imageLabel.setHorizontalAlignment(JLabel.CENTER); // Center the image
 
         JLabel nameLabel = new JLabel(product.getProductName());
-        JLabel priceLabel = new JLabel("$" + product.getProductPrice());
+        JLabel priceLabel = new JLabel("₱" + product.getProductPrice());
 
         // Create a JSpinner for quantity
         JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // Min: 1, Max: 100, Step: 1
