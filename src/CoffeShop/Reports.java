@@ -52,9 +52,10 @@ public class Reports extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        header.setBackground(new java.awt.Color(175, 145, 145));
+        header.setBackground(new java.awt.Color(81, 56, 33));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 245, 238));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Employee Name");
 
@@ -77,7 +78,9 @@ public class Reports extends javax.swing.JFrame {
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
 
-        navbarLeft.setBackground(new java.awt.Color(204, 204, 255));
+        navbarLeft.setBackground(new java.awt.Color(255, 192, 135));
+
+        btnOption.setBackground(new java.awt.Color(255, 192, 135));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
@@ -139,26 +142,26 @@ public class Reports extends javax.swing.JFrame {
         btnOptionLayout.setHorizontalGroup(
             btnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOptionLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(btnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(btnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         btnOptionLayout.setVerticalGroup(
             btnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnOptionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout navbarLeftLayout = new javax.swing.GroupLayout(navbarLeft);
@@ -173,33 +176,33 @@ public class Reports extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 691, Short.MAX_VALUE))
+                .addGap(0, 568, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
 
-        itemDetails.setBackground(new java.awt.Color(255, 245, 238));
+        itemDetails.setBackground(new java.awt.Color(255, 192, 135));
 
-        centerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        centerPanel.setBackground(new java.awt.Color(142, 104, 69));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 245, 238));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Reports");
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Category", "img"
+                "ID", "Name", "QTY", "Price", "Time", "Employee Name", "Total Sales"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -213,12 +216,12 @@ public class Reports extends javax.swing.JFrame {
         centerPanelLayout.setHorizontalGroup(
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centerPanelLayout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(centerPanelLayout.createSequentialGroup()
-                .addComponent(productTable)
-                .addContainerGap())
+                .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         centerPanelLayout.setVerticalGroup(
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,8 +238,8 @@ public class Reports extends javax.swing.JFrame {
         itemDetailsLayout.setHorizontalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemDetailsLayout.createSequentialGroup()
-                .addComponent(centerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 533, Short.MAX_VALUE))
+                .addComponent(centerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 259, Short.MAX_VALUE))
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
