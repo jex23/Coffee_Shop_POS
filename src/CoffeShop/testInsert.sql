@@ -1,12 +1,3 @@
-* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
- */
-/**
- * Author:  James
- * Created: Sep 27, 2024
- */
-
 INSERT INTO `tbl_products` (`product_name`, `product_category`, `product_price`, `product_ImagePath`) VALUES
 ('Classic Brewed Coffee', 'Coffee', 70.00, 'src\\products\\Brewed Coffee toon.jpg'),
 ('French Pressed Brewed Coffee', 'Coffee', 90.00, 'src\\products\\Brewed toon.jpg'),
@@ -45,7 +36,7 @@ INSERT INTO `tbl_products` (`product_name`, `product_category`, `product_price`,
 ('Chocolate Milk Frappe', 'Coffee', 140.00, 'src\\products\\Chocolate Milk Frappes.jpg'),
 ('Milky Caramel Frappe', 'Coffee', 140.00, 'src\\products\\Caramel Frappes.jpg'),
 ('Milky Creamy Vanilla Frappe', 'Coffee', 150.00, 'src\\products\\Creamy Vanilla Frappes.jpg'),
-('Cookies N' Cream Frappe', 'Coffee', 155.00, 'src\\products\\Cookies N' Cream Milk Frappes.jpg'),
+('Cookies N'' Cream Frappe', 'Coffee', 155.00, 'src\\products\\Cookies N'' Cream Milk Frappes.jpg'),
 ('Dark Chocolate with Cheese Frappe', 'Coffee', 165.00, 'src\\products\\Dark Chocolate Milk Frappes.jpg'),
 ('White Chocolate Frappe', 'Coffee', 165.00, 'src\\products\\White Chocolate Milk Frappes.jpg'),
 ('Creamy Mango Tea', 'Tea', 125.00, 'src\\products\\Creamy Mango Fruit Smoothies.jpg'),
@@ -82,5 +73,13 @@ INSERT INTO `tbl_products` (`product_name`, `product_category`, `product_price`,
 ('Beefy Nachos', 'Snacks', 115.00, 'src\\products\\Beefy Nachos.jpg'),
 ('Clubhouse Sandwich', 'Snacks', 125.00, 'src\\products\\Clubhouse Sandwich.jpg'),
 ('Ube Halaya', 'Snacks', 125.00, 'src\\products\\Ube Halaya.jpg'),
-('Corn Dog', 'Snacks', 70.00, 'src\\products\\Corndog.jpg'),
-('Grilled Cheese Sandwich', 'Snacks', 90.00, 'src\\products\\Grilled Cheese Sandwich.jpg');
+('Chocolate Cake', 'Snacks', 145.00, 'src\\products\\Chocolate Cake.jpg'),
+('Cheesecake', 'Snacks', 150.00, 'src\\products\\Cheesecake.jpg'),
+('Ice Cream Cake', 'Snacks', 150.00, 'src\\products\\Ice Cream Cake.jpg'),
+('Birthday Cake', 'Snacks', 150.00, 'src\\products\\Birthday Cake.jpg'),
+('Red Velvet Cake', 'Snacks', 150.00, 'src\\products\\Red Velvet Cake.jpg'),
+('Chocolate Chip Cookies', 'Snacks', 150.00, 'src\\products\\Chocolate Chip Cookies.jpg'),
+('Jelly Beans', 'Snacks', 150.00, 'src\\products\\Jelly Beans.jpg'),
+('Cheese Bread', 'Snacks', 150.00, 'src\\products\\Cheese Bread.jpg'),
+('Cupcakes', 'Snacks', 150.00, 'src\\products\\Cupcakes.jpg'),
+('Bread Roll', 'Snacks', 150.00, 'src\\products\\Bread Roll.jpg');
