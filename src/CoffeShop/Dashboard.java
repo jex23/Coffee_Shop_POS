@@ -8,26 +8,26 @@ package CoffeShop;
  *
  * @author James
  */
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
-public class Dashboard extends javax.swing.JFrame {
 
+public class Dashboard extends javax.swing.JFrame {
+  private ProductMethods productMethods; 
     /**
      * Creates new form Dashboard
      */
@@ -40,6 +40,18 @@ public class Dashboard extends javax.swing.JFrame {
         Image img = icon.getImage();
         
         setIconImage(img);
+        productMethods = new ProductMethods();
+        GridLayoutDisplay();
+       
+        searchText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    // Trigger the login action when Enter is pressed
+                    btnSearchActionPerformed(null);
+                }
+            }
+        });
     }
 
     /**
@@ -62,8 +74,8 @@ public class Dashboard extends javax.swing.JFrame {
         itemDetails = new javax.swing.JPanel();
         centerPanel = new javax.swing.JPanel();
         searchBar = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        searchText = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         coffeeGrid = new javax.swing.JPanel();
@@ -102,7 +114,7 @@ public class Dashboard extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(987, Short.MAX_VALUE)
+                .addContainerGap(1039, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -212,7 +224,7 @@ public class Dashboard extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 470, Short.MAX_VALUE))
+                .addGap(0, 691, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -224,30 +236,39 @@ public class Dashboard extends javax.swing.JFrame {
         searchBar.setBackground(new java.awt.Color(255, 245, 238));
         searchBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField1.setBackground(new java.awt.Color(255, 245, 238));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(142, 104, 69));
-        jTextField1.setText("Search");
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        searchText.setBackground(new java.awt.Color(255, 245, 238));
+        searchText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        searchText.setForeground(new java.awt.Color(142, 104, 69));
+        searchText.setText("Search");
+        searchText.setToolTipText("");
+        searchText.setBorder(null);
+        searchText.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        searchText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchTextFocusLost(evt);
+            }
+        });
+        searchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchTextActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton5.setIconTextGap(20);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        btnSearch.setBorder(null);
+        btnSearch.setBorderPainted(false);
+        btnSearch.setContentAreaFilled(false);
+        btnSearch.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnSearch.setIconTextGap(20);
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -257,9 +278,9 @@ public class Dashboard extends javax.swing.JFrame {
             searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchBarLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(searchText, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addComponent(btnSearch)
                 .addContainerGap())
         );
         searchBarLayout.setVerticalGroup(
@@ -267,8 +288,8 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(searchBarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(searchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9))
         );
 
@@ -374,7 +395,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jButton8)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -421,28 +442,33 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1262, 786));
+        setSize(new java.awt.Dimension(1316, 1009));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Dashboard callDashboard = new Dashboard();
         callDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    String searchTerm = searchText.getText().trim(); // Get the search term from the text field
+    searchMenu(searchTerm);
+    
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
+
+    }//GEN-LAST:event_searchTextActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
@@ -464,141 +490,198 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        GridlayoutDisplay();
+        GridLayoutDisplay();
     }//GEN-LAST:event_formWindowOpened
+
+    private void searchTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFocusGained
+        if (searchText.getText().equals("Search")) {
+            searchText.setText("");
+            searchText.setForeground(Color.BLACK); // Optional: Change text color to black
+        }
+    }//GEN-LAST:event_searchTextFocusGained
+
+    private void searchTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFocusLost
+        if (searchText.getText().isEmpty()) {
+                searchText.setText("Search");
+                searchText.setForeground(Color.GRAY); // Change text color to gray
+            }
+    }//GEN-LAST:event_searchTextFocusLost
      
-    
-    
-private void GridlayoutDisplay() {
-    // Create an instance of ProductMethods to fetch products from the database
-    ProductMethods productMethods = new ProductMethods();
-    List<Product> products = productMethods.productMethod(); // Fetch products from the database
+    private void searchMenu(String searchTerm) {
+        // Clear the existing product displays
+        coffeeGrid.removeAll();
+        teaGrid.removeAll();
+        snackGrid.removeAll();
+        
+        
+        // Fetch products based on search term (not dynamically)
+        List<Product> products = productMethods.searchMenuMethod(searchTerm); 
 
-    // Clear existing components in each grid
-    coffeeGrid.removeAll();
-    teaGrid.removeAll();
-    snackGrid.removeAll();
+        // Iterate over the products list and create UI components for each product
+        for (Product product : products) {
+            JPanel productPanel = createProductPanel(product);
+            // Add the product panel to the corresponding grid based on the category
+            switch (product.getProductCategory()) {
+                case "Coffee":
+                    coffeeGrid.add(productPanel);
+                    break;
+                case "Tea":
+                    teaGrid.add(productPanel);
+                    break;
+                case "Snacks":
+                    snackGrid.add(productPanel);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-    // Iterate over the products list and create UI components for each product
-    for (Product product : products) {
-        // Create a new panel for each product
+        // Refresh each grid panel
+        coffeeGrid.revalidate();
+        coffeeGrid.repaint();
+        teaGrid.revalidate();
+        teaGrid.repaint();
+        snackGrid.revalidate();
+        snackGrid.repaint();
+    }
+
+    private void GridLayoutDisplay() {
+        // Clear existing components in each grid
+        coffeeGrid.removeAll();
+        teaGrid.removeAll();
+        snackGrid.removeAll();
+
+        List<Product> products = productMethods.productMethod(); // Fetch products from the database
+
+        // Iterate over the products list and create UI components for each product
+        for (Product product : products) {
+            JPanel productPanel = createProductPanel(product);
+            // Add the product panel to the corresponding grid based on the category
+            switch (product.getProductCategory()) {
+                case "Coffee":
+                    coffeeGrid.add(productPanel);
+                    break;
+                case "Tea":
+                    teaGrid.add(productPanel);
+                    break;
+                case "Snacks":
+                    snackGrid.add(productPanel);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Refresh each grid panel
+        coffeeGrid.revalidate();
+        coffeeGrid.repaint();
+        teaGrid.revalidate();
+        teaGrid.repaint();
+        snackGrid.revalidate();
+        snackGrid.repaint();
+    }
+
+    private JPanel createProductPanel(Product product) {
         JPanel productPanel = new JPanel();
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); // Add a line border
-
-        // Create components for the product details
+        Color customColor = new Color(142, 104, 69);
+        productPanel.setBorder(BorderFactory.createLineBorder(customColor, 1));
+        productPanel.setBackground(new Color(255, 255, 255));
+        
         JLabel imageLabel = new JLabel();
-        ImageIcon productImage = new ImageIcon(new ImageIcon(product.getProductImagePath())
-                .getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH)); // Resize the image
-        imageLabel.setIcon(productImage); // Set the resized image
-        imageLabel.setHorizontalAlignment(JLabel.CENTER); // Center the image
-
+        ImageIcon productImage = new ImageIcon(product.getProductImagePath());
+        Image scaledImage = resizeImage(productImage, 100, 200);
+        imageLabel.setIcon(new ImageIcon(scaledImage));
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        
         JLabel nameLabel = new JLabel(product.getProductName());
         JLabel priceLabel = new JLabel("₱" + product.getProductPrice());
-
-        // Create a JSpinner for quantity
-        JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // Min: 1, Max: 100, Step: 1
-
+        
+        Font justFont = new Font("Segoe UI", Font.PLAIN, 14);
+        Font boldFont = new Font("Arial", Font.BOLD, 14);
+        nameLabel.setFont(justFont);
+        priceLabel.setFont(boldFont);
+        
+        JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
         JButton addButton = new JButton("Add");
 
-        // ActionListener for the Add button
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Retrieve product details
-                String productName = product.getProductName(); // Correctly get the product name
-                double productPrice = product.getProductPrice(); // Get product price
-                int quantity = (int) quantitySpinner.getValue(); // Get the quantity from the spinner
-
-                // Pass productName, quantity, and productPrice to addToOrderTable
-                addToOrderTable(productName, quantity, productPrice);
-            }
+        addButton.addActionListener(e -> {
+            String productName = product.getProductName();
+            double productPrice = product.getProductPrice();
+            int quantity = (int) quantitySpinner.getValue();
+            addToOrderTable(productName, quantity, productPrice);
         });
 
-        // Create a GroupLayout for the product panel
         GroupLayout productPanelLayout = new GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
 
-        // Set up horizontal and vertical groups for layout
         productPanelLayout.setHorizontalGroup(
-            productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(productPanelLayout.createSequentialGroup()
+            productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE) // Center image
+                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(nameLabel, GroupLayout.Alignment.CENTER)
                     .addGroup(productPanelLayout.createSequentialGroup()
-                        .addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE) // Name
+                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)) // Price
-                    .addGroup(GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
-                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Quantity spinner
+                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))) // Add button
-                .addContainerGap())
+                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
         );
 
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(nameLabel) // Product Name
-                .addComponent(priceLabel)) // Product Price
-            .addGap(18, 18, 18)
-            .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE) // Image
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(quantitySpinner) // Quantity spinner
-                .addComponent(addButton)) // Add button
-            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGap(15)
+                .addComponent(nameLabel)
+                .addGap(18, 18, 18)
+                .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceLabel)
+                    .addComponent(quantitySpinner)
+                    .addComponent(addButton))
+                .addGap(15)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        // Add the product panel to the corresponding grid based on the category
-        switch (product.getProductCategory()) {
-            case "Coffee":
-                coffeeGrid.add(productPanel);
-                break;
-            case "Tea":
-                teaGrid.add(productPanel);
-                break;
-            case "Snacks":
-                snackGrid.add(productPanel);
-                break;
-            default:
-                // Handle unknown categories if necessary
-                break;
+        productPanel.revalidate();
+        productPanel.repaint();
+        return productPanel;
+    }
+    
+    
+    private Image resizeImage(ImageIcon originalImage, int targetWidth, int targetHeight) {
+        // Get the original dimensions
+        int originalWidth = originalImage.getIconWidth();
+        int originalHeight = originalImage.getIconHeight();
+
+        // Maintain aspect ratio
+        double aspectRatio = (double) originalWidth / originalHeight;
+        if (originalWidth > originalHeight) {
+            targetHeight = (int) (targetWidth / aspectRatio);
+        } else {
+            targetWidth = (int) (targetHeight * aspectRatio);
         }
+
+        return originalImage.getImage().getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
     }
 
-    // Refresh each grid panel
-    coffeeGrid.revalidate();
-    coffeeGrid.repaint();
-    teaGrid.revalidate();
-    teaGrid.repaint();
-    snackGrid.revalidate();
-    snackGrid.repaint();
-}
 
-private void addToOrderTable(String productName, int quantity, double price) {
-    // Assuming you have a JTable named orderTable
-    DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+    private void addToOrderTable(String productName, int quantity, double price) {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
 
-    // Debugging: Log the values being added to the order table
-    System.out.println("Adding to order table:");
-    System.out.println("Product Name: " + productName);
-    System.out.println("Quantity: " + quantity);
-    System.out.println("Price per item: " + price); // Price per item
+        // Calculate total price
+        double totalPrice = quantity * price; // Calculate total price
 
-    // Calculate total price
-    double totalPrice = quantity * price; // Calculate total price
-    System.out.println("Total Price: " + totalPrice);
-
-    // Add new row to the order table
-    model.addRow(new Object[]{
-//        model.getRowCount() + 1, // ID: simple row count
-        productName,              // Product Name
-        quantity,                 // Quantity
-        totalPrice                // Total Price
-    });
-}
+        // Add new row to the order table
+        model.addRow(new Object[]{
+    //        model.getRowCount() + 1, // ID: simple row count
+            productName,              // Product Name
+            quantity,                 // Quantity
+            totalPrice                // Total Price
+        });
+    }
 
     /**
      * @param args the command line arguments
@@ -637,6 +720,7 @@ private void addToOrderTable(String productName, int quantity, double price) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnOption;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JPanel centerPanel;
     private javax.swing.JPanel coffeeGrid;
     private javax.swing.JPanel header;
@@ -645,7 +729,6 @@ private void addToOrderTable(String productName, int quantity, double price) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -658,7 +741,6 @@ private void addToOrderTable(String productName, int quantity, double price) {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -666,6 +748,7 @@ private void addToOrderTable(String productName, int quantity, double price) {
     private javax.swing.JTable orderTable;
     private javax.swing.JScrollPane productTable;
     private javax.swing.JPanel searchBar;
+    private javax.swing.JTextField searchText;
     private javax.swing.JPanel snackGrid;
     private javax.swing.JPanel teaGrid;
     // End of variables declaration//GEN-END:variables
