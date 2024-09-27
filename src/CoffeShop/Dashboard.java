@@ -23,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.LayoutStyle;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +44,25 @@ public class Dashboard extends javax.swing.JFrame {
         setIconImage(img);
         productMethods = new ProductMethods();
         GridLayoutDisplay();
-       
+
+        searchText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                handleSearch();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                handleSearch();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                handleSearch();
+            }
+        });
+
+
         searchText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -451,9 +471,6 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Dashboard callDashboard = new Dashboard();
         callDashboard.setVisible(true);
@@ -461,9 +478,8 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-    String searchTerm = searchText.getText().trim(); // Get the search term from the text field
-    searchMenu(searchTerm);
-    
+        String searchTerm = searchText.getText().trim(); // Get the search term from the text field
+        searchMenu(searchTerm);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
@@ -506,8 +522,24 @@ public class Dashboard extends javax.swing.JFrame {
                 searchText.setForeground(Color.GRAY); // Change text color to gray
             }
     }//GEN-LAST:event_searchTextFocusLost
-     
+    
+    private void handleSearch() {
+        String searchTerm = searchText.getText().trim();  // Get the search term
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, reset to display the full menu
+            GridLayoutDisplay();
+        } else {
+            // Perform the search and update the grids
+            searchMenu(searchTerm);
+        }
+    }
+
     private void searchMenu(String searchTerm) {
+        if (searchTerm.isEmpty()) {
+            GridLayoutDisplay(); // This will reset and display the full menu
+            return;
+        }
         // Clear the existing product displays
         coffeeGrid.removeAll();
         teaGrid.removeAll();

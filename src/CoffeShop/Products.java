@@ -265,7 +265,7 @@ public class Products extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(829, Short.MAX_VALUE)
+                .addContainerGap(1039, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -375,7 +375,7 @@ public class Products extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 400, Short.MAX_VALUE))
+                .addGap(0, 691, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -505,7 +505,7 @@ public class Products extends javax.swing.JFrame {
                     .addComponent(bUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,8 +584,7 @@ public class Products extends javax.swing.JFrame {
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1106, 748));
-        setLocationRelativeTo(null);
+        setBounds(0, 0, 1316, 1009);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

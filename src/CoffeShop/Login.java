@@ -132,7 +132,7 @@ public class Login extends javax.swing.JFrame {
         username.setForeground(new java.awt.Color(205, 186, 136));
         username.setText("Username");
         username.setToolTipText("");
-        username.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         username.setPreferredSize(new java.awt.Dimension(300, 40));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
