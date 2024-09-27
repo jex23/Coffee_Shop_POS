@@ -62,7 +62,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-
         searchText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -72,6 +71,9 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         });
+        
+
+
     }
 
     /**
@@ -733,7 +735,7 @@ public class Dashboard extends javax.swing.JFrame {
             totalPrice                // Total Price
         });
     }
-
+ 
     /**
      * @param args the command line arguments
      */
