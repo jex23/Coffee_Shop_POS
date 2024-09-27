@@ -43,12 +43,12 @@ CREATE TABLE `tbl_employees` (
 
 INSERT INTO `tbl_employees` (`employee_id`, `employee_username`, `employee_passsword`, `employee_name`, `employee_role`, `employee_date_of_employment`, `employee_ImagePath`) VALUES
 (1, 'admin', 'password', 'Admin User', 'Administrator', '2024-09-25 12:49:04', 'path/to/image.png'),
-(2, 'jen23', 'cashier123', 'Jenalyn Mirafuentes', 'Cashier', '2024-09-27 02:31:47', ''),
-(3, 'prince23', 'chef123', 'Prince Laranjo Olaguera II', 'Chef', '2024-09-27 02:31:47', ''),
-(4, 'berp23', 'asstchef123', 'John Bert Onrubia', 'Assistant Chef', '2024-09-27 02:31:47', ''),
-(5, 'sean23', 'waiter123', 'Sean Francis Ryan Castillo', 'Waiter', '2024-09-27 02:31:47', ''),
-(6, 'kian23', 'waiter123', 'Kian Carlo Apurado', 'Waiter', '2024-09-27 02:31:47', ''),
-(7, 'jex23', 'manager123', 'James Galos', 'Owner/Manager', '2024-09-27 02:31:47', '');
+(2, 'jen23', 'cashier123', 'Jenalyn Mirafuentes', 'Cashier', '2024-09-27 02:31:47', 'src\\Employees\\Jen.jpg'),
+(3, 'prince23', 'chef123', 'Prince Laranjo Olaguera II', 'Chef', '2024-09-27 02:31:47', 'src\\Employees\\Prince.jpg'),
+(4, 'berp23', 'asstchef123', 'John Bert Onrubia', 'Assistant Chef', '2024-09-27 02:31:47', 'src\\Employees\\Berp.jpg'),
+(5, 'sean23', 'waiter123', 'Sean Francis Ryan Castillo', 'Waiter', '2024-09-27 02:31:47', 'src\\Employees\\Sean.jpg'),
+(6, 'kian23', 'waiter123', 'Kian Carlo Apurado', 'Waiter', '2024-09-27 02:31:47', 'src\\Employees\\Kian.jpg'),
+(7, 'jex23', 'manager123', 'James Galos', 'Owner/Manager', '2024-09-27 02:31:47', 'src\\Employees\\James.jpg');
 
 --
 -- Indexes for dumped tables
