@@ -150,7 +150,7 @@ public class Products extends javax.swing.JFrame {
           {
               JOptionPane.showMessageDialog(this, "Cannot add. (Check for duplicate product names or contact system administrator)");
           }
-
+          conn.createConnection().close();
       } catch (SQLException ex) {
           Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -195,7 +195,7 @@ public class Products extends javax.swing.JFrame {
                 }
                 dtm.addRow(vector);
             }
-            
+            conn.createConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
