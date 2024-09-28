@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
         password.setBackground(new java.awt.Color(255, 245, 238));
         password.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         password.setForeground(new java.awt.Color(205, 186, 136));
-        password.setText("Password");
+        password.setText("dsdaswadxsd");
         password.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         password.setPreferredSize(new java.awt.Dimension(300, 40));
         password.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -261,19 +261,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // Get username and password from the input fields
     String userName = username.getText();
     String passWord = new String(password.getPassword());
-    
+
     // Create an instance of LoginMethod to authenticate the user
     LoginMethod callLogin = new LoginMethod();
-    
+
     // Check if the login is successful
-    if (callLogin.authenticate(userName, passWord)) {
-        // If successful, open the Dashboard
+    UserAuthenticate user = callLogin.authenticate(userName, passWord);
+    if (user != null) {
+        // If successful, open the Dashboard and set user details
         Dashboard callDashboard = new Dashboard();
-        callDashboard.setVisible(true); // Assuming setVisible shows the dashboard window
-        this.dispose(); // Close the login window
+        callDashboard.setLoggedInUser(user);  // Set the logged-in user details
+
+        // You might want to pass the employee ID here if needed
+        // callDashboard.setEmployeeId(user.getId()); // Optional, if there's a method to set employee ID
+
+        callDashboard.setVisible(true);       // Show the dashboard window
+        this.dispose();                       // Close the login window
     } else {
         // If failed, show an error message
         JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);

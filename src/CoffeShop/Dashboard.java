@@ -20,6 +20,7 @@ import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.LayoutStyle;
@@ -27,20 +28,30 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Dashboard extends javax.swing.JFrame {
-  private ProductMethods productMethods; 
+
+    private ProductMethods productMethods;
+    private UserAuthenticate loggedInUser; // Store the use
+
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
-        
+
         setTitle("Dashboard");
-        
+
+        // Load the icon for the dashboard window
         ImageIcon icon = IconLoader.getIcon();
         Image img = icon.getImage();
-        
+        setIconImage(img);
+
         setIconImage(img);
         productMethods = new ProductMethods();
         GridLayoutDisplay();
@@ -71,8 +82,6 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         });
-        
-
 
     }
 
@@ -86,7 +95,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        employeeRoleTxt = new javax.swing.JLabel();
+        UserImageIcon = new javax.swing.JLabel();
+        employeNamerTxt = new javax.swing.JLabel();
         navbarLeft = new javax.swing.JPanel();
         btnOption = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -111,9 +122,9 @@ public class Dashboard extends javax.swing.JFrame {
         totalLabel = new javax.swing.JLabel();
         amountLabel = new javax.swing.JLabel();
         changeLabel = new javax.swing.JLabel();
-        totalText = new javax.swing.JTextField();
-        amountText = new javax.swing.JTextField();
-        changeText = new javax.swing.JTextField();
+        totalFld = new javax.swing.JTextField();
+        amountFld = new javax.swing.JTextField();
+        changeFld = new javax.swing.JTextField();
         btnPay = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         btnReceipt = new javax.swing.JButton();
@@ -127,26 +138,46 @@ public class Dashboard extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(81, 56, 33));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Employee Name");
+        employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeeRoleTxt.setForeground(new java.awt.Color(255, 255, 255));
+        employeeRoleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeRoleTxt.setText("Role");
+
+        UserImageIcon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        UserImageIcon.setForeground(new java.awt.Color(255, 255, 255));
+        UserImageIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        UserImageIcon.setText("User");
+
+        employeNamerTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeNamerTxt.setForeground(new java.awt.Color(255, 255, 255));
+        employeNamerTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeNamerTxt.setText("Employee Name");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(1039, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addContainerGap(872, Short.MAX_VALUE)
+                .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(UserImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(UserImageIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
@@ -249,7 +280,7 @@ public class Dashboard extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 568, Short.MAX_VALUE))
+                .addGap(0, 566, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -359,7 +390,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -370,22 +401,24 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity", "Price"
+                "Product Name", "Price", "Quantity", "Total Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        orderTable.getTableHeader().setReorderingAllowed(false);
         productTable.setViewportView(orderTable);
         if (orderTable.getColumnModel().getColumnCount() > 0) {
             orderTable.getColumnModel().getColumn(0).setResizable(false);
             orderTable.getColumnModel().getColumn(1).setResizable(false);
             orderTable.getColumnModel().getColumn(2).setResizable(false);
+            orderTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         totalLabel.setText("Total:");
@@ -394,15 +427,32 @@ public class Dashboard extends javax.swing.JFrame {
 
         changeLabel.setText("Change:");
 
-        totalText.setText("0");
+        totalFld.setEditable(false);
+        totalFld.setText("0");
 
-        amountText.setText("0");
+        amountFld.setText("0");
+        amountFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                amountFldKeyReleased(evt);
+            }
+        });
 
-        changeText.setText("0");
+        changeFld.setEditable(false);
+        changeFld.setText("0");
 
         btnPay.setText("Pay");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
         btnReceipt.setText("Receipt");
 
@@ -422,9 +472,10 @@ public class Dashboard extends javax.swing.JFrame {
                                     .addComponent(changeLabel))
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(changeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(amountText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(changeFld, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                    .addComponent(amountFld)
+                                    .addComponent(totalFld))
+                                .addGap(38, 38, 38))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addComponent(btnPay)
@@ -433,7 +484,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(109, 109, 109)
                                 .addComponent(btnReceipt)))
-                        .addGap(0, 116, Short.MAX_VALUE))
+                        .addGap(126, 126, 126))
                     .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -444,16 +495,16 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalLabel))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(amountText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(amountLabel))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(amountLabel)
+                    .addComponent(amountFld, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(changeLabel)
-                    .addComponent(changeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(changeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPay)
@@ -478,12 +529,12 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1316, 1009));
+        setSize(new java.awt.Dimension(1335, 1009));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -515,14 +566,22 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       Reports callReports = new Reports();
-       callReports.setVisible(true);
-       this.dispose();
+        Reports callReports = new Reports();
+        callReports.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         GridLayoutDisplay();
+
+        // Set user details if available
+        if (loggedInUser != null) {
+            setUserDetails(loggedInUser);
+        } else {
+            System.out.println("User details not set yet.");
+        }
+
     }//GEN-LAST:event_formWindowOpened
 
     private void searchTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFocusGained
@@ -534,11 +593,109 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void searchTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFocusLost
         if (searchText.getText().isEmpty()) {
-                searchText.setText("Search");
-                searchText.setForeground(Color.GRAY); // Change text color to gray
-            }
+            searchText.setText("Search");
+            searchText.setForeground(Color.GRAY); // Change text color to gray
+        }
     }//GEN-LAST:event_searchTextFocusLost
-    
+
+    private void amountFldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountFldKeyReleased
+        // TODO add your handling code here:
+        // Get the amount entered in the amountFld
+        String amountText = amountFld.getText();
+
+        // Try to parse the amount to a double
+        try {
+            double amount = Double.parseDouble(amountText);
+
+            // Calculate the total price using your updated method
+            double totalPrice = calculateTotalPrice(); // This now returns the total price
+
+            // Calculate the change amount
+            double change = amount - totalPrice;
+
+            // Display the change in changeFld
+            changeFld.setText(String.format("%.2f", change)); // Format the change to 2 decimal places
+
+        } catch (NumberFormatException e) {
+            // Handle the case where the input is not a valid double
+            changeFld.setText("0.00"); // Reset changeFld if input is invalid
+        }
+    }//GEN-LAST:event_amountFldKeyReleased
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+
+        // Clear all rows from the table
+        model.setRowCount(0);
+
+        
+        // Reset the fields after successful sale
+            amountFld.setText("0"); // Reset amount field
+            changeFld.setText("0"); // Reset change field
+            totalFld.setText("0"); // Reset total field (if you have a totalFld)
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        // Check if there are any items in the order table
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No items in the order to proceed with the payment.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return; // Exit if the order table is empty
+        }
+
+        // Retrieve amount and change from the input fields
+        double amount = 0.0;
+        double amountChange = 0.0;
+
+        try {
+            // Get amount from the amountFld JTextField
+            amount = Double.parseDouble(amountFld.getText());
+            // Get change from the changeFld JTextField
+            amountChange = Double.parseDouble(changeFld.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid amount or change value.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if the values are invalid
+        }
+
+        // Check for validation conditions
+        if (amount <= 0) {
+            JOptionPane.showMessageDialog(this, "The amount must be greater than zero.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return; // Exit if the amount is zero or less
+        }
+
+        if (amountChange < 0) {
+            JOptionPane.showMessageDialog(this, "Change cannot be negative.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return; // Exit if the change is negative
+        }
+
+        // Show confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to proceed with this sale?",
+                "Confirm Sale",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        // If the user confirmed the sale
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Call the method to add the sale
+            addSales(); // This calls your addSales method to process the transaction
+
+            // Reset the fields after successful sale
+            amountFld.setText("0"); // Reset amount field
+            changeFld.setText("0"); // Reset change field
+            totalFld.setText("0"); // Reset total field (if you have a totalFld)
+
+            // Notify user of success
+            JOptionPane.showMessageDialog(this, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // Optionally clear the order table after sale
+            model.setRowCount(0); // Clear order table
+        } else {
+            // User cancelled the transaction
+            JOptionPane.showMessageDialog(this, "Transaction cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPayActionPerformed
+
     private void handleSearch() {
         String searchTerm = searchText.getText().trim();  // Get the search term
 
@@ -560,10 +717,9 @@ public class Dashboard extends javax.swing.JFrame {
         coffeeGrid.removeAll();
         teaGrid.removeAll();
         snackGrid.removeAll();
-        
-        
+
         // Fetch products based on search term (not dynamically)
-        List<Product> products = productMethods.searchMenuMethod(searchTerm); 
+        List<Product> products = productMethods.searchMenuMethod(searchTerm);
 
         // Iterate over the products list and create UI components for each product
         for (Product product : products) {
@@ -629,84 +785,126 @@ public class Dashboard extends javax.swing.JFrame {
         snackGrid.repaint();
     }
 
+    private ImageIcon resizeImage(String imagePath, int width, int height) {
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image originalImage = originalIcon.getImage();
+
+        // Resize the image
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        // Return the resized ImageIcon
+        return new ImageIcon(resizedImage);
+    }
+
+    public void setUserDetails(UserAuthenticate user) {
+        this.loggedInUser = user;
+
+        if (loggedInUser != null) {
+            employeeRoleTxt.setText(loggedInUser.getRole());
+            employeNamerTxt.setText(loggedInUser.getName());
+
+            // Resize and set employee image icon
+            ImageIcon userImage = resizeImage(loggedInUser.getImagePath(), 60, 60);
+            UserImageIcon.setIcon(userImage);
+        } else {
+            System.out.println("User details not set.");
+        }
+    }
+
+    // Method to set loggedInUser before the form opens
+    public void setLoggedInUser(UserAuthenticate user) {
+        this.loggedInUser = user;
+    }
+
     private JPanel createProductPanel(Product product) {
         JPanel productPanel = new JPanel();
-        Color customColor = new Color(230,155,87);
+        Color customColor = new Color(230, 155, 87);
         productPanel.setBorder(BorderFactory.createLineBorder(customColor, 1));
-        productPanel.setBackground(new Color(255,245,238));
-        
+        productPanel.setBackground(new Color(255, 245, 238));
+
+        // Set up image label
         JLabel imageLabel = new JLabel();
         ImageIcon productImage = new ImageIcon(product.getProductImagePath());
         Image scaledImage = resizeImage(productImage, 100, 200);
         imageLabel.setIcon(new ImageIcon(scaledImage));
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        
+
+        // Set up name and price labels
         JLabel nameLabel = new JLabel(product.getProductName());
-        JLabel priceLabel = new JLabel("₱" + product.getProductPrice());
-        
+        JLabel priceLabel = new JLabel("₱" + String.format("%.2f", product.getProductPrice()));
+
         Font justFont = new Font("Segoe UI", Font.BOLD, 14);
         Font boldFont = new Font("Arial", Font.PLAIN, 14);
         nameLabel.setFont(boldFont);
         priceLabel.setFont(justFont);
-        
+
+        // Set up quantity spinner
         JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
 
+        // Set up add button
         JButton addButton = new JButton("Add");
         addButton.setBackground(new Color(255, 167, 87));
-        addButton.setForeground(new Color(81,56,33));
+        addButton.setForeground(new Color(81, 56, 33));
         addButton.setBorderPainted(false);
         addButton.setFocusPainted(false);
         addButton.setContentAreaFilled(true);
         Font boldAdd = addButton.getFont().deriveFont(Font.BOLD);
         addButton.setFont(boldAdd);
-        
+
+        // Add action listener to the Add button
         addButton.addActionListener(e -> {
             String productName = product.getProductName();
             double productPrice = product.getProductPrice();
             int quantity = (int) quantitySpinner.getValue();
+
+            // Add the product to the order table
             addToOrderTable(productName, quantity, productPrice);
+
+            // Reset the spinner value back to 1
+            quantitySpinner.setValue(1);
         });
 
+        // Set up layout for the product panel
         GroupLayout productPanelLayout = new GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
 
         productPanelLayout.setHorizontalGroup(
-            productPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(nameLabel, GroupLayout.Alignment.CENTER)
-                    .addGroup(productPanelLayout.createSequentialGroup()
-                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap()
+                productPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                .addComponent(imageLabel, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(nameLabel, GroupLayout.Alignment.CENTER)
+                                .addGroup(productPanelLayout.createSequentialGroup()
+                                        .addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quantitySpinner, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
         );
 
         productPanelLayout.setVerticalGroup(
-            productPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGap(15)
-                .addComponent(nameLabel)
-                .addGap(18, 18, 18)
-                .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(priceLabel)
-                    .addComponent(quantitySpinner)
-                    .addComponent(addButton))
-                .addGap(15)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                productPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGap(15)
+                        .addComponent(nameLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(productPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(priceLabel)
+                                .addComponent(quantitySpinner)
+                                .addComponent(addButton))
+                        .addGap(15)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         productPanel.revalidate();
         productPanel.repaint();
         return productPanel;
     }
-    
-    
+
     private Image resizeImage(ImageIcon originalImage, int targetWidth, int targetHeight) {
         // Get the original dimensions
         int originalWidth = originalImage.getIconWidth();
@@ -723,22 +921,194 @@ public class Dashboard extends javax.swing.JFrame {
         return originalImage.getImage().getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
     }
 
-
     private void addToOrderTable(String productName, int quantity, double price) {
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
 
-        // Calculate total price
-        double totalPrice = quantity * price; // Calculate total price
+        // Validate inputs
+        if (productName.isEmpty() || quantity <= 0 || price <= 0) {
+            JOptionPane.showMessageDialog(this, "Please provide valid product details", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        // Add new row to the order table
-        model.addRow(new Object[]{
-    //        model.getRowCount() + 1, // ID: simple row count
-            productName,              // Product Name
-            quantity,                 // Quantity
-            totalPrice                // Total Price
-        });
+        // Calculate total price for the new quantity
+        double totalPrice = quantity * price;
+
+        // Flag to check if the product already exists
+        boolean productExists = false;
+
+        // Check if the product already exists in the table
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String existingProductName = (String) model.getValueAt(i, 0); // Assuming product name is in column 0
+            if (existingProductName.equals(productName)) {
+                // Update the quantity and total price for the existing product
+                int existingQuantity = (int) model.getValueAt(i, 2); // Assuming quantity is in column 2
+                double existingTotalPrice = (double) model.getValueAt(i, 3); // Assuming total price is in column 3
+
+                // Update the quantity and total price
+                model.setValueAt(existingQuantity + quantity, i, 2); // Update quantity
+                model.setValueAt(existingTotalPrice + totalPrice, i, 3); // Update total price
+
+                productExists = true;
+                break; // Exit the loop as we found the product
+            }
+        }
+
+        // If the product doesn't exist, add a new row
+        if (!productExists) {
+            model.addRow(new Object[]{
+                productName, // Product Name
+                price, // Price
+                quantity, // Quantity
+                totalPrice // Total Price
+            });
+        }
+
+        // Update the total price displayed in totalFld
+        calculateTotalPrice();
+        updateChangeAmount();
     }
- 
+
+    private void updateChangeAmount() {
+        // Get the amount entered in the amountFld
+        String amountText = amountFld.getText();
+
+        // Try to parse the amount to a double
+        try {
+            double amount = Double.parseDouble(amountText);
+
+            // Calculate the total price using your updated method
+            double totalPrice = calculateTotalPrice(); // This now returns the total price
+
+            // Calculate the change amount
+            double change = amount - totalPrice;
+
+            // Display the change in changeFld
+            changeFld.setText(String.format("%.2f", change)); // Format the change to 2 decimal places
+
+        } catch (NumberFormatException e) {
+            // Handle the case where the input is not a valid double
+            changeFld.setText("0.00"); // Reset changeFld if input is invalid
+        }
+    }
+
+    private double calculateTotalPrice() {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        double totalPriceSum = 0;
+
+        // Loop through all rows and sum the total price column (assumed to be at index 3)
+        for (int i = 0; i < model.getRowCount(); i++) {
+            // Assuming the total price is stored as a double in column 3
+            Object totalPriceObject = model.getValueAt(i, 3);
+            double rowTotalPrice = 0;
+
+            // Check the type of total price and cast accordingly
+            if (totalPriceObject instanceof Double) {
+                rowTotalPrice = (Double) totalPriceObject;
+            } else if (totalPriceObject instanceof Integer) {
+                rowTotalPrice = (Integer) totalPriceObject; // Cast as Integer
+            }
+
+            totalPriceSum += rowTotalPrice;
+        }
+
+        // Display the total sum in the JTextField totalFld
+        totalFld.setText(String.format("%.2f", totalPriceSum)); // Format to 2 decimal places
+
+        // Return the calculated total price
+        return totalPriceSum;
+    }
+
+    private void addSales() {
+        // Check if there are any items in the order table
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No items in the order to add a sale.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Retrieve employee ID correctly
+        int employeeId = 0;
+        try {
+            // Assuming getId() method returns the employee ID as a string
+            employeeId = Integer.parseInt(loggedInUser.getId());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid employee ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if the ID is invalid
+        }
+
+        String employeeName = loggedInUser.getName();
+        double subtotal = 0.0;
+        double vat = 0.0; // You can define how VAT is calculated
+        double total = 0.0;
+
+        List<SaleItem> saleItems = new ArrayList<>();
+
+        // Loop through the order table to collect sale items and calculate totals
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String productName = (String) model.getValueAt(i, 0);
+            double price = (Double) model.getValueAt(i, 1);
+            int quantity = (Integer) model.getValueAt(i, 2);
+            double itemTotalPrice = (Double) model.getValueAt(i, 3);
+
+            subtotal += itemTotalPrice; // Update subtotal
+            total += itemTotalPrice; // Update total
+
+            // Create SaleItem and add to the list
+            int productId = getProductIdByName(productName); // Get the product ID
+            if (productId <= 0) {
+                JOptionPane.showMessageDialog(this, "Product not found: " + productName, "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Exit if the product ID is invalid
+            }
+            saleItems.add(new SaleItem(productId, quantity, price));
+        }
+
+        // Calculate VAT (example: 12% of subtotal)
+        vat = subtotal * 0.12; // Adjust VAT calculation as needed
+        total = subtotal + vat;
+
+        // Get amount and change from fields
+        double amount = 0.0;
+        double amountChange = 0.0;
+
+        try {
+            amount = Double.parseDouble(amountFld.getText()); // Get amount from amountFld
+            amountChange = Double.parseDouble(changeFld.getText()); // Get change from changeFld
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid amount or change value.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if the values are invalid
+        }
+
+        // Create an instance of SalesManagementMethod to add the sale
+        SalesManagementMethod salesManager = new SalesManagementMethod();
+        salesManager.addSale(employeeId, employeeName, subtotal, vat, total, amount, amountChange, saleItems);
+
+        // Notify user of success
+        JOptionPane.showMessageDialog(this, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        // Optionally clear the order table after sale
+        model.setRowCount(0); // Clear order table
+    }
+
+    private int getProductIdByName(String productName) {
+        int productId = 0; // Placeholder for product ID
+        String query = "SELECT product_id FROM tbl_products WHERE product_name = ?"; // Updated SQL query
+
+        sqlConnector callConnector = new sqlConnector();
+
+        try (Connection conn = callConnector.createConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, productName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                productId = rs.getInt("product_id"); // Use the correct column name
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return productId; // Return the found product ID
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -775,24 +1145,26 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel UserImageIcon;
+    private javax.swing.JTextField amountFld;
     private javax.swing.JLabel amountLabel;
-    private javax.swing.JTextField amountText;
     private javax.swing.JPanel btnOption;
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnReceipt;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JTextField changeFld;
     private javax.swing.JLabel changeLabel;
-    private javax.swing.JTextField changeText;
     private javax.swing.JPanel coffeeGrid;
+    private javax.swing.JLabel employeNamerTxt;
+    private javax.swing.JLabel employeeRoleTxt;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -805,7 +1177,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField searchText;
     private javax.swing.JPanel snackGrid;
     private javax.swing.JPanel teaGrid;
+    private javax.swing.JTextField totalFld;
     private javax.swing.JLabel totalLabel;
-    private javax.swing.JTextField totalText;
     // End of variables declaration//GEN-END:variables
 }

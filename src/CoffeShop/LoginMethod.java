@@ -6,45 +6,47 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class LoginMethod {
-   
-    // Method to authenticate the user
-    public boolean authenticate(String username, String password) {
-        boolean isAuthenticated = false;
+
+    public UserAuthenticate authenticate(String username, String password) {
+        UserAuthenticate loggedInUser = null;
         sqlConnector callConnector = new sqlConnector();
-        // SQL query to check the user credentials
-        String query = "SELECT * FROM tbl_employees WHERE employee_username = ? AND employee_passsword = ?";
 
-        try (Connection conn = callConnector.createConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        // SQL query to check the user credentials and fetch additional details
+        String query = "SELECT employee_id, employee_passsword, employee_name, employee_role, employee_ImagePath FROM tbl_employees WHERE employee_username = ?";
+        // SQL query to update the last login time
+        String updateLoginQuery = "UPDATE tbl_employees SET last_Login = NOW() WHERE employee_username = ?";
+
+        try (Connection conn = callConnector.createConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the username for the query
             stmt.setString(1, username);
-            stmt.setString(2, password); // Note: Consider hashing the password for security
-
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
-                isAuthenticated = true; // User found
+                // Retrieve stored password, name, role, image path, and employee ID from the result set
+                String storedPassword = rs.getString("employee_passsword");
+                String employeeName = rs.getString("employee_name");
+                String employeeRole = rs.getString("employee_role");
+                String employeeImagePath = rs.getString("employee_ImagePath");
+                String employeeId = rs.getString("employee_id"); // Fetch the employee ID
+
+                // Check if the entered password matches the stored password
+                if (password.equals(storedPassword)) { // Plain text comparison
+                    // User is authenticated, create UserAuthenticate object with employee details
+                    loggedInUser = new UserAuthenticate(employeeId, username, employeeName, employeeRole, employeeImagePath);
+
+                    // Update the last login timestamp
+                    try (PreparedStatement updateStmt = conn.prepareStatement(updateLoginQuery)) {
+                        updateStmt.setString(1, username);
+                        updateStmt.executeUpdate();
+                    }
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        return isAuthenticated;
+
+        // Return UserAuthenticate object if authentication is successful, null otherwise
+        return loggedInUser;
     }
-
-      //for testing inser this 
-// INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath)
-//VALUES ('admin', 'password', 'Admin User', 'Administrator', 'path/to/image.png');
-     // Main method to test the LoginMethod class
-    public static void main(String[] args) {
-        LoginMethod loginMethod = new LoginMethod();
-        String testUsername = "admin"; // Test username
-        String testPassword = "password"; // Test password
-
-        // Attempt to authenticate the user
-        if (loginMethod.authenticate(testUsername, testPassword)) {
-            System.out.println("Login successful!"); // Successful login message
-        } else {
-            System.out.println("Login failed. Invalid username or password."); // Failed login message
-        }
-    }
-
 }
