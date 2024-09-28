@@ -52,7 +52,7 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `p
 ('White Chocolate Frappe', 'Coffee', 165.00, 'src\\products\\White Chocolate Milk Frappes.png'),
 ('Creamy Mango Tea', 'Tea', 125.00, 'src\\products\\Creamy Mango Fruit Smoothies.jpg'),
 ('Milky Strawberry Tea', 'Tea', 150.00, 'src\\products\\Milky Strawberry Fruit Smoothies.jpg'),
-('Melon with Collagen Tea', 'Tea', 150.00, 'src\\products\\Melon with Collagen Fruit Smoothies.jpg'),
+('Melon with Collagen Tea', 'Tea', 150.00, 'src\\products\\Melon with Collagen.jpg'),
 ('Assam Tea', 'Tea', 90.00, 'src\\products\\Assam Milk Tea.jpg'),
 ('Coffee Jelly Tea', 'Tea', 95.00, 'src\\products\\Coffee Jelly Milk Tea.jpg'),
 ('Chocolate Tea', 'Tea', 95.00, 'src\\products\\Chocolate Milk Tea.png'),
