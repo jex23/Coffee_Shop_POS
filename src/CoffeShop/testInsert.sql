@@ -9,7 +9,7 @@
 
 
 INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `product_price`, `product_ImagePath`) VALUES
-('Ham & Cheese Bread Roll', 'Snacks', 115.00, 'src\\products\\Ham & Cheese Bread Roll.jpg'),
+('Ham & Cheese Bread Roll', 'Snacks', 115.00, 'src\\products\\Ham and Cheese Bread Roll.jpg'),
 ('Classic Brewed Coffee', 'Coffee', 70.00, 'src\\products\\Brewed Coffee toon.jpg'),
 ('French Pressed Brewed Coffee', 'Coffee', 90.00, 'src\\products\\Brewed toon.jpg'),
 ('Caffe Latte', 'Coffee', 90.00, 'src\\products\\Caffe Latte hot.jpg'),
