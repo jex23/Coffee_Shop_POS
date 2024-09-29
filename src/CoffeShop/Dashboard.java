@@ -307,11 +307,6 @@ public class Dashboard extends javax.swing.JFrame {
                 searchTextFocusLost(evt);
             }
         });
-        searchText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextActionPerformed(evt);
-            }
-        });
 
         btnSearch.setBackground(new java.awt.Color(142, 104, 69));
         btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -548,10 +543,6 @@ public class Dashboard extends javax.swing.JFrame {
         String searchTerm = searchText.getText().trim(); // Get the search term from the text field
         searchMenu(searchTerm);
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
-
-    }//GEN-LAST:event_searchTextActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
