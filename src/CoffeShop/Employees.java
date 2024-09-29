@@ -5,21 +5,38 @@
 package CoffeShop;
 
 import java.awt.Image;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.awt.event.ActionListener;
+import org.jdatepicker.impl.JDatePickerImpl;
+import java.util.Calendar; 
+import java.sql.Date; 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdatepicker.DateModel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import java.util.Properties;
+import javax.swing.text.DateFormatter;
 
 /**
  *
  * @author jenal
  */
 public class Employees extends javax.swing.JFrame {
-
-        
+    private JDatePickerImpl datePicker;
+    
     /**
      * Creates new form Employees
      */
@@ -32,9 +49,33 @@ public class Employees extends javax.swing.JFrame {
         Image img = icon.getImage();
         
         setIconImage(img);
+        
+        UtilDateModel model = new UtilDateModel();
+        Properties properties = new Properties();
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter()); // Use DateLabelFormatter for date display
+
+        calendar.add(datePicker);
+
+//        // Replace with the actual concrete class if JDatePicker is abstract
+//        JDatePicker datePicker = new JDatePicker(); 
+//        datePicker.setDate(Calendar.getInstance().getTime());
+//        datePicker.setBounds(20, 100, 150, 30);
+//        this.add(datePicker); // Ensure 'this' refers to a JFrame or JPanel
+
+        Fetch();
+        
     }
     
-    sqlConnector conn = new sqlConnector();   
+    public class DateLabelFormatter extends DateFormatter {
+    public DateLabelFormatter() {
+        super(new SimpleDateFormat("yyyy-MM-dd")); // Adjust the format as needed
+    }
+    }
+    sqlConnector connector = new sqlConnector();
+    PreparedStatement prepState;
+    ResultSet rs;
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,15 +106,12 @@ public class Employees extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtPrice = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        role = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        calendar = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,17 +258,17 @@ public class Employees extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Role", "Address", "Date of Employmeent"
+                "Employee ID", "Name", "Role", "Date of Employmeent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -276,19 +314,22 @@ public class Employees extends javax.swing.JFrame {
         jLabel38.setText("Name");
 
         jLabel39.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel39.setText("Category");
+        jLabel39.setText("Role");
 
         jLabel40.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel40.setText("Price");
+        jLabel40.setText("Date of Employment");
 
         jLabel41.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel41.setText("Image Path");
 
         txtName.setBackground(new java.awt.Color(255, 245, 238));
 
-        txtPrice.setBackground(new java.awt.Color(255, 245, 238));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        role.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roleActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Add Image");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -301,70 +342,39 @@ public class Employees extends javax.swing.JFrame {
         jPanel4.setMinimumSize(new java.awt.Dimension(60, 60));
         jPanel4.add(jLabel6);
 
-        jPanel17.setBackground(new java.awt.Color(255, 245, 238));
-
-        jButton23.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
-        jButton23.setText("Update");
-
-        jButton24.setText("Delete");
-
-        jButton25.setText("Add");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButton23)
-                .addGap(24, 24, 24)
-                .addComponent(jButton24)
-                .addGap(23, 23, 23)
-                .addComponent(jButton25)
-                .addGap(50, 50, 50))
-        );
 
         javax.swing.GroupLayout crudOption1Layout = new javax.swing.GroupLayout(crudOption1);
         crudOption1.setLayout(crudOption1Layout);
         crudOption1Layout.setHorizontalGroup(
             crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crudOption1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPrice)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(crudOption1Layout.createSequentialGroup()
-                        .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtName)
-                    .addComponent(jComboBox1, 0, 305, Short.MAX_VALUE))
+                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(crudOption1Layout.createSequentialGroup()
+                            .addGap(74, 74, 74)
+                            .addComponent(btnAdd))
+                        .addGroup(crudOption1Layout.createSequentialGroup()
+                            .addGap(48, 48, 48)
+                            .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(crudOption1Layout.createSequentialGroup()
+                                    .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton5))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtName)
+                                .addComponent(role, 0, 305, Short.MAX_VALUE)
+                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crudOption1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
         );
         crudOption1Layout.setVerticalGroup(
             crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,12 +386,12 @@ public class Employees extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel39)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel40)
-                .addGap(7, 7, 7)
-                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(role, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel41)
                 .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(crudOption1Layout.createSequentialGroup()
@@ -390,9 +400,9 @@ public class Employees extends javax.swing.JFrame {
                     .addGroup(crudOption1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12)
+                .addComponent(btnAdd)
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout crudOptionLayout = new javax.swing.GroupLayout(crudOption);
@@ -433,6 +443,55 @@ public class Employees extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+//        
+//    private void addEmployee() {
+//        String employeeName = txtname.getText();
+//        String position = txtPosition.getText();
+//        String salaryText = txtSalary.getText();
+//        
+//        if (!isValidName(employeeName)) {
+//            JOptionPane.showMessageDialog(this, "Invalid Name. It should only contains letters");
+//        }
+//        
+//        
+//    }
+    
+    private void addEmployee(String name, String role, Date employmentDate) {
+        String insertQuery = "INSERT INTO tbl_employees (employee_name, employee_role, employee_date_of_employment) VALUES (?, ?, ?)";
+        try (Connection conn = connector.createConnection(); // Assuming you have a method to create the connection
+             PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, role);
+            pstmt.setDate(3, employmentDate);
+
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Employee added successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error adding employee.");
+        }
+    }
+
+
+
+    private void Fetch() {
+        EmployeesMethods employeeMethods = new EmployeesMethods();
+        List<Employee> employees = employeeMethods.employeesMethod();
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable4.getModel();
+        dtm.setRowCount(0);
+        
+        for (Employee employee : employees) {
+            Vector<String> row = new Vector<>();
+            row.add(String.valueOf(employee.getEmployeeID()));
+            row.add(employee.getEmployeeName());
+            row.add(employee.getEmployeeRole());
+            row.add(String.valueOf(employee.getEmployeeDateOfEmployment()));
+            dtm.addRow(row);
+        }
+    }
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Reports callReports = new Reports();
         callReports.setVisible(true);
@@ -457,15 +516,34 @@ public class Employees extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton25ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 //        this.imagePath();
 //        this.addImageToFolder();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void roleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String name = txtName.getText(); 
+        String selectedRole = (String) role.getSelectedItem(); 
+        java.util.Date selectedDate = (java.util.Date) datePicker.getModel().getValue();
+        
+        if (selectedDate != null) {
+            Date employmentDate = new Date(selectedDate.getTime());
+            addEmployee(name, selectedRole, employmentDate);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a date.");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -502,7 +580,9 @@ public class Employees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JPanel btnOption;
+    private javax.swing.JPanel calendar;
     private javax.swing.JPanel crudOption;
     private javax.swing.JPanel crudOption1;
     private javax.swing.JScrollPane employeeTable;
@@ -510,38 +590,23 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JPanel itemDetails;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTable jTable4;
     private javax.swing.JPanel navbarLeft;
+    private javax.swing.JComboBox<String> role;
     private javax.swing.JPanel tblEmployees;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 
-    private static class PreparedStatement {
 
-        public PreparedStatement() {
-        }
-    }
 }
