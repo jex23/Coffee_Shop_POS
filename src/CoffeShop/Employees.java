@@ -5,7 +5,13 @@
 package CoffeShop;
 
 import java.awt.Image;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,6 +19,7 @@ import javax.swing.ImageIcon;
  */
 public class Employees extends javax.swing.JFrame {
 
+        
     /**
      * Creates new form Employees
      */
@@ -26,6 +33,8 @@ public class Employees extends javax.swing.JFrame {
         
         setIconImage(img);
     }
+    
+    sqlConnector conn = new sqlConnector();   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -495,4 +504,10 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
+
+    private static class PreparedStatement {
+
+        public PreparedStatement() {
+        }
+    }
 }

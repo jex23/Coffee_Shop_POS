@@ -488,7 +488,7 @@ public class Products extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(productTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE))
+                    .addComponent(productTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tblProductsLayout.setVerticalGroup(
@@ -505,26 +505,25 @@ public class Products extends javax.swing.JFrame {
         crudOption.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel38.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
         jLabel38.setText("Name");
 
         jLabel39.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
         jLabel39.setText("Category");
 
         jLabel40.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(0, 0, 0));
         jLabel40.setText("Price");
 
         jLabel41.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(0, 0, 0));
         jLabel41.setText("Image Path");
 
         txtName.setBackground(new java.awt.Color(255, 245, 238));
-        txtName.setForeground(new java.awt.Color(0, 0, 0));
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         txtPrice.setBackground(new java.awt.Color(255, 245, 238));
-        txtPrice.setForeground(new java.awt.Color(0, 0, 0));
 
         jPanel17.setBackground(new java.awt.Color(255, 192, 135));
         jPanel17.setOpaque(false);
@@ -673,7 +672,7 @@ public class Products extends javax.swing.JFrame {
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
             .addComponent(crudOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -723,6 +722,10 @@ public class Products extends javax.swing.JFrame {
         this.imagePath();
         this.addImageToFolder();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
 
     /**
      * @param args the command line arguments
