@@ -36,18 +36,24 @@ import java.util.ArrayList;
 
 public class Dashboard extends javax.swing.JFrame {
 
-    private ProductMethods productMethods;
+     private ProductMethods productMethods;
+    // Initialize the productMethods instance
+
     private UserAuthenticate loggedInUser; // Store the use
     private int currentPage = 1; // Start on the first page
     private static final int PAGE_SIZE = 10; // Number of products per page
+    private boolean isCoffeeGridOpen = false; // To track if coffee grid is open
+    private boolean isTeaGridOpen = false;   // To track if tea grid is open
+    private boolean isSnackGridOpen = false;  // To track if snack grid is open
 
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
-
+         productMethods = new ProductMethods();
         setTitle("Dashboard");
+         displayProductsForTab("Coffee"); // Default to Coffee tab
 
         // Load the icon for the dashboard window
         ImageIcon icon = IconLoader.getIcon();
@@ -311,11 +317,6 @@ public class Dashboard extends javax.swing.JFrame {
                 searchTextFocusLost(evt);
             }
         });
-        searchText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextActionPerformed(evt);
-            }
-        });
 
         btnSearch.setBackground(new java.awt.Color(142, 104, 69));
         btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -360,8 +361,18 @@ public class Dashboard extends javax.swing.JFrame {
         jTabbedPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTabbedPane2.setFont(new java.awt.Font("Segoe Print", 0, 14)); // NOI18N
         jTabbedPane2.setOpaque(true);
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
+            }
+        });
 
         coffeeGrid.setBackground(new java.awt.Color(255, 245, 238));
+        coffeeGrid.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                coffeeGridPropertyChange(evt);
+            }
+        });
         coffeeGrid.setLayout(new java.awt.GridLayout(0, 3));
         jScrollPane1.setViewportView(coffeeGrid);
 
@@ -581,10 +592,6 @@ public class Dashboard extends javax.swing.JFrame {
         searchMenu(searchTerm);
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
-
-    }//GEN-LAST:event_searchTextActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
         callProducts.setVisible(true);
@@ -741,6 +748,83 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_previousButtonActionPerformed
 
+    private void coffeeGridPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_coffeeGridPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_coffeeGridPropertyChange
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+        // Get the currently selected index
+        int selectedIndex = jTabbedPane2.getSelectedIndex();
+
+        // Reset all boolean values to false
+        isCoffeeGridOpen = false;
+        isTeaGridOpen = false;
+        isSnackGridOpen = false;
+
+        // Check which tab is selected and update the boolean values accordingly
+        switch (selectedIndex) {
+            case 0: // Assuming coffee tab is at index 0
+                isCoffeeGridOpen = true;
+                System.out.println("Coffee Grid is open: " + isCoffeeGridOpen);
+                displayProductsForTab("Coffee"); // Fetch products for Coffee
+                break;
+            case 1: // Assuming tea tab is at index 1
+                isTeaGridOpen = true;
+                System.out.println("Tea Grid is open: " + isTeaGridOpen);
+                displayProductsForTab("Tea"); // Fetch products for Tea
+                break;
+            case 2: // Assuming snack tab is at index 2
+                isSnackGridOpen = true;
+                System.out.println("Snack Grid is open: " + isSnackGridOpen);
+                displayProductsForTab("Snacks"); // Fetch products for Snacks
+                break;
+            default:
+                System.out.println("No valid tab selected.");
+                break;
+        }
+    }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    // Method to display products based on selected tab
+   private void displayProductsForTab(String category) {
+        if (productMethods == null) {
+            System.err.println("productMethods is not initialized.");
+            return; // Prevent NullPointerException
+        }
+
+        // Clear existing components
+        coffeeGrid.removeAll();
+        teaGrid.removeAll();
+        snackGrid.removeAll();
+
+        // Fetch products
+        List<Product> products = productMethods.getProductsByCategory(category, currentPage, PAGE_SIZE);
+
+        for (Product product : products) {
+            JPanel productPanel = createProductPanel(product);
+            switch (category) {
+                case "Coffee":
+                    coffeeGrid.add(productPanel);
+                    break;
+                case "Tea":
+                    teaGrid.add(productPanel);
+                    break;
+                case "Snacks":
+                    snackGrid.add(productPanel);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Refresh the grids
+        coffeeGrid.revalidate();
+        coffeeGrid.repaint();
+        teaGrid.revalidate();
+        teaGrid.repaint();
+        snackGrid.revalidate();
+        snackGrid.repaint();
+    }
+
     private void handleSearch() {
         String searchTerm = searchText.getText().trim();  // Get the search term
 
@@ -794,14 +878,24 @@ public class Dashboard extends javax.swing.JFrame {
         snackGrid.repaint();
     }
 
+    // Method to update the product display based on the selected tab
     private void GridLayoutDisplay() {
         // Clear existing components in each grid
         coffeeGrid.removeAll();
         teaGrid.removeAll();
         snackGrid.removeAll();
 
-        // Fetch products from the database for the current page
-        List<Product> products = productMethods.productMethod(currentPage, PAGE_SIZE);
+        // Fetch products based on the open category
+        List<Product> products;
+        if (isCoffeeGridOpen) {
+            products = productMethods.getProductsByCategory("Coffee", currentPage, PAGE_SIZE);
+        } else if (isTeaGridOpen) {
+            products = productMethods.getProductsByCategory("Tea", currentPage, PAGE_SIZE);
+        } else if (isSnackGridOpen) {
+            products = productMethods.getProductsByCategory("Snacks", currentPage, PAGE_SIZE);
+        } else {
+            products = new ArrayList<>(); // Empty list if no category is open
+        }
 
         // Iterate over the products list and create UI components for each product
         for (Product product : products) {
@@ -832,8 +926,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         // Update pagination button states
         updateButtonStates();
-    } 
-    
+    }
+
     private void updateButtonStates() {
         int totalProducts = productMethods.getTotalProductCount();
         previousButton.setEnabled(currentPage > 1);

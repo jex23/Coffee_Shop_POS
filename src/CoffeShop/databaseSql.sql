@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS tbl_sales_items (
 );
 
 
-
---  Insert User sample
-INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath)
-VALUES ('admin', 'password', 'Admin User', 'Administrator', 'path/to/image.png');
+-- 
+-- --  Insert User sample
+-- INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath)
+-- VALUES ('admin', 'password', 'Admin User', 'Administrator', 'path/to/image.png');

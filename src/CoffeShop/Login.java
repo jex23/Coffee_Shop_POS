@@ -130,7 +130,7 @@ public class Login extends javax.swing.JFrame {
         username.setBackground(new java.awt.Color(255, 245, 238));
         username.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         username.setForeground(new java.awt.Color(205, 186, 136));
-        username.setText("Username");
+        username.setText("Enter Username");
         username.setToolTipText("");
         username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         username.setPreferredSize(new java.awt.Dimension(300, 40));
@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
         password.setBackground(new java.awt.Color(255, 245, 238));
         password.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         password.setForeground(new java.awt.Color(205, 186, 136));
-        password.setText("dsdaswadxsd");
+        password.setText("Enter Password");
         password.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         password.setPreferredSize(new java.awt.Dimension(300, 40));
         password.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -286,7 +286,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
-        if (username.getText().equals("Username")) {
+        if (username.getText().equals("Enter Username")) {
             username.setText("");
             username.setForeground(new Color(142,122,69));
         } 
@@ -294,13 +294,13 @@ public class Login extends javax.swing.JFrame {
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
         if (username.getText().isEmpty()) {
-            username.setText("Username");
+            username.setText("Enter Username");
             username.setForeground(new Color(205,186,136));
         }
     }//GEN-LAST:event_usernameFocusLost
 
     private void passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusGained
-        if (String.valueOf(password.getPassword()).equals("Password")) {
+        if (String.valueOf(password.getPassword()).equals("Enter Password")) {
             password.setText("");
             password.setEchoChar('*');
             password.setForeground(new Color(142,122,69));
@@ -310,7 +310,7 @@ public class Login extends javax.swing.JFrame {
     private void passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusLost
         if (String.valueOf(password.getPassword()).isEmpty()) {
             password.setEchoChar((char)0);
-            password.setText("Password");
+            password.setText("Enter Password");
             password.setForeground(new Color(205,186,136));
         }
     }//GEN-LAST:event_passwordFocusLost

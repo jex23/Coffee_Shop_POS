@@ -27,15 +27,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_employees`
 --
 
-CREATE TABLE `tbl_employees` (
-  `employee_id` int(11) NOT NULL,
-  `employee_username` varchar(50) NOT NULL,
-  `employee_passsword` varchar(50) NOT NULL,
-  `employee_name` varchar(50) NOT NULL,
-  `employee_role` varchar(50) NOT NULL,
-  `employee_date_of_employment` timestamp NOT NULL DEFAULT current_timestamp(),
-  `employee_ImagePath` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CREATE TABLE `tbl_employees` (
+--   `employee_id` int(11) NOT NULL,
+--   `employee_username` varchar(50) NOT NULL,
+--   `employee_passsword` varchar(50) NOT NULL,
+--   `employee_name` varchar(50) NOT NULL,
+--   `employee_role` varchar(50) NOT NULL,
+--   `employee_date_of_employment` timestamp NOT NULL DEFAULT current_timestamp(),
+--   `employee_ImagePath` varchar(50) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_employees`

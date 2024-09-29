@@ -45,6 +45,36 @@ public class ProductMethods {
         return products;
     }
 
+    // Method to fetch products from a specific category with pagination
+    public List<Product> getProductsByCategory(String category, int pageNumber, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM tbl_products WHERE product_category = ? LIMIT ? OFFSET ?";
+
+        int offset = (pageNumber - 1) * pageSize; // Calculate offset
+
+        try (Connection conn = connector.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, category); // Set category
+            stmt.setInt(2, pageSize);     // Set limit
+            stmt.setInt(3, offset);       // Set offset
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
+                String productCategory = rs.getString("product_category");
+                double productPrice = rs.getDouble("product_price");
+                String productImagePath = rs.getString("product_ImagePath");
+                Product product = new Product(productId, productName, productCategory, productPrice, productImagePath);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     // Method to get the total count of products
     public int getTotalProductCount() {
         int count = 0;
@@ -64,6 +94,7 @@ public class ProductMethods {
         return count;
     }
 
+    // Method to search products by name
     public List<Product> searchMenuMethod(String searchTerm) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM tbl_products WHERE product_name LIKE ?";
