@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CoffeShop;
 
-/**
- *
- * @author James
- */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductMethods {
-
     private sqlConnector connector;
 
     // Constructor to initialize the connector
@@ -25,44 +16,63 @@ public class ProductMethods {
         connector = new sqlConnector();
     }
 
-    // Method to fetch products from the database
-    public List<Product> productMethod() {
+    // Method to fetch products from the database with pagination
+    public List<Product> productMethod(int pageNumber, int pageSize) {
         List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM tbl_products LIMIT ? OFFSET ?";
 
-        String query = "SELECT * FROM tbl_products";
-        try (Connection conn = connector.createConnection(); 
-             Statement stmt = conn.createStatement(); 
-             ResultSet rs = stmt.executeQuery(query)) {
+        int offset = (pageNumber - 1) * pageSize; // Calculate offset
 
+        try (Connection conn = connector.createConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, pageSize); // Set limit
+            stmt.setInt(2, offset);    // Set offset
+
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("product_id");
                 String productName = rs.getString("product_name");
                 String productCategory = rs.getString("product_category");
                 double productPrice = rs.getDouble("product_price");
                 String productImagePath = rs.getString("product_ImagePath");
-
                 Product product = new Product(productId, productName, productCategory, productPrice, productImagePath);
                 products.add(product);
             }
-            rs.close();
-            conn.close();        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    // Method to get the total count of products
+    public int getTotalProductCount() {
+        int count = 0;
+        String query = "SELECT COUNT(*) FROM tbl_products";
+
+        try (Connection conn = connector.createConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            if (rs.next()) {
+                count = rs.getInt(1); // Get the count
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return products;
+        return count;
     }
-    
 
     public List<Product> searchMenuMethod(String searchTerm) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM tbl_products WHERE product_name LIKE ?";
-        
+
         try (Connection conn = connector.createConnection();
              PreparedStatement statement = conn.prepareStatement(query)) {
-             
+
             statement.setString(1, "%" + searchTerm + "%"); // Wildcard search
-            
+
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("product_id");
@@ -70,15 +80,14 @@ public class ProductMethods {
                 String productCategory = rs.getString("product_category");
                 double productPrice = rs.getDouble("product_price");
                 String productImagePath = rs.getString("product_ImagePath");
-                
+
                 Product product = new Product(productId, productName, productCategory, productPrice, productImagePath);
                 products.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return products;
-    
     }
 }

@@ -38,6 +38,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private ProductMethods productMethods;
     private UserAuthenticate loggedInUser; // Store the use
+    private int currentPage = 1; // Start on the first page
+    private static final int PAGE_SIZE = 10; // Number of products per page
 
     /**
      * Creates new form Dashboard
@@ -116,6 +118,8 @@ public class Dashboard extends javax.swing.JFrame {
         teaGrid = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         snackGrid = new javax.swing.JPanel();
+        previousButton = new javax.swing.JButton();
+        nxtButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         productTable = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -373,15 +377,36 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Snacks", jScrollPane3);
 
+        previousButton.setText("jButton5");
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousButtonActionPerformed(evt);
+            }
+        });
+
+        nxtButton.setText("jButton6");
+        nxtButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nxtButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
         centerPanelLayout.setHorizontalGroup(
             centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTabbedPane2)
-                    .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(centerPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTabbedPane2)
+                            .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(centerPanelLayout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(previousButton)
+                        .addGap(77, 77, 77)
+                        .addComponent(nxtButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         centerPanelLayout.setVerticalGroup(
@@ -389,8 +414,15 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(centerPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(previousButton))
+                    .addGroup(centerPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nxtButton)))
                 .addContainerGap())
         );
 
@@ -628,11 +660,10 @@ public class Dashboard extends javax.swing.JFrame {
         // Clear all rows from the table
         model.setRowCount(0);
 
-        
         // Reset the fields after successful sale
-            amountFld.setText("0"); // Reset amount field
-            changeFld.setText("0"); // Reset change field
-            totalFld.setText("0"); // Reset total field (if you have a totalFld)
+        amountFld.setText("0"); // Reset amount field
+        changeFld.setText("0"); // Reset change field
+        totalFld.setText("0"); // Reset total field (if you have a totalFld)
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
@@ -696,6 +727,20 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private void nxtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxtButtonActionPerformed
+        // TODO add your handling code here:
+        currentPage++; // Move to the next page
+        GridLayoutDisplay(); // Refresh the display
+    }//GEN-LAST:event_nxtButtonActionPerformed
+
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
+        // TODO add your handling code here:
+        if (currentPage > 1) {
+            currentPage--; // Move to the previous page
+            GridLayoutDisplay(); // Refresh the display
+        }
+    }//GEN-LAST:event_previousButtonActionPerformed
+
     private void handleSearch() {
         String searchTerm = searchText.getText().trim();  // Get the search term
 
@@ -755,7 +800,8 @@ public class Dashboard extends javax.swing.JFrame {
         teaGrid.removeAll();
         snackGrid.removeAll();
 
-        List<Product> products = productMethods.productMethod(); // Fetch products from the database
+        // Fetch products from the database for the current page
+        List<Product> products = productMethods.productMethod(currentPage, PAGE_SIZE);
 
         // Iterate over the products list and create UI components for each product
         for (Product product : products) {
@@ -776,13 +822,22 @@ public class Dashboard extends javax.swing.JFrame {
             }
         }
 
-        // Refresh each grid panel
+        // Refresh the grids after adding components
         coffeeGrid.revalidate();
         coffeeGrid.repaint();
         teaGrid.revalidate();
         teaGrid.repaint();
         snackGrid.revalidate();
         snackGrid.repaint();
+
+        // Update pagination button states
+        updateButtonStates();
+    } 
+    
+    private void updateButtonStates() {
+        int totalProducts = productMethods.getTotalProductCount();
+        previousButton.setEnabled(currentPage > 1);
+        nxtButton.setEnabled(currentPage * PAGE_SIZE < totalProducts);
     }
 
     private ImageIcon resizeImage(String imagePath, int width, int height) {
@@ -826,14 +881,13 @@ public class Dashboard extends javax.swing.JFrame {
         // Set up image label
         JLabel imageLabel = new JLabel();
         ImageIcon productImage = new ImageIcon(product.getProductImagePath());
-        Image scaledImage = resizeImage(productImage, 100, 200);
+        Image scaledImage = resizeImage(productImage, 100, 200); // Ensure resizeImage is defined
         imageLabel.setIcon(new ImageIcon(scaledImage));
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
 
         // Set up name and price labels
         JLabel nameLabel = new JLabel(product.getProductName());
         JLabel priceLabel = new JLabel("₱" + String.format("%.2f", product.getProductPrice()));
-
         Font justFont = new Font("Segoe UI", Font.BOLD, 14);
         Font boldFont = new Font("Arial", Font.PLAIN, 14);
         nameLabel.setFont(boldFont);
@@ -858,9 +912,13 @@ public class Dashboard extends javax.swing.JFrame {
             double productPrice = product.getProductPrice();
             int quantity = (int) quantitySpinner.getValue();
 
-            // Add the product to the order table
-            addToOrderTable(productName, quantity, productPrice);
+            if (quantity < 1) {
+                JOptionPane.showMessageDialog(productPanel, "Please select a quantity greater than 0.");
+                return;
+            }
 
+            // Add the product to the order table (assumed method)
+            addToOrderTable(productName, quantity, productPrice);
             // Reset the spinner value back to 1
             quantitySpinner.setValue(1);
         });
@@ -868,7 +926,6 @@ public class Dashboard extends javax.swing.JFrame {
         // Set up layout for the product panel
         GroupLayout productPanelLayout = new GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
-
         productPanelLayout.setHorizontalGroup(
                 productPanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -883,7 +940,6 @@ public class Dashboard extends javax.swing.JFrame {
                                         .addComponent(addButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap()
         );
-
         productPanelLayout.setVerticalGroup(
                 productPanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -902,6 +958,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         productPanel.revalidate();
         productPanel.repaint();
+
         return productPanel;
     }
 
@@ -1171,7 +1228,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel navbarLeft;
+    private javax.swing.JButton nxtButton;
     private javax.swing.JTable orderTable;
+    private javax.swing.JButton previousButton;
     private javax.swing.JScrollPane productTable;
     private javax.swing.JPanel searchBar;
     private javax.swing.JTextField searchText;
