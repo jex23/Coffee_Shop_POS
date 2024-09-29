@@ -433,7 +433,7 @@ public class Products extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 252, Short.MAX_VALUE))
+                .addGap(0, 568, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -672,13 +672,13 @@ public class Products extends javax.swing.JFrame {
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(crudOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1316, 721));
+        setSize(new java.awt.Dimension(1316, 1009));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

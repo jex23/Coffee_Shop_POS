@@ -7,14 +7,12 @@
  * Created: Sep 27, 2024
  */
 
-
-INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `product_price`, `product_ImagePath`) VALUES
-('Ham & Cheese Bread Roll', 'Snacks', 115.00, 'src\\products\\Ham and Cheese Bread Roll.jpg'),
+INSERT INTO `tbl_products` (`product_name`, `product_category`, `product_price`, `product_ImagePath`) VALUES
 ('Classic Brewed Coffee', 'Coffee', 70.00, 'src\\products\\Brewed Coffee toon.jpg'),
 ('French Pressed Brewed Coffee', 'Coffee', 90.00, 'src\\products\\Brewed toon.jpg'),
 ('Caffe Latte', 'Coffee', 90.00, 'src\\products\\Caffe Latte hot.jpg'),
 ('Cappuccino', 'Coffee', 90.00, 'src\\products\\cappuccino hot.jpg'),
-('Caffe Mocha', 'Coffee', 100.00, 'src\\products\\coffee mocha hot.jpg'),
+('Caffe Mocha', 'Coffee', 100.00, 'src\\products\\ coffee mocha hot.jpg'),
 ('Caramel Macchiato', 'Coffee', 105.00, 'src\\products\\caramel Macchiato hot.jpg'),
 ('Caramel Latte', 'Coffee', 105.00, 'src\\products\\caramel latte hot.jpg'),
 ('Almond Latte', 'Coffee', 105.00, 'src\\products\\Almond Latte Hot.jpg'),
@@ -49,16 +47,16 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `p
 ('Milky Creamy Vanilla Frappe', 'Coffee', 150.00, 'src\\products\\Creamy Vanilla Frappes.jpg'),
 ('Cookies N Cream Frappe', 'Coffee', 155.00, 'src\\products\\Cookies N Cream Milk Frappes.jpg'),
 ('Dark Chocolate with Cheese Frappe', 'Coffee', 165.00, 'src\\products\\Dark Chocolate Milk Frappes.jpg'),
-('White Chocolate Frappe', 'Coffee', 165.00, 'src\\products\\White Chocolate Milk Frappes.png'),
+('White Chocolate Frappe', 'Coffee', 165.00, 'src\\products\\White Chocolate Milk Frappes.jpg'),
 ('Creamy Mango Tea', 'Tea', 125.00, 'src\\products\\Creamy Mango Fruit Smoothies.jpg'),
 ('Milky Strawberry Tea', 'Tea', 150.00, 'src\\products\\Milky Strawberry Fruit Smoothies.jpg'),
-('Melon with Collagen Tea', 'Tea', 150.00, 'src\\products\\Melon with Collagen.jpg'),
+('Melon with Collagen Tea', 'Tea', 150.00, 'src\\products\\Melon with Collagen Fruit Smoothies.jpg'),
 ('Assam Tea', 'Tea', 90.00, 'src\\products\\Assam Milk Tea.jpg'),
 ('Coffee Jelly Tea', 'Tea', 95.00, 'src\\products\\Coffee Jelly Milk Tea.jpg'),
-('Chocolate Tea', 'Tea', 95.00, 'src\\products\\Chocolate Milk Tea.png'),
-('Brown Sugar Tea', 'Tea', 95.00, 'src\\products\\Brown Sugar Milk Tea.jpg'),
+('Chocolate Tea', 'Tea', 95.00, 'src\\products\\Chocolate Milk Tea.jpg'),
+('Brown Sugar Tea', 'Tea', 95.00, 'src\\products\\Brown Sugar Tea.jpg'),
 ('Oreo Cookies Tea', 'Tea', 95.00, 'src\\products\\Oreo Cookies.jpg'),
-('Wintermelon Tea', 'Tea', 100.00, 'src\\products\\Wintermelon Milk TEa.png'),
+('Wintermelon Tea', 'Tea', 100.00, 'src\\products\\Wintermelon Milk TEa.jpg'),
 ('Okinawa Tea', 'Tea', 100.00, 'src\\products\\Okinawa Milk Tea.jpg'),
 ('Strawberry Cream Tea', 'Tea', 100.00, 'src\\products\\Strawberry Cream Milk Tea.jpg'),
 ('Matcha Tea', 'Tea', 110.00, 'src\\products\\Matcha Milk TEa.jpg'),
@@ -68,7 +66,7 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `p
 ('Taro Tea', 'Tea', 90.00, 'src\\products\\Taro Milk TEa.jpg'),
 ('Choco Kisses Tea', 'Tea', 90.00, 'src\\products\\Choco Kisses Milk TEa.jpg'),
 ('Salted Caramel Tea', 'Tea', 100.00, 'src\\products\\Brown Sugar Milk Tea.jpg'),
-('Double Dutch Tea', 'Tea', 100.00, 'src\\products\\Double Dutch Milk Tea.png'),
+('Double Dutch Tea', 'Tea', 100.00, 'src\\products\\Double Dutch Milk Tea.jpg'),
 ('Mint Tea', 'Tea', 70.00, 'src\\products\\Mint Hot Tea.jpg'),
 ('Green Tea', 'Tea', 70.00, 'src\\products\\Assam Tea Latte.jpg'),
 ('Strawberry Tea Latte', 'Tea', 70.00, 'src\\products\\Strawberry Tea Latte.jpg'),
@@ -94,4 +92,3 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `p
 ('Cheese Bread', 'Snacks', 150.00, 'src\\products\\Cheese Bread.jpg'),
 ('Cupcakes', 'Snacks', 150.00, 'src\\products\\Cupcakes.jpg'),
 ('Bread Roll', 'Snacks', 150.00, 'src\\products\\Bread Roll.jpg');
-
