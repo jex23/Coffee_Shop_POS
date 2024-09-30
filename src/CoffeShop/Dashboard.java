@@ -371,6 +371,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         coffeeGrid.setBackground(new java.awt.Color(255, 245, 238));
+        coffeeGrid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                coffeeGridMouseClicked(evt);
+            }
+        });
         coffeeGrid.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 coffeeGridPropertyChange(evt);
@@ -428,7 +433,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -562,7 +567,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(changeLabel)
                     .addComponent(changeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPay)
                     .addComponent(btnRemove))
                 .addGap(55, 55, 55))
@@ -871,6 +876,10 @@ public class Dashboard extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    private void coffeeGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coffeeGridMouseClicked
+        
+    }//GEN-LAST:event_coffeeGridMouseClicked
 
     // Method to display products based on selected tab
     private void displayProductsForTab(String category) {

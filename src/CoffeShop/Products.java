@@ -284,7 +284,7 @@ public class Products extends javax.swing.JFrame {
         }
     }
     //update table and database
-    private void updateProduct() {
+   private void updateProduct() {
         checkEmptyFields();
         if (isEmpty) {
             return;
@@ -301,27 +301,26 @@ public class Products extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
             return;
         }
+
+        int selectedRow = imageLabel.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a product to update.");
+            return;
+        }
+
+        // id na lang gamit. id din naman pala gagamitin >:|
+        int productId = Integer.parseInt((String) imageLabel.getValueAt(selectedRow, 0)); 
+
+        // Update gamit selected id
         try {
-            // Check if the product exists
-            PreparedStatement checkStmt = conn.createConnection().prepareStatement("SELECT COUNT(*) FROM tbl_products WHERE product_name = ?");
-            checkStmt.setString(1, productName);
-            ResultSet rs = checkStmt.executeQuery();
-            rs.next();
-
-            if (rs.getInt(1) == 0) {
-                JOptionPane.showMessageDialog(this, "This product does not exist.");
-                clearFields();
-                return;
-                
-            }
-
-            // Update the product
-            prepState = conn.createConnection().prepareStatement("UPDATE tbl_products SET product_name = ?, product_category = ?, product_price = ?, product_ImagePath = ? WHERE product_name = ?");
+            PreparedStatement prepState = conn.createConnection().prepareStatement(
+                "UPDATE tbl_products SET product_name = ?, product_category = ?, product_price = ?, product_ImagePath = ? WHERE product_id = ?"
+            );
             prepState.setString(1, productName);
             prepState.setString(2, category);
             prepState.setDouble(3, Double.parseDouble(priceText));
             prepState.setString(4, imagePath);
-            prepState.setString(5, productName);
+            prepState.setInt(5, productId);
             prepState.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "Updated successfully");
@@ -389,7 +388,20 @@ public class Products extends javax.swing.JFrame {
         }
     }
 }
+    public void getTableData(){
+          int selectedRow = imageLabel.getSelectedRow();
 
+            if (selectedRow != -1) {
+                // get data sa clicked row
+                String name = (String) imageLabel.getValueAt(selectedRow, 1);
+                String category = (String) imageLabel.getValueAt(selectedRow, 2);
+                double price = Double.parseDouble((String) imageLabel.getValueAt(selectedRow, 3));
+                //set depende sa kung ano pinli
+                txtName.setText(name);
+                jComboBox1.setSelectedItem(category);
+                txtPrice.setText(String.valueOf(price));
+            }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -618,6 +630,11 @@ public class Products extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        imageLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageLabelMouseClicked(evt);
+            }
+        });
         productTable.setViewportView(imageLabel);
 
         javax.swing.GroupLayout tblProductsLayout = new javax.swing.GroupLayout(tblProducts);
@@ -631,7 +648,7 @@ public class Products extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(productTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                    .addComponent(productTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tblProductsLayout.setVerticalGroup(
@@ -809,7 +826,7 @@ public class Products extends javax.swing.JFrame {
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
             .addComponent(crudOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -875,6 +892,10 @@ public class Products extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
+    private void imageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageLabelMouseClicked
+         getTableData();
+    }//GEN-LAST:event_imageLabelMouseClicked
+  
     /**
      * @param args the command line arguments
      */
