@@ -4,6 +4,8 @@
  */
 package CoffeShop;
 
+import CoffeShop.AdminAuthDialog;
+import CoffeShop.EmployeesMethods;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -633,11 +635,19 @@ public class Employees extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        addEmployee();
+        AdminAuthDialog authDialog = new AdminAuthDialog(this, true);
+        authDialog.setVisible(true);
+        if (authDialog.isAuthenticated()) {
+            addEmployee();
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        updateEmployee();
+        AdminAuthDialog authDialog = new AdminAuthDialog(this, true);
+            authDialog.setVisible(true);
+            if (authDialog.isAuthenticated()) {
+            updateEmployee();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
@@ -650,32 +660,43 @@ public class Employees extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = jTable4.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an employee to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+        
+        AdminAuthDialog authDialog = new AdminAuthDialog(this, true); 
+        authDialog.setVisible(true);
+        
+        if (!authDialog.isAuthenticated()) {
+            JOptionPane.showMessageDialog(this, "You must be an admin to delete an employee.", "Authentication Required", JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
 
-        if (selectedRow != -1) {
-            String employeeIdString = jTable4.getValueAt(selectedRow, 0).toString();
-            int employeeId;
-            try {
-                employeeId = Integer.parseInt(employeeIdString);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid Employee ID format.");
-                return; 
-            }
+        String employeeIdString = jTable4.getValueAt(selectedRow, 0).toString();
+        int employeeId;
+        try {
+            employeeId = Integer.parseInt(employeeIdString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Employee ID format.");
+            return; 
+        }
 
-            int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this employee?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this employee?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
-            if (confirmation == JOptionPane.YES_OPTION) {
-                EmployeesMethods empMethods = new EmployeesMethods();
-                boolean deleted = empMethods.deleteEmployeeById(employeeId); 
+        if (confirmation == JOptionPane.YES_OPTION) {
+            EmployeesMethods empMethods = new EmployeesMethods();
+            boolean deleted = empMethods.deleteEmployeeById(employeeId); 
 
-                if (deleted) {
-                    JOptionPane.showMessageDialog(this, "Employee deleted successfully.");
+            if (deleted) {
+                JOptionPane.showMessageDialog(this, "Employee deleted successfully.");
 
-                    Fetch(); 
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete employee. Please try again.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
-                }
+                Fetch(); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to delete employee. Please try again.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
             }
         }
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
