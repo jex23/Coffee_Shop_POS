@@ -298,7 +298,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="tblProducts" pref="943" max="32767" attributes="0"/>
+              <Component id="tblProducts" pref="907" max="32767" attributes="0"/>
               <Component id="crudOption" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -325,7 +325,7 @@
                               <Component id="jLabel5" min="-2" pref="88" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="productTable" alignment="1" pref="716" max="32767" attributes="0"/>
+                          <Component id="productTable" alignment="1" pref="704" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
