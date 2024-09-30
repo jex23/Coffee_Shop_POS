@@ -22,16 +22,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import CoffeShop.UserAuthenticate; // Adjust the package name as needed
+
 public class Products extends javax.swing.JFrame {
+
+    private UserAuthenticate authenticatedUser; // Instance variable
 
     /**
      * Creates new form Products
      */
     public Products() {
-        initComponents();
-        
+
+        initComponents(); // Call method to initialize components
+
         setTitle("Products");
-        
+
         ImageIcon icon = IconLoader.getIcon();
         Image img = icon.getImage();
         jComboBox1.addItem("Coffee");
@@ -43,13 +48,13 @@ public class Products extends javax.swing.JFrame {
         jComboBox1.removeItem("Item 4");
         setIconImage(img);
         Fetch();
-        
+
     }
-   
+
     sqlConnector conn = new sqlConnector();
     PreparedStatement prepState;
     ResultSet rs;
-    
+
     private boolean imageSelected = false;
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +85,39 @@ public class Products extends javax.swing.JFrame {
         }
     }
 
+     private ImageIcon resizeImage(String imagePath, int width, int height) {
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image originalImage = originalIcon.getImage();
+        // Resize the image
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        // Return the resized ImageIcon
+        return new ImageIcon(resizedImage);
+    }
+
+    // Setter method to pass and display authenticatedUser details
+    public void setAuthenticatedUser(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
+        setUserDetails(authenticatedUser); // Update UI based on user details
+    }
+
+    // Method to set and display user details (name, role, and image)
+    public void setUserDetails(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser; // Set the authenticatedUser passed
+
+        if (authenticatedUser != null) {
+            // Assuming these are your GUI builder variable names for the components
+            employeeRoleTxt.setText(authenticatedUser.getRole());
+            employeNamerTxt.setText(authenticatedUser.getName());
+
+            // Resize and set employee image icon
+            ImageIcon userImage = resizeImage(authenticatedUser.getImagePath(), 60, 60); // Adjust size as needed
+            UserImageIcon.setIcon(userImage);
+        } else {
+            System.out.println("User details not set.");
+        }
+    }
+
     private void addImageToFolder() {
         String imagePath = "C:\\Users\\ameer\\Products\\" + System.currentTimeMillis() + ".jpg";
         File file = new File(imagePath);
@@ -93,70 +131,62 @@ public class Products extends javax.swing.JFrame {
             System.err.println("Error adding image: " + e.getMessage());
         }
     }
-    private void addToDatabase() 
-    {
-      String productName = txtName.getText();
-      String priceText = txtPrice.getText();
-      String category = (String)jComboBox1.getSelectedItem();
-      String imagePath = this.imagePath();
+
+    private void addToDatabase() {
+        String productName = txtName.getText();
+        String priceText = txtPrice.getText();
+        String category = (String) jComboBox1.getSelectedItem();
+        String imagePath = this.imagePath();
         if (!imageSelected) {
             JOptionPane.showMessageDialog(this, "Please select an image first.");
             return;
         }
-      if (!isValidProductName(productName)) 
-      {
-          JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
-          return;
-      }
+        if (!isValidProductName(productName)) {
+            JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
+            return;
+        }
 
-      if (!isValidPrice(priceText)) 
-      {
-          JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
-          return;
-      }
-      double price = Double.parseDouble(priceText);
+        if (!isValidPrice(priceText)) {
+            JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
+            return;
+        }
+        double price = Double.parseDouble(priceText);
 
-      try (
-          PreparedStatement checkStmt = conn.createConnection().prepareStatement("SELECT COUNT(*) FROM tbl_products WHERE product_name = ?");
-          PreparedStatement prepState = conn.createConnection().prepareStatement("INSERT INTO tbl_products (product_name"
-                                                                                + ", product_category"
-                                                                                + ", product_price"
-                                                                                + ", product_ImagePath) "
-                                                                                + "VALUES (?, ?, ?, ?)")
-      ) 
-      {
-          checkStmt.setString(1, productName);
-          ResultSet rs = checkStmt.executeQuery();
-          rs.next();
-          if (rs.getInt(1) > 0) 
-          {
-              JOptionPane.showMessageDialog(this, "This product already exists");
-              return;
-          }
+        try (
+                PreparedStatement checkStmt = conn.createConnection().prepareStatement("SELECT COUNT(*) FROM tbl_products WHERE product_name = ?"); PreparedStatement prepState = conn.createConnection().prepareStatement("INSERT INTO tbl_products (product_name"
+                + ", product_category"
+                + ", product_price"
+                + ", product_ImagePath) "
+                + "VALUES (?, ?, ?, ?)")) {
+            checkStmt.setString(1, productName);
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+            if (rs.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(this, "This product already exists");
+                return;
+            }
 
-          prepState.setString(1, productName);
-          prepState.setString(2, category);
-          prepState.setDouble(3, price);
-          prepState.setString(4, imagePath);
+            prepState.setString(1, productName);
+            prepState.setString(2, category);
+            prepState.setDouble(3, price);
+            prepState.setString(4, imagePath);
 
-          int execUp = prepState.executeUpdate();
+            int execUp = prepState.executeUpdate();
 
-          if (execUp == 1) 
-          {
-              JOptionPane.showMessageDialog(this, "Added successfully");
-              clearFields();
-              Fetch();
-          } else 
-          {
-              JOptionPane.showMessageDialog(this, "Cannot add. (Check for duplicate product names or contact system administrator)");
-          }
-          conn.createConnection().close();
-      } catch (SQLException ex) {
-          Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
-      }
-  }
+            if (execUp == 1) {
+                JOptionPane.showMessageDialog(this, "Added successfully");
+                clearFields();
+                Fetch();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cannot add. (Check for duplicate product names or contact system administrator)");
+            }
+            conn.createConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-   // checks kung tama nilagay ng user
+    // checks kung tama nilagay ng user
     private boolean isValidProductName(String name) {
         return name.chars().allMatch(c -> Character.isLetter(c) || Character.isSpaceChar(c) || c == '-');
     }
@@ -171,22 +201,22 @@ public class Products extends javax.swing.JFrame {
     }
 
     //fetch
-    private void Fetch(){
+    private void Fetch() {
         try {
             int q;
             prepState = conn.createConnection().prepareStatement("SELECT * FROM tbl_products");
             rs = prepState.executeQuery();
-            
+
             ResultSetMetaData rsmt = rs.getMetaData();
             q = rsmt.getColumnCount();
-            
-            DefaultTableModel dtm = (DefaultTableModel)imageLabel.getModel();
-            
+
+            DefaultTableModel dtm = (DefaultTableModel) imageLabel.getModel();
+
             dtm.setRowCount(0);
-            while(rs.next()){
+            while (rs.next()) {
                 Vector vector = new Vector();
-                
-                for(int i = 1; i <= q; i++){
+
+                for (int i = 1; i <= q; i++) {
                     vector.add(rs.getString("product_id"));
                     vector.add(rs.getString("product_name"));
                     vector.add(rs.getString("product_category"));
@@ -200,64 +230,64 @@ public class Products extends javax.swing.JFrame {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     //update table and database
-    private void updateProduct(){
-        try {        
+    private void updateProduct() {
+        try {
             try {
                 String productName = txtName.getText();
-        String priceText = txtPrice.getText();
-        String category = (String)jComboBox1.getSelectedItem();
-        String imagePath = this.imagePath();
-        
-        if (!isValidProductName(productName)) 
-        {
-            JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
-            return;
-        }
+                String priceText = txtPrice.getText();
+                String category = (String) jComboBox1.getSelectedItem();
+                String imagePath = this.imagePath();
 
-        if (!isValidPrice(priceText)) 
-        {
-            JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
-            return;
-        }
-                prepState = conn.createConnection().prepareStatement("UPDATE tbl_products "
-                                                                    + "SET "
-                                                                    + "product_name = ?, "
-                                                                    + "product_category = ?, "
-                                                                    + "product_price = ?, "
-                                                                    + "product_ImagePath = ? "
-                                                                    + "WHERE "
-                                                                    + "product_name = ?;");
-                    prepState.setString(1, txtName.getText());
-                    prepState.setString(2, (String)jComboBox1.getSelectedItem());
-                    prepState.setDouble(3, Double.parseDouble(txtPrice.getText()));
-                    prepState.setString(4, this.imagePath());
-                    prepState.setString(5, txtName.getText()); 
-                    prepState.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Updated successfully");
-                    Fetch();
-                    clearFields();
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
-                    String store = ex.toString();
-                    JOptionPane.showMessageDialog(this, "Error: " + store);
-                } finally {
-                    try {
-                        conn.createConnection().close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                if (!isValidProductName(productName)) {
+                    JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
+                    return;
                 }
 
-        conn.createConnection().close();
+                if (!isValidPrice(priceText)) {
+                    JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
+                    return;
+                }
+                prepState = conn.createConnection().prepareStatement("UPDATE tbl_products "
+                        + "SET "
+                        + "product_name = ?, "
+                        + "product_category = ?, "
+                        + "product_price = ?, "
+                        + "product_ImagePath = ? "
+                        + "WHERE "
+                        + "product_name = ?;");
+                prepState.setString(1, txtName.getText());
+                prepState.setString(2, (String) jComboBox1.getSelectedItem());
+                prepState.setDouble(3, Double.parseDouble(txtPrice.getText()));
+                prepState.setString(4, this.imagePath());
+                prepState.setString(5, txtName.getText());
+                prepState.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Updated successfully");
+                Fetch();
+                clearFields();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+                String store = ex.toString();
+                JOptionPane.showMessageDialog(this, "Error: " + store);
+            } finally {
+                try {
+                    conn.createConnection().close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            conn.createConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     //delete product
-    private void deleteProduct(){
-         try {                                          
+    private void deleteProduct() {
+        try {
             try {
                 prepState = conn.createConnection().prepareStatement("DELETE FROM tbl_products where product_name=?;");
                 prepState.setString(1, txtName.getText());
@@ -275,12 +305,15 @@ public class Products extends javax.swing.JFrame {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        employeNamerTxt = new javax.swing.JLabel();
+        UserImageIcon = new javax.swing.JLabel();
+        employeeRoleTxt = new javax.swing.JLabel();
         navbarLeft = new javax.swing.JPanel();
         btnOption = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -309,29 +342,53 @@ public class Products extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         header.setBackground(new java.awt.Color(81, 56, 33));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 245, 238));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Employee Name");
+        employeNamerTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeNamerTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeNamerTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeNamerTxt.setText("Employee Name");
+
+        UserImageIcon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        UserImageIcon.setForeground(new java.awt.Color(255, 245, 238));
+        UserImageIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        UserImageIcon.setText("User");
+
+        employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeeRoleTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeeRoleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeRoleTxt.setText("Role");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(1039, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addContainerGap(815, Short.MAX_VALUE)
+                .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(UserImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(UserImageIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
@@ -434,7 +491,7 @@ public class Products extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 568, Short.MAX_VALUE))
+                .addGap(0, 580, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -652,7 +709,7 @@ public class Products extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout itemDetailsLayout = new javax.swing.GroupLayout(itemDetails);
@@ -667,7 +724,7 @@ public class Products extends javax.swing.JFrame {
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tblProducts, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
             .addComponent(crudOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -686,29 +743,33 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_bUpdateActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-       deleteProduct();
+        deleteProduct();
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Reports callReports = new Reports();
+        callReports.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callReports.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Dashboard callDashboard = new Dashboard();
+        Dashboard callDashboard = new Dashboard(); // Instantiate Dashboard
+        callDashboard.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callDashboard.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
+        callProducts.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user;
         callProducts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Employees callEmployees = new Employees();
+        callEmployees.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callEmployees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -721,6 +782,10 @@ public class Products extends javax.swing.JFrame {
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -758,9 +823,12 @@ public class Products extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel UserImageIcon;
     private javax.swing.JButton bUpdate;
     private javax.swing.JPanel btnOption;
     private javax.swing.JPanel crudOption;
+    private javax.swing.JLabel employeNamerTxt;
+    private javax.swing.JLabel employeeRoleTxt;
     private javax.swing.JPanel header;
     private javax.swing.JTable imageLabel;
     private javax.swing.JPanel itemDetails;
@@ -772,7 +840,6 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;

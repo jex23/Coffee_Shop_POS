@@ -19,22 +19,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Employees extends javax.swing.JFrame {
 
-        
+    private UserAuthenticate authenticatedUser; // Instance variable
+
     /**
      * Creates new form Employees
      */
     public Employees() {
         initComponents();
-        
+
         setTitle("Employees");
-        
+
         ImageIcon icon = IconLoader.getIcon();
         Image img = icon.getImage();
-        
+
         setIconImage(img);
     }
-    
-    sqlConnector conn = new sqlConnector();   
+
+    sqlConnector conn = new sqlConnector();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,7 +47,9 @@ public class Employees extends javax.swing.JFrame {
     private void initComponents() {
 
         header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        employeeRoleTxt = new javax.swing.JLabel();
+        UserImageIcon = new javax.swing.JLabel();
+        employeNamerTxt = new javax.swing.JLabel();
         navbarLeft = new javax.swing.JPanel();
         btnOption = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -76,30 +79,49 @@ public class Employees extends javax.swing.JFrame {
         jButton25 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         header.setBackground(new java.awt.Color(81, 56, 33));
 
-        jLabel1.setBackground(new java.awt.Color(255, 245, 238));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 245, 238));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Employee Name");
+        employeeRoleTxt.setBackground(new java.awt.Color(255, 245, 238));
+        employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeeRoleTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeeRoleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeRoleTxt.setText("Employee Name");
+
+        UserImageIcon.setText("User");
+
+        employeNamerTxt.setBackground(new java.awt.Color(255, 245, 238));
+        employeNamerTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeNamerTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeNamerTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeNamerTxt.setText("employeNamerTxt");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(1058, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addContainerGap(808, Short.MAX_VALUE)
+                .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(UserImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(UserImageIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
         );
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
@@ -202,7 +224,7 @@ public class Employees extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 568, Short.MAX_VALUE))
+                .addGap(0, 576, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -258,7 +280,7 @@ public class Employees extends javax.swing.JFrame {
             .addGroup(tblEmployeesLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(862, Short.MAX_VALUE))
+                .addContainerGap(870, Short.MAX_VALUE))
             .addGroup(tblEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(tblEmployeesLayout.createSequentialGroup()
                     .addGap(82, 82, 82)
@@ -420,7 +442,7 @@ public class Employees extends javax.swing.JFrame {
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tblEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(crudOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -433,26 +455,67 @@ public class Employees extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Method to resize the image
+     private ImageIcon resizeImage(String imagePath, int width, int height) {
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image originalImage = originalIcon.getImage();
+        // Resize the image
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        // Return the resized ImageIcon
+        return new ImageIcon(resizedImage);
+    }
+
+    // Setter method to pass and display authenticatedUser details
+    public void setAuthenticatedUser(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
+        setUserDetails(authenticatedUser); // Update UI based on user details
+    }
+
+    // Method to set and display user details (name, role, and image)
+    public void setUserDetails(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser; // Set the authenticatedUser passed
+
+        if (authenticatedUser != null) {
+            // Assuming these are your GUI builder variable names for the components
+            employeeRoleTxt.setText(authenticatedUser.getRole());
+            employeNamerTxt.setText(authenticatedUser.getName());
+
+            // Resize and set employee image icon
+            ImageIcon userImage = resizeImage(authenticatedUser.getImagePath(), 60, 60); // Adjust size as needed
+            UserImageIcon.setIcon(userImage);
+        } else {
+            System.out.println("User details not set.");
+        }
+    }
+
+    
+    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Reports callReports = new Reports();
+        callReports.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callReports.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Dashboard callDashboard = new Dashboard();
+         Dashboard callDashboard = new Dashboard(); // Instantiate Dashboard
+        callDashboard.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callDashboard.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
+        callProducts.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callProducts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Employees callEmployees = new Employees();
+        callEmployees.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callEmployees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -465,6 +528,11 @@ public class Employees extends javax.swing.JFrame {
 //        this.imagePath();
 //        this.addImageToFolder();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -502,9 +570,12 @@ public class Employees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel UserImageIcon;
     private javax.swing.JPanel btnOption;
     private javax.swing.JPanel crudOption;
     private javax.swing.JPanel crudOption1;
+    private javax.swing.JLabel employeNamerTxt;
+    private javax.swing.JLabel employeeRoleTxt;
     private javax.swing.JScrollPane employeeTable;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
@@ -517,20 +588,13 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTable jTable4;
     private javax.swing.JPanel navbarLeft;

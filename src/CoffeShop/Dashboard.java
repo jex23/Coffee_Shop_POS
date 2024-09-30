@@ -32,16 +32,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Dashboard extends javax.swing.JFrame {
 
-     private ProductMethods productMethods;
-    // Initialize the productMethods instance
+    private ProductMethods productMethods;
+    private UserAuthenticate authenticatedUser;
 
     private UserAuthenticate loggedInUser; // Store the use
     private int currentPage = 1; // Start on the first page
-    private static final int PAGE_SIZE = 10; // Number of products per page
+    private static final int PAGE_SIZE = 9; // Number of products per page
     private boolean isCoffeeGridOpen = false; // To track if coffee grid is open
     private boolean isTeaGridOpen = false;   // To track if tea grid is open
     private boolean isSnackGridOpen = false;  // To track if snack grid is open
@@ -50,10 +52,10 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     public Dashboard() {
-        initComponents();
-         productMethods = new ProductMethods();
+        initComponents(); // Call method to initialize components
+        productMethods = new ProductMethods();
         setTitle("Dashboard");
-         displayProductsForTab("Coffee"); // Default to Coffee tab
+        displayProductsForTab("Coffee"); // Default to Coffee tab
 
         // Load the icon for the dashboard window
         ImageIcon icon = IconLoader.getIcon();
@@ -137,7 +139,8 @@ public class Dashboard extends javax.swing.JFrame {
         changeFld = new javax.swing.JTextField();
         btnPay = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        btnReceipt = new javax.swing.JButton();
+        vatFld = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -168,7 +171,7 @@ public class Dashboard extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(872, Short.MAX_VALUE)
+                .addContainerGap(914, Short.MAX_VALUE)
                 .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -388,14 +391,14 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Snacks", jScrollPane3);
 
-        previousButton.setText("jButton5");
+        previousButton.setText("Previous");
         previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 previousButtonActionPerformed(evt);
             }
         });
 
-        nxtButton.setText("jButton6");
+        nxtButton.setText("Next");
         nxtButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nxtButtonActionPerformed(evt);
@@ -414,9 +417,9 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(jTabbedPane2)
                             .addComponent(searchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(centerPanelLayout.createSequentialGroup()
-                        .addGap(199, 199, 199)
+                        .addGap(174, 174, 174)
                         .addComponent(previousButton)
-                        .addGap(77, 77, 77)
+                        .addGap(138, 138, 138)
                         .addComponent(nxtButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -425,16 +428,13 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(centerPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(centerPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(previousButton))
-                    .addGroup(centerPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nxtButton)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nxtButton)
+                    .addComponent(previousButton))
+                .addGap(10, 10, 10))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 192, 135));
@@ -472,6 +472,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         totalFld.setEditable(false);
         totalFld.setText("0");
+        totalFld.setActionCommand("<Not Set>");
+        totalFld.setAutoscrolls(false);
 
         amountFld.setText("0");
         amountFld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -497,7 +499,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnReceipt.setText("Receipt");
+        vatFld.setText("0");
+
+        jLabel1.setText("Vat 12%:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -505,30 +509,35 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(productTable, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(totalLabel)
-                                    .addComponent(amountLabel)
-                                    .addComponent(changeLabel))
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(changeFld, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                                    .addComponent(amountFld)
-                                    .addComponent(totalFld))
-                                .addGap(38, 38, 38))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(amountLabel)
+                                            .addComponent(changeLabel)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(amountFld)
+                                            .addComponent(changeFld)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnPay)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnRemove)
+                                        .addGap(49, 49, 49))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(btnPay)
-                                .addGap(52, 52, 52)
-                                .addComponent(btnRemove))
+                                .addGap(138, 138, 138)
+                                .addComponent(vatFld))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(btnReceipt)))
-                        .addGap(126, 126, 126))
-                    .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(63, 63, 63)
+                                .addComponent(totalLabel)
+                                .addGap(46, 46, 46)
+                                .addComponent(totalFld)))
+                        .addGap(97, 97, 97)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -540,7 +549,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalLabel))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vatFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(amountLabel)
                     .addComponent(amountFld, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -548,13 +561,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(changeLabel)
                     .addComponent(changeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPay)
                     .addComponent(btnRemove))
-                .addGap(26, 26, 26)
-                .addComponent(btnReceipt)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout itemDetailsLayout = new javax.swing.GroupLayout(itemDetails);
@@ -577,7 +588,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1335, 1009));
+        setSize(new java.awt.Dimension(1377, 1009));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -593,21 +604,24 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Products callProducts = new Products();
+        Products callProducts = new Products(); // Instantiate without parameters
+        callProducts.setAuthenticatedUser(loggedInUser); // Set the user details
         callProducts.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Employees callEmployees = new Employees();
+        Employees callEmployees = new Employees(); // Instantiate without parameters
+        callEmployees.setAuthenticatedUser(loggedInUser); // Set the user details
         callEmployees.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Reports callReports = new Reports();
+        Reports callReports = new Reports(); // Instantiate without parameters
+        callReports.setAuthenticatedUser(loggedInUser); // Set the user details
         callReports.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -674,7 +688,6 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        // Check if there are any items in the order table
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
         if (model.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "No items in the order to proceed with the payment.", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -715,36 +728,108 @@ public class Dashboard extends javax.swing.JFrame {
 
         // If the user confirmed the sale
         if (confirm == JOptionPane.YES_OPTION) {
-            // Call the method to add the sale
-            addSales(); // This calls your addSales method to process the transaction
+            // Prepare details for the receipt
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            String time = new SimpleDateFormat("HH:mm").format(new Date());
+            String orderNo = generateOrderNumber(); // Implement this method to generate order number
+            String employeeName = loggedInUser.getName();
+
+            double subtotal = calculateSubtotal(); // Implement this method to calculate subtotal from order table
+            double vat = subtotal * 0.12; // Adjust VAT calculation as needed
+            double total = subtotal + vat;
+
+            List<SaleItem> saleItems = getSaleItemsFromOrderTable(); // Implement this method to get SaleItems from order table
+
+            // Create an instance of SalesManagementMethod to add the sale
+            SalesManagementMethod salesManager = new SalesManagementMethod();
+
+            // Call the method to add the sale and get the sale ID
+            int saleId = salesManager.addSale(Integer.parseInt(loggedInUser.getId()), employeeName, subtotal, vat, total, amount, amountChange, saleItems);
+
+            // Create an instance of the Receipt class
+            Receipt callReceipt = new Receipt();
+
+            // Display receipt, including amount and change details
+            callReceipt.displayReceipt(date, time, String.valueOf(saleId), employeeName, saleItems, subtotal, vat, total, "Credit Card", amount, amountChange, total);
+
+            // Set the totalFld to the calculated total amount
+            totalFld.setText(String.format("%.2f", total)); // Update total field with total amount
+
+            // Make the Receipt JFrame visible
+            callReceipt.setVisible(true);
 
             // Reset the fields after successful sale
+            totalFld.setText("0"); // Reset total field
+            vatFld.setText("0"); // Reset VAT field
             amountFld.setText("0"); // Reset amount field
             changeFld.setText("0"); // Reset change field
-            totalFld.setText("0"); // Reset total field (if you have a totalFld)
+            model.setRowCount(0); // Clear order table
 
             // Notify user of success
             JOptionPane.showMessageDialog(this, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            // Optionally clear the order table after sale
-            model.setRowCount(0); // Clear order table
         } else {
             // User cancelled the transaction
             JOptionPane.showMessageDialog(this, "Transaction cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private List<SaleItem> getSaleItemsFromOrderTable(DefaultTableModel model) {
+        List<SaleItem> saleItems = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            int productId = (int) model.getValueAt(i, 0); // Assuming product ID is in the first column
+            int quantity = (int) model.getValueAt(i, 1); // Assuming quantity is in the second column
+            double price = (double) model.getValueAt(i, 2); // Assuming price is in the third column
+            saleItems.add(new SaleItem(productId, quantity, price));
+        }
+        return saleItems;
+    }
+
+    private String generateOrderNumber() {
+        // Implement logic to generate a unique order number, e.g., using a timestamp or counter
+        return String.valueOf(System.currentTimeMillis()); // Simple example using current time
+    }
+
+    private double calculateSubtotal() {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        double subtotal = 0.0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            subtotal += (Double) model.getValueAt(i, 3); // Assuming total price is in column 3
+        }
+        return subtotal;
+    }
+
+    private List<SaleItem> getSaleItemsFromOrderTable() {
+        List<SaleItem> saleItems = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String productName = (String) model.getValueAt(i, 0);
+            double price = (Double) model.getValueAt(i, 1);
+            int quantity = (Integer) model.getValueAt(i, 2);
+            int productId = getProductIdByName(productName); // Retrieve product ID
+            saleItems.add(new SaleItem(productId, quantity, price)); // Create SaleItem instance
+        }
+        return saleItems;
+    }
     private void nxtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxtButtonActionPerformed
-        // TODO add your handling code here:
-        currentPage++; // Move to the next page
-        GridLayoutDisplay(); // Refresh the display
+        // Check if the next page has products
+        List<Product> nextPageProducts = productMethods.getProductsByCategory(getCurrentCategory(), currentPage + 1, PAGE_SIZE);
+
+        if (!nextPageProducts.isEmpty()) {
+            currentPage++; // Move to the next page
+            GridLayoutDisplay(); // Refresh the display
+            updateButtonStates(); // Update button states after page change
+        } else {
+            System.out.println("Cannot go to the next page; the next page is blank.");
+        }
     }//GEN-LAST:event_nxtButtonActionPerformed
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
-        // TODO add your handling code here:
         if (currentPage > 1) {
             currentPage--; // Move to the previous page
             GridLayoutDisplay(); // Refresh the display
+            updateButtonStates(); // Update button states after page change
+        } else {
+            System.out.println("Cannot go to the previous page; already on the first page.");
         }
     }//GEN-LAST:event_previousButtonActionPerformed
 
@@ -755,6 +840,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
         // Get the currently selected index
         int selectedIndex = jTabbedPane2.getSelectedIndex();
+
+        // Reset current page to 1 when switching tabs
+        currentPage = 1; // Reset the current page to 1
 
         // Reset all boolean values to false
         isCoffeeGridOpen = false;
@@ -785,7 +873,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane2StateChanged
 
     // Method to display products based on selected tab
-   private void displayProductsForTab(String category) {
+    private void displayProductsForTab(String category) {
         if (productMethods == null) {
             System.err.println("productMethods is not initialized.");
             return; // Prevent NullPointerException
@@ -796,7 +884,7 @@ public class Dashboard extends javax.swing.JFrame {
         teaGrid.removeAll();
         snackGrid.removeAll();
 
-        // Fetch products
+        // Fetch products for the selected category
         List<Product> products = productMethods.getProductsByCategory(category, currentPage, PAGE_SIZE);
 
         for (Product product : products) {
@@ -823,6 +911,9 @@ public class Dashboard extends javax.swing.JFrame {
         teaGrid.repaint();
         snackGrid.revalidate();
         snackGrid.repaint();
+
+        // Update pagination button states after loading products
+        updateButtonStates();
     }
 
     private void handleSearch() {
@@ -879,28 +970,33 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Method to update the product display based on the selected tab
-    private void GridLayoutDisplay() {
+    // Method to update the product display based on the selected tab
+    private List<Product> GridLayoutDisplay() {
         // Clear existing components in each grid
         coffeeGrid.removeAll();
         teaGrid.removeAll();
         snackGrid.removeAll();
 
         // Fetch products based on the open category
-        List<Product> products;
+        List<Product> products = new ArrayList<>();
         if (isCoffeeGridOpen) {
             products = productMethods.getProductsByCategory("Coffee", currentPage, PAGE_SIZE);
         } else if (isTeaGridOpen) {
             products = productMethods.getProductsByCategory("Tea", currentPage, PAGE_SIZE);
         } else if (isSnackGridOpen) {
             products = productMethods.getProductsByCategory("Snacks", currentPage, PAGE_SIZE);
-        } else {
-            products = new ArrayList<>(); // Empty list if no category is open
+        }
+
+        // Check if products list is empty
+        if (products.isEmpty() && currentPage > 1) {
+            // If there are no products, we should go back to the previous page
+            currentPage--; // Move back to the previous page
+            return GridLayoutDisplay(); // Refresh and return products
         }
 
         // Iterate over the products list and create UI components for each product
         for (Product product : products) {
             JPanel productPanel = createProductPanel(product);
-            // Add the product panel to the corresponding grid based on the category
             switch (product.getProductCategory()) {
                 case "Coffee":
                     coffeeGrid.add(productPanel);
@@ -924,16 +1020,23 @@ public class Dashboard extends javax.swing.JFrame {
         snackGrid.revalidate();
         snackGrid.repaint();
 
-        // Update pagination button states
-        updateButtonStates();
+        return products; // Return the list of products for further checking
     }
 
     private void updateButtonStates() {
-        int totalProducts = productMethods.getTotalProductCount();
+        String currentCategory = getCurrentCategory(); // Get the current category
+
+        // Get the total product count for the current category
+        int totalProducts = productMethods.getTotalProductCount(currentCategory);
+
+        // Enable or disable the previous button
         previousButton.setEnabled(currentPage > 1);
-        nxtButton.setEnabled(currentPage * PAGE_SIZE < totalProducts);
+
+        // Enable or disable the next button
+        nxtButton.setEnabled((currentPage * PAGE_SIZE) < totalProducts);
     }
 
+    // Method to get the total product count for a specific category
     private ImageIcon resizeImage(String imagePath, int width, int height) {
         // Load the image
         ImageIcon originalIcon = new ImageIcon(imagePath);
@@ -946,8 +1049,13 @@ public class Dashboard extends javax.swing.JFrame {
         return new ImageIcon(resizedImage);
     }
 
-    public void setUserDetails(UserAuthenticate user) {
-        this.loggedInUser = user;
+    public void setAuthenticatedUser(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
+        setUserDetails(authenticatedUser); // Update UI based on user details if necessary
+    }
+
+    public void setUserDetails(UserAuthenticate authenticatedUser) {
+        this.loggedInUser = authenticatedUser; // Changed variable name for clarity
 
         if (loggedInUser != null) {
             employeeRoleTxt.setText(loggedInUser.getRole());
@@ -961,9 +1069,20 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }
 
-    // Method to set loggedInUser before the form opens
-    public void setLoggedInUser(UserAuthenticate user) {
-        this.loggedInUser = user;
+// Method to set loggedInUser before the form opens
+    public void setLoggedInUser(UserAuthenticate authenticatedUser) {
+        this.loggedInUser = authenticatedUser; // Changed variable name for clarity
+    }
+
+    private String getCurrentCategory() {
+        if (isCoffeeGridOpen) {
+            return "Coffee";
+        } else if (isTeaGridOpen) {
+            return "Tea";
+        } else if (isSnackGridOpen) {
+            return "Snacks";
+        }
+        return null; // No category is open
     }
 
     private JPanel createProductPanel(Product product) {
@@ -1162,11 +1281,18 @@ public class Dashboard extends javax.swing.JFrame {
             totalPriceSum += rowTotalPrice;
         }
 
-        // Display the total sum in the JTextField totalFld
-        totalFld.setText(String.format("%.2f", totalPriceSum)); // Format to 2 decimal places
+        // Calculate VAT (12%)
+        double vat = totalPriceSum * 0.12;
+        double totalPriceWithVAT = totalPriceSum + vat;
 
-        // Return the calculated total price
-        return totalPriceSum;
+        // Display the total sum in the JTextField totalFld
+        totalFld.setText(String.format("%.2f", totalPriceWithVAT)); // Format to 2 decimal places
+
+        // Display the VAT in the JTextField vatFld
+        vatFld.setText(String.format("%.2f", vat)); // Format to 2 decimal places for VAT
+
+        // Return the calculated total price including VAT
+        return totalPriceWithVAT;
     }
 
     private void addSales() {
@@ -1231,6 +1357,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         // Create an instance of SalesManagementMethod to add the sale
         SalesManagementMethod salesManager = new SalesManagementMethod();
+        // Pass sale items along with employee details and amounts
         salesManager.addSale(employeeId, employeeName, subtotal, vat, total, amount, amountChange, saleItems);
 
         // Notify user of success
@@ -1301,7 +1428,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel amountLabel;
     private javax.swing.JPanel btnOption;
     private javax.swing.JButton btnPay;
-    private javax.swing.JButton btnReceipt;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel centerPanel;
@@ -1316,6 +1442,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1332,5 +1459,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel teaGrid;
     private javax.swing.JTextField totalFld;
     private javax.swing.JLabel totalLabel;
+    private javax.swing.JTextField vatFld;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,11 +14,13 @@ public class SalesManagementMethod { // Renamed class
         dbConnector = new sqlConnector();
     }
 
-    // Method to add a new sale
-    public void addSale(int employeeId, String employeeName, double subtotal, double vat, double total, double amount, double amountChange, List<SaleItem> saleItems) {
+    // Method to add a new sale and return the generated sale ID
+    public int addSale(int employeeId, String employeeName, double subtotal, double vat, double total, double amount, double amountChange, List<SaleItem> saleItems) {
         // Updated SQL query to include amount and amount_change
         String insertSaleQuery = "INSERT INTO tbl_sales (employee_id, employee_name, subtotal, vat, total, amount, amount_change) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String insertSaleItemQuery = "INSERT INTO tbl_sales_items (sale_id, product_id, quantity, price, total_item_price) VALUES (?, ?, ?, ?, ?)"; // Include total_item_price
+
+        int saleId = 0; // Initialize saleId
 
         try (Connection conn = dbConnector.createConnection()) {
             conn.setAutoCommit(false); // Start transaction
@@ -35,7 +37,6 @@ public class SalesManagementMethod { // Renamed class
                 saleStmt.executeUpdate();
 
                 // Get the generated sale ID
-                int saleId;
                 try (ResultSet generatedKeys = saleStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         saleId = generatedKeys.getInt(1);
@@ -68,5 +69,7 @@ public class SalesManagementMethod { // Renamed class
                 rollbackEx.printStackTrace();
             }
         }
+        
+        return saleId; // Return the generated sale ID
     }
 }

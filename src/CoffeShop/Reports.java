@@ -12,12 +12,14 @@ import javax.swing.ImageIcon;
  * @author jenal
  */
 public class Reports extends javax.swing.JFrame {
-
+    private UserAuthenticate authenticatedUser; // Instance variable
     /**
      * Creates new form Reports
      */
     public Reports() {
+       
         initComponents();
+       
         
         setTitle("Reports");
         
@@ -37,7 +39,9 @@ public class Reports extends javax.swing.JFrame {
     private void initComponents() {
 
         header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        employeeRoleTxt = new javax.swing.JLabel();
+        UserImageIcon = new javax.swing.JLabel();
+        employeNamerTxt = new javax.swing.JLabel();
         navbarLeft = new javax.swing.JPanel();
         btnOption = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -71,26 +75,46 @@ public class Reports extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(81, 56, 33));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 245, 238));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Employee Name");
+        employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeeRoleTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeeRoleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeRoleTxt.setText("Role");
+
+        UserImageIcon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        UserImageIcon.setForeground(new java.awt.Color(255, 245, 238));
+        UserImageIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        UserImageIcon.setText("User");
+
+        employeNamerTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        employeNamerTxt.setForeground(new java.awt.Color(255, 245, 238));
+        employeNamerTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeNamerTxt.setText("Employee Name");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(1053, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addContainerGap(777, Short.MAX_VALUE)
+                .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(UserImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(employeNamerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 9, Short.MAX_VALUE))
+                    .addComponent(UserImageIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
@@ -193,7 +217,7 @@ public class Reports extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 570, Short.MAX_VALUE))
+                .addGap(0, 579, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -215,7 +239,7 @@ public class Reports extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         salesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -408,6 +432,41 @@ public class Reports extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     private ImageIcon resizeImage(String imagePath, int width, int height) {
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image originalImage = originalIcon.getImage();
+        // Resize the image
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        // Return the resized ImageIcon
+        return new ImageIcon(resizedImage);
+    }
+
+    // Setter method to pass and display authenticatedUser details
+    public void setAuthenticatedUser(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
+        setUserDetails(authenticatedUser); // Update UI based on user details
+    }
+
+    // Method to set and display user details (name, role, and image)
+    public void setUserDetails(UserAuthenticate authenticatedUser) {
+        this.authenticatedUser = authenticatedUser; // Set the authenticatedUser passed
+
+        if (authenticatedUser != null) {
+            // Assuming these are your GUI builder variable names for the components
+            employeeRoleTxt.setText(authenticatedUser.getRole());
+            employeNamerTxt.setText(authenticatedUser.getName());
+
+            // Resize and set employee image icon
+            ImageIcon userImage = resizeImage(authenticatedUser.getImagePath(), 60, 60); // Adjust size as needed
+            UserImageIcon.setIcon(userImage);
+        } else {
+            System.out.println("User details not set.");
+        }
+    }
+
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Reports callReports = new Reports();
         callReports.setVisible(true);
@@ -415,19 +474,22 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Dashboard callDashboard = new Dashboard();
+        Dashboard callDashboard = new Dashboard(); // Instantiate Dashboard
+        callDashboard.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callDashboard.setVisible(true);
-        this.dispose();
+        this.dispose(); // Close the current frame
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Products callProducts = new Products();
+        callProducts.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callProducts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Employees callEmployees = new Employees();
+        callEmployees.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
         callEmployees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -488,8 +550,11 @@ public class Reports extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel UserImageIcon;
     private javax.swing.JPanel btnOption;
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JLabel employeNamerTxt;
+    private javax.swing.JLabel employeeRoleTxt;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
     private javax.swing.JTable itemSalesTable;
@@ -501,7 +566,6 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
