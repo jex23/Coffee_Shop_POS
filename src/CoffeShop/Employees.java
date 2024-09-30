@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -576,8 +577,15 @@ public class Employees extends javax.swing.JFrame {
             return null;
         }
 
+        String[] acceptedImageExtensions = {".jpg", ".jpeg", ".png"};
+        String fileExtension = imageLocation.substring(imageLocation.lastIndexOf(".")).toLowerCase();
+        boolean isImage = Arrays.asList(acceptedImageExtensions).contains(fileExtension);
+        if (!isImage) {
+            JOptionPane.showMessageDialog(this, "Please select a valid image file (jpg, jpeg, png, gif, bmp).", "Invalid File Type", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    
         String destinationFolder = "src/Employees/";
-        String fileExtension = imageLocation.substring(imageLocation.lastIndexOf("."));
         String newFileName = "employee_" + System.currentTimeMillis() + fileExtension;
         String destinationPath = destinationFolder + newFileName;
 
