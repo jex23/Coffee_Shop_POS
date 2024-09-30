@@ -128,6 +128,7 @@ public class Dashboard extends javax.swing.JFrame {
         snackGrid = new javax.swing.JPanel();
         previousButton = new javax.swing.JButton();
         nxtButton = new javax.swing.JButton();
+        pageLabelTxt = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         productTable = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -141,6 +142,8 @@ public class Dashboard extends javax.swing.JFrame {
         btnRemove = new javax.swing.JButton();
         vatFld = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        subtotalFld = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -410,6 +413,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        pageLabelTxt.setText("0");
+
         javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
         centerPanel.setLayout(centerPanelLayout);
         centerPanelLayout.setHorizontalGroup(
@@ -424,7 +429,9 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(centerPanelLayout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addComponent(previousButton)
-                        .addGap(138, 138, 138)
+                        .addGap(18, 18, 18)
+                        .addComponent(pageLabelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(nxtButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -438,7 +445,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nxtButton)
-                    .addComponent(previousButton))
+                    .addComponent(previousButton)
+                    .addComponent(pageLabelTxt))
                 .addGap(10, 10, 10))
         );
 
@@ -469,9 +477,9 @@ public class Dashboard extends javax.swing.JFrame {
             orderTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        totalLabel.setText("Total:");
+        totalLabel.setText("Sub Total:");
 
-        amountLabel.setText("Amount:");
+        amountLabel.setText("Amount");
 
         changeLabel.setText("Change:");
 
@@ -479,6 +487,7 @@ public class Dashboard extends javax.swing.JFrame {
         totalFld.setText("0");
         totalFld.setActionCommand("<Not Set>");
         totalFld.setAutoscrolls(false);
+        totalFld.setEnabled(false);
 
         amountFld.setText("0");
         amountFld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -504,9 +513,17 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        vatFld.setEditable(false);
         vatFld.setText("0");
+        vatFld.setEnabled(false);
 
         jLabel1.setText("Vat 12%:");
+
+        jLabel2.setText("Total:");
+
+        subtotalFld.setEditable(false);
+        subtotalFld.setText("0");
+        subtotalFld.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -514,35 +531,37 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productTable, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addComponent(productTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnPay)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addComponent(btnRemove)
+                                .addGap(144, 144, 144))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(amountLabel)
                                             .addComponent(changeLabel)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(28, 28, 28)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(amountFld)
-                                            .addComponent(changeFld)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnPay)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnRemove)
-                                        .addGap(49, 49, 49))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(vatFld))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(totalLabel)
-                                .addGap(46, 46, 46)
-                                .addComponent(totalFld)))
-                        .addGap(97, 97, 97)))
+                                            .addComponent(changeFld)
+                                            .addComponent(subtotalFld)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(totalLabel))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(totalFld)
+                                            .addComponent(vatFld))))
+                                .addGap(77, 77, 77)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -554,23 +573,27 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vatFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(subtotalFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountLabel)
                     .addComponent(amountFld, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changeLabel)
-                    .addComponent(changeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(changeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(changeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPay)
                     .addComponent(btnRemove))
-                .addGap(55, 55, 55))
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout itemDetailsLayout = new javax.swing.GroupLayout(itemDetails);
@@ -579,16 +602,17 @@ public class Dashboard extends javax.swing.JFrame {
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addComponent(centerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         itemDetailsLayout.setVerticalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(itemDetailsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
@@ -631,6 +655,9 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+
+        currentPage = 1; // Reset the current page to 1
+        pageLabelTxt.setText("Page: " + currentPage); // Update the label text to reflect the reset page
         GridLayoutDisplay();
 
         // Set user details if available
@@ -689,6 +716,8 @@ public class Dashboard extends javax.swing.JFrame {
         // Reset the fields after successful sale
         amountFld.setText("0"); // Reset amount field
         changeFld.setText("0"); // Reset change field
+        vatFld.setText("0"); // Reset change field
+        subtotalFld.setText("0"); // Reset change field
         totalFld.setText("0"); // Reset total field (if you have a totalFld)
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -765,7 +794,8 @@ public class Dashboard extends javax.swing.JFrame {
 
             // Reset the fields after successful sale
             totalFld.setText("0"); // Reset total field
-            vatFld.setText("0"); // Reset VAT field
+            vatFld.setText("0"); // Reset change field
+            subtotalFld.setText("0"); // Reset change field
             amountFld.setText("0"); // Reset amount field
             changeFld.setText("0"); // Reset change field
             model.setRowCount(0); // Clear order table
@@ -823,6 +853,7 @@ public class Dashboard extends javax.swing.JFrame {
             currentPage++; // Move to the next page
             GridLayoutDisplay(); // Refresh the display
             updateButtonStates(); // Update button states after page change
+            pageLabelTxt.setText("Page: " + currentPage); // Update the label text
         } else {
             System.out.println("Cannot go to the next page; the next page is blank.");
         }
@@ -833,6 +864,7 @@ public class Dashboard extends javax.swing.JFrame {
             currentPage--; // Move to the previous page
             GridLayoutDisplay(); // Refresh the display
             updateButtonStates(); // Update button states after page change
+            pageLabelTxt.setText("Page: " + currentPage); // Update the label text
         } else {
             System.out.println("Cannot go to the previous page; already on the first page.");
         }
@@ -848,6 +880,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         // Reset current page to 1 when switching tabs
         currentPage = 1; // Reset the current page to 1
+        pageLabelTxt.setText("Page: " + currentPage); // Update the label text to reflect the reset page
 
         // Reset all boolean values to false
         isCoffeeGridOpen = false;
@@ -1295,7 +1328,10 @@ public class Dashboard extends javax.swing.JFrame {
         double totalPriceWithVAT = totalPriceSum + vat;
 
         // Display the total sum in the JTextField totalFld
-        totalFld.setText(String.format("%.2f", totalPriceWithVAT)); // Format to 2 decimal places
+        totalFld.setText(String.format("%.2f", totalPriceSum)); // Format to 2 decimal places
+
+        // Display the Sub total sum in the JTextField totalFld
+        subtotalFld.setText(String.format("%.2f", totalPriceWithVAT)); // Format to 2 decimal places
 
         // Display the VAT in the JTextField vatFld
         vatFld.setText(String.format("%.2f", vat)); // Format to 2 decimal places for VAT
@@ -1452,6 +1488,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1460,11 +1497,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel navbarLeft;
     private javax.swing.JButton nxtButton;
     private javax.swing.JTable orderTable;
+    private javax.swing.JLabel pageLabelTxt;
     private javax.swing.JButton previousButton;
     private javax.swing.JScrollPane productTable;
     private javax.swing.JPanel searchBar;
     private javax.swing.JTextField searchText;
     private javax.swing.JPanel snackGrid;
+    private javax.swing.JTextField subtotalFld;
     private javax.swing.JPanel teaGrid;
     private javax.swing.JTextField totalFld;
     private javax.swing.JLabel totalLabel;

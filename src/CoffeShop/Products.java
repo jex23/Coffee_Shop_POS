@@ -6,7 +6,7 @@ package CoffeShop;
 
 /**
  *
- * @author jenal
+ * @author prince
  */
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -138,21 +138,24 @@ public class Products extends javax.swing.JFrame {
             jLabel2.setIcon(scaledIcon);
         }
     }
-    //add chosen image to selected folder
     private void addImageToFolder() {
-        String imagePath = "C:\\Users\\ameer\\Products\\" + System.currentTimeMillis() + ".jpg";
-        File file = new File(imagePath);
+        String destinationFolder = "src/Employees/";
+        String imageName = System.currentTimeMillis() + ".jpg";
+        File file = new File(destinationFolder + imageName);
 
         try {
+            // Read the image from the specified location
             BufferedImage image = ImageIO.read(new File(imageLocation));
+            // Write the image to the new location
             ImageIO.write(image, "jpg", file);
-            System.out.println("Image added successfully!");
+            System.out.println("Image added successfully at: " + file.getAbsolutePath());
             isEmpty = false;
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error adding image: " + e.getMessage());
         }
     }
+
     
     
     boolean isEmpty = false;
@@ -437,6 +440,7 @@ public class Products extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -761,6 +765,13 @@ public class Products extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(60, 60));
         jPanel1.add(jLabel2);
 
+        jButton6.setText("Clear fields");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout crudOptionLayout = new javax.swing.GroupLayout(crudOption);
         crudOption.setLayout(crudOptionLayout);
         crudOptionLayout.setHorizontalGroup(
@@ -777,7 +788,8 @@ public class Products extends javax.swing.JFrame {
                     .addGroup(crudOptionLayout.createSequentialGroup()
                         .addGroup(crudOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)))
@@ -807,11 +819,13 @@ public class Products extends javax.swing.JFrame {
                     .addGroup(crudOptionLayout.createSequentialGroup()
                         .addComponent(jLabel41)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5))
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout itemDetailsLayout = new javax.swing.GroupLayout(itemDetails);
@@ -895,6 +909,10 @@ public class Products extends javax.swing.JFrame {
     private void imageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageLabelMouseClicked
          getTableData();
     }//GEN-LAST:event_imageLabelMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        clearFields();
+    }//GEN-LAST:event_jButton6ActionPerformed
   
     /**
      * @param args the command line arguments
@@ -948,6 +966,7 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel38;
