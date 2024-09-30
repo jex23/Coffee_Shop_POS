@@ -4,43 +4,41 @@
  */
 package CoffeShop;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Asus
  */
 public class Employee {
-    private int employeeId;
+    private int employeeID;
     private String employeeName;
-    private String employeeUsername;
-    private String employeeDateofEmployment;
-    private String employeeImagePath;
+    private String employeeRole;
+    private LocalDateTime employeeDateOfEmployment;
+ 
 
-    public Employee(int employeeId, String employeeName, String employeeUsername, String employeeDateofEmployment,String employeeImagePath){
-        this.employeeId = employeeId;
+    public Employee(int employeeID, String employeeName, String employeeRole, LocalDateTime employeeDateOfEmployment){
+        this.employeeID = employeeID;
         this.employeeName = employeeName;
-        this.employeeUsername = employeeUsername;
-        this.employeeDateofEmployment = employeeDateofEmployment;
-        this.employeeImagePath = employeeImagePath;
+        this.employeeRole = employeeRole;
+        this.employeeDateOfEmployment = employeeDateOfEmployment;
     }
     
-    public int getEmployeeId(){
-        return employeeId;
+    public int getEmployeeID(){
+        return employeeID;
     }
     
     public String getEmployeeName(){
         return employeeName;
     }
     
-    public String getEmployeeUserName(){
-        return employeeUsername;
+    public String getEmployeeRole(){
+        return employeeRole;
     }
     
-    public String getEmployeeDateofEmployment(){
-        return employeeDateofEmployment;
+    public LocalDateTime getEmployeeDateOfEmployment(){
+        return employeeDateOfEmployment;
     }
-    
-    public String getImagePath(){
-        return employeeImagePath;
-    }  
+
 
 }
