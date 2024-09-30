@@ -6,7 +6,7 @@ package CoffeShop;
 
 /**
  *
- * @author jenal
+ * @author prince
  */
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -138,21 +138,24 @@ public class Products extends javax.swing.JFrame {
             jLabel2.setIcon(scaledIcon);
         }
     }
-    //add chosen image to selected folder
     private void addImageToFolder() {
-        String imagePath = "C:\\Users\\ameer\\Products\\" + System.currentTimeMillis() + ".jpg";
-        File file = new File(imagePath);
+        String destinationFolder = "src/Employees/";
+        String imageName = System.currentTimeMillis() + ".jpg";
+        File file = new File(destinationFolder + imageName);
 
         try {
+            // Read the image from the specified location
             BufferedImage image = ImageIO.read(new File(imageLocation));
+            // Write the image to the new location
             ImageIO.write(image, "jpg", file);
-            System.out.println("Image added successfully!");
+            System.out.println("Image added successfully at: " + file.getAbsolutePath());
             isEmpty = false;
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error adding image: " + e.getMessage());
         }
     }
+
     
     
     boolean isEmpty = false;

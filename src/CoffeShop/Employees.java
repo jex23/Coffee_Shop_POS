@@ -5,20 +5,32 @@
 package CoffeShop;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 
 /**
  *
- * @author jenal
+ * @author jenalyn
  */
 public class Employees extends javax.swing.JFrame {
-
+    private String imageLocation;
+    private boolean imageSelected = false;
     private UserAuthenticate authenticatedUser; // Instance variable
-
+    
+    sqlConnector connector = new sqlConnector();
+    PreparedStatement prepState;
+    ResultSet rs;
     /**
      * Creates new form Employees
      */
@@ -33,15 +45,19 @@ public class Employees extends javax.swing.JFrame {
         setIconImage(img);
         
         comboxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
-        "Cashier", "Chef", "Assistand Chef", "Waiter", "Owner/Manager"
+        "Administrator", "Cashier", "Chef", "Assistand Chef", "Waiter", "Owner/Manager"
         }));
         
         Fetch();
-    }
+        
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jTable4MouseClicked(evt);
+        }
+        });
 
-    sqlConnector connector = new sqlConnector();
-    PreparedStatement prepState;
-    ResultSet rs;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +98,10 @@ public class Employees extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -257,7 +277,7 @@ public class Employees extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Role", "Date of Employmeent"
+                "Employee ID", "Name", "Role", "Date of Employment"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -266,6 +286,11 @@ public class Employees extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
             }
         });
         employeeTable.setViewportView(jTable4);
@@ -327,7 +352,7 @@ public class Employees extends javax.swing.JFrame {
         jPanel4.setMinimumSize(new java.awt.Dimension(60, 60));
         jPanel4.add(jLabel6);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 100));
         jPanel4.add(jLabel1);
 
         txtUsername.setBackground(new java.awt.Color(255, 245, 238));
@@ -340,27 +365,67 @@ public class Employees extends javax.swing.JFrame {
 
         txtPassword.setBackground(new java.awt.Color(255, 245, 238));
 
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout crudOption1Layout = new javax.swing.GroupLayout(crudOption1);
         crudOption1.setLayout(crudOption1Layout);
         crudOption1Layout.setHorizontalGroup(
             crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crudOption1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(crudOption1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(crudOption1Layout.createSequentialGroup()
+                                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(add))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName)
+                            .addComponent(comboxRole, 0, 305, Short.MAX_VALUE)
+                            .addComponent(txtUsername)
+                            .addComponent(txtPassword)))
+                    .addGroup(crudOption1Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
                         .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(add))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtName)
-                    .addComponent(comboxRole, 0, 305, Short.MAX_VALUE)
-                    .addComponent(txtUsername)
-                    .addComponent(txtPassword))
+                            .addComponent(btnUpdate)
+                            .addComponent(btnAdd)
+                            .addGroup(crudOption1Layout.createSequentialGroup()
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                                .addComponent(btnClear)
+                                .addGap(25, 25, 25)))))
                 .addGap(46, 46, 46))
         );
         crudOption1Layout.setVerticalGroup(
@@ -391,7 +456,15 @@ public class Employees extends javax.swing.JFrame {
                     .addGroup(crudOption1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addGap(18, 18, 18)
+                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnClear))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout crudOptionLayout = new javax.swing.GroupLayout(crudOption);
@@ -465,8 +538,62 @@ public class Employees extends javax.swing.JFrame {
             System.out.println("User details not set.");
         }
     }
-
     
+    // for image path
+
+    public void selectImage() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif"));
+    
+        int response = fileChooser.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            imageLocation = selectedFile.getAbsolutePath();
+            imageSelected = true;
+            displayImage(imageLocation); 
+        }
+    }
+    
+    private void displayImage(String imagePath) {
+        if (imageLocation != null) {
+            ImageIcon originalIcon = new ImageIcon(imageLocation);
+            Image originalImage = originalIcon.getImage();
+            
+            int width = 100;
+            int height = 100;
+            
+            Image scaledImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            jLabel1.setIcon(scaledIcon);
+        }
+    }
+    
+    private String addImageToFolder() {
+        if (!imageSelected) {
+            JOptionPane.showMessageDialog(this, "Please select an image first.");
+            return null;
+        }
+
+        String destinationFolder = "src/Employees/";
+        String fileExtension = imageLocation.substring(imageLocation.lastIndexOf("."));
+        String newFileName = "employee_" + System.currentTimeMillis() + fileExtension;
+        String destinationPath = destinationFolder + newFileName;
+
+        File sourceFile = new File(imageLocation);
+        File destinationFile = new File(destinationPath);
+
+        try {
+            destinationFile.getParentFile().mkdirs();
+
+            Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            JOptionPane.showMessageDialog(this, "Image added successfully!");
+            return destinationPath;
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error adding image: " + e.getMessage());
+            return null;
+        }
+    }    
     
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -498,56 +625,119 @@ public class Employees extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-//        this.imagePath();
-//        this.addImageToFolder();
+        selectImage();
     }//GEN-LAST:event_addActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
 
     }//GEN-LAST:event_formWindowOpened
 
-    
-//    private void addEmployee() {
-//        String username = txtUsername.getText();
-//        String password = txtPassword.getText();
-//        String name = txtName.getText();
-//        String selectedRole = comboxRole.getSelectedItem().toString();
-//        String imagePath = this.imagePath();
-//        
-//        if (!imageSelected) {
-//            JOptionPane.showMessageDialog(this, "Please select an image first.");
-//            return;
-//        }
-//        
-//        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || selectedRole.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Please complete the required field.");
-//            return;
-//        }
-//        java.sql.Timestamp employmentTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
-//        
-//        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_date_of_employment) VALUES (?, ?, ?, ?, ?)";
-//        
-//        try (Connection conn = connector.createConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-//            
-//            pstmt.setString(1, username);
-//            pstmt.setString(2, password);
-//            pstmt.setString(3, name);
-//            pstmt.setString(4, selectedRole);
-//            pstmt.setTimestamp(5, employmentTimestamp);
-//
-//            pstmt.executeUpdate();
-//            JOptionPane.showMessageDialog(this, "Employee added successfully!");
-//            
-//            Fetch();
-//            
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(this, "Error adding employee.");
-//        }
-//    }
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        addEmployee();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        updateEmployee();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        int selectedRow = jTable4.getSelectedRow(); 
         
+        if (selectedRow != -1) { 
+            loadEmployeeData(selectedRow);
+        }
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = jTable4.getSelectedRow();
+
+        if (selectedRow != -1) {
+            String employeeIdString = jTable4.getValueAt(selectedRow, 0).toString();
+            int employeeId;
+            try {
+                employeeId = Integer.parseInt(employeeIdString);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid Employee ID format.");
+                return; 
+            }
+
+            int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this employee?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+            if (confirmation == JOptionPane.YES_OPTION) {
+                EmployeesMethods empMethods = new EmployeesMethods();
+                boolean deleted = empMethods.deleteEmployeeById(employeeId); 
+
+                if (deleted) {
+                    JOptionPane.showMessageDialog(this, "Employee deleted successfully.");
+
+                    Fetch(); 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete employee. Please try again.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clearFields();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    // for add method
+    
+    private void addEmployee() {
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText().trim();
+        String name = txtName.getText().trim();
+        String selectedRole = comboxRole.getSelectedItem().toString();
+
+        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || selectedRole.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please complete all required fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!imageSelected) {
+            JOptionPane.showMessageDialog(this, "Please select an image for the employee.", "Image Required", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        String storedImagePath = addImageToFolder();
+        if (storedImagePath == null) {
+            return;
+        }
+
+        Timestamp employmentTimestamp = new Timestamp(System.currentTimeMillis());
+
+        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_date_of_employment, employee_ImagePath) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connector.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, name);
+            pstmt.setString(4, selectedRole);
+            pstmt.setTimestamp(5, employmentTimestamp);
+            pstmt.setString(6, storedImagePath);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "Employee added successfully!");
+                Fetch(); 
+                clearFields(); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add employee.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error adding employee: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // for table
+    
     private void Fetch() {
         EmployeesMethods employeeMethods = new EmployeesMethods();
         List<Employee> employees = employeeMethods.employeesMethod();
@@ -565,6 +755,75 @@ public class Employees extends javax.swing.JFrame {
         }
     }
     
+    
+    // for update method
+    
+    private void loadEmployeeData(int selectedRow) {
+        // Get the employee ID from the selected row
+        int employeeID = Integer.parseInt(jTable4.getValueAt(selectedRow, 0).toString());
+
+        EmployeesMethods employeeMethods = new EmployeesMethods();
+        Employee selectedEmployee = employeeMethods.getEmployeeById(employeeID); 
+        
+        if (selectedEmployee != null) {
+            txtName.setText(selectedEmployee.getEmployeeName());
+            comboxRole.setSelectedItem(selectedEmployee.getEmployeeRole());
+            txtUsername.setText(selectedEmployee.getEmployeeUsername());
+            txtPassword.setText(selectedEmployee.getEmployeePassword());
+            displayImage(selectedEmployee.getImagePath());
+            imageLocation = selectedEmployee.getImagePath(); 
+            imageSelected = true; 
+        } else {
+            JOptionPane.showMessageDialog(this, "Employee not found.");
+        }
+    }
+
+
+    private void updateEmployee() {
+        int selectedRow = jTable4.getSelectedRow(); 
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an employee from the table.");
+            return;
+        }
+
+        String name = txtName.getText().trim();
+        String role = comboxRole.getSelectedItem().toString();
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText().trim();
+        String imagePath = null;
+
+        if (imageSelected) {
+            imagePath = addImageToFolder(); 
+            if (imagePath == null) {
+               
+                return;
+            }
+        } else {
+            imagePath = jTable4.getValueAt(selectedRow, 5).toString(); 
+        }
+
+        int employeeID = Integer.parseInt(jTable4.getValueAt(selectedRow, 0).toString());
+
+        Employee updatedEmployee = new Employee(employeeID, username, password, name, role, LocalDateTime.now(), imagePath);
+
+        EmployeesMethods employeeMethods = new EmployeesMethods();
+        employeeMethods.updateEmployee(updatedEmployee);
+
+
+        Fetch(); 
+    }
+    
+    // for clearing fields
+    private void clearFields() {
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtName.setText("");
+        comboxRole.setSelectedIndex(0);
+        jLabel1.setIcon(null); 
+        imageSelected = false;
+        imageLocation = null;
+    }
     
     /**
      * @param args the command line arguments
@@ -604,7 +863,11 @@ public class Employees extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel UserImageIcon;
     private javax.swing.JButton add;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JPanel btnOption;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> comboxRole;
     private javax.swing.JPanel crudOption;
     private javax.swing.JPanel crudOption1;
