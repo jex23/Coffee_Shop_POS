@@ -9,12 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Asus
+ * @author jenalyn
  */
 public class EmployeesMethods {
     
@@ -25,21 +27,22 @@ public class EmployeesMethods {
         connector = new sqlConnector();
     }
     
-    public List<Employee> EmployeesMethod() {
+    public List<Employee> employeesMethod() {
         List<Employee> employees = new ArrayList<>();
-        String query = "SELECT * FROM tbl_employees";
+        String query = "SELECT employee_id, employee_name, employee_role, employee_date_of_employment FROM tbl_employees";
             try (Connection conn = connector.createConnection(); 
                 Statement stmt = conn.createStatement(); 
                 ResultSet rs = stmt.executeQuery(query)) {
 
-                 while (rs.next()) {
-                    int employeeId = rs.getInt("employee_id");
-                    String employeeName = rs.getString("employee_name");
-                    String employeeUsername = rs.getString("employee_username");
-                    String employeeDateofEmployment = rs.getString("employee_date_of_employment");
-                    String employeeImagePath = rs.getString("employee_ImagePath");
+                while (rs.next()) {
+                          int employeeID = rs.getInt("employee_id");
+                          String employeeName = rs.getString("employee_name");
+                          String employeeRole = rs.getString("employee_role");
+                          String dateStr = rs.getString("employee_date_of_employment");
+                          LocalDateTime employeeDateOfEmployment = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-                    Employee employee = new Employee(employeeId, employeeName, employeeUsername, employeeDateofEmployment, employeeImagePath);
+
+                    Employee employee = new Employee(employeeID, employeeName, employeeRole, employeeDateOfEmployment);
                     employees.add(employee);                    
             }
             rs.close();
@@ -51,4 +54,63 @@ public class EmployeesMethods {
         return employees;
     }
     
+    public Employee getEmployeeById(int employeeID) {
+        Employee employee = null;
+        String query = "SELECT employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath FROM tbl_employees WHERE employee_id = ?";
+
+        try (Connection conn = connector.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, employeeID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString("employee_username");
+                String password = rs.getString("employee_passsword");
+                String name = rs.getString("employee_name");
+                String role = rs.getString("employee_role");
+                String imagePath = rs.getString("employee_ImagePath");
+                LocalDateTime dateOfEmployment = LocalDateTime.now(); // Assuming you do not fetch this for updating
+
+                employee = new Employee(employeeID, username, password, name, role, dateOfEmployment, imagePath);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
+    }
+
+
+    public void updateEmployee(Employee employee) {
+        String query = "UPDATE tbl_employees SET employee_name = ?, employee_role = ?, employee_username = ?, employee_passsword = ?, employee_ImagePath = ? WHERE employee_id = ?";
+
+        try (Connection conn = connector.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, employee.getEmployeeName());
+            pstmt.setString(2, employee.getEmployeeRole());
+            pstmt.setString(3, employee.getEmployeeUsername());
+            pstmt.setString(4, employee.getEmployeePassword());
+            pstmt.setString(5, employee.getImagePath());
+            pstmt.setInt(6, employee.getEmployeeID());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean deleteEmployeeById(int employeeId) {
+        String sql = "DELETE FROM tbl_employees WHERE employee_id = ?";
+        try (Connection conn = connector.createConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, employeeId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; 
+        }
+    }
+
 }
