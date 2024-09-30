@@ -494,40 +494,47 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="bestSellerQuatityTxt" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="bestSellerQuatityTxt4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="snacksBeSLQuatityText" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="bestSellerQuatityTxt4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="bestSellerQuatityTxt3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                                                       <Component id="bestSellerQuatityTxt1" min="-2" pref="430" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                                      <Component id="snacksBeSLProductNameText" min="-2" pref="371" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="coffeeBeSLQuatityText" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="teaBeSLQuatityText" alignment="0" pref="60" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="teaBeSLProductNameText" min="-2" pref="365" max="-2" attributes="0"/>
+                                                                  <Component id="coffeeBeSLProductNameText" min="-2" pref="309" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
                                                   </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="coffeeBeSLQuatityText" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="teaBeSLQuatityText" alignment="0" pref="60" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="teaBeSLProductNameText" min="-2" pref="365" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                                      <Component id="coffeeBeSLProductNameText" min="-2" pref="309" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="bestSellerQuatityTxt" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                              <Component id="snacksBeSLQuatityText" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="snacksBeSLProductNameText" min="-2" pref="371" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -542,15 +549,15 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Component id="bestSellerQuatityTxt3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="546" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="481" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="481" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="532" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -559,36 +566,47 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace pref="74" max="32767" attributes="0"/>
-                                      <Component id="coffeeBeSLQuatityText" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="83" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="coffeeBeSLQuatityText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="coffeeBeSLProductNameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="bestSellerQuatityTxt3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="bestSellerQuatityTxt4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="teaBeSLQuatityText" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="bestSellerQuatityTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="snacksBeSLQuatityText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="bestSellerQuatityTxt1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="snacksBeSLProductNameText" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="coffeeBeSLProductNameText" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                       <Component id="teaBeSLProductNameText" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="bestSellerQuatityTxt1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="bestSellerQuatityTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="snacksBeSLQuatityText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="snacksBeSLProductNameText" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="bestSellerComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -597,16 +615,16 @@
                           </Group>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                  <Component id="bestSellerQuatityTxt3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="212" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="212" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="192" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -718,7 +736,34 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="coffeeBeSLProductNameText">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="36" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="jLabel2"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel7">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Quantity"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel8">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Category"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel9">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Product Name"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -742,15 +787,6 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" alignment="0" pref="1321" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
-                              <Component id="salesPreviousBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="salesComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="salesNextBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -758,13 +794,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="454" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="salesPreviousBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="salesNextBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="salesComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="70" max="32767" attributes="0"/>
+                              <EmptySpace pref="99" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -842,40 +872,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="salesPreviousBtn">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Previous"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salesPreviousBtnActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="salesNextBtn">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Next"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salesNextBtnActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="salesComboBox">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salesComboBoxActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel3">
@@ -894,28 +890,13 @@
                               <Component id="jScrollPane1" min="-2" pref="1124" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="197" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="itemSalesPreviousBtn" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="itemSalesComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="itemSalesNBextBtn" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="602" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="458" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="itemSalesNBextBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="itemSalesComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="itemSalesPreviousBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="72" max="32767" attributes="0"/>
+                              <EmptySpace pref="101" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -993,40 +974,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JToggleButton" name="itemSalesPreviousBtn">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Previous"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSalesPreviousBtnActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JToggleButton" name="itemSalesNBextBtn">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Next"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSalesNBextBtnActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="itemSalesComboBox">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSalesComboBoxActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

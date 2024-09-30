@@ -76,19 +76,16 @@ public class Reports extends javax.swing.JFrame {
         teaBeSLProductNameText = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         coffeeBeSLProductNameText = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         salesTable = new javax.swing.JTable();
-        salesPreviousBtn = new javax.swing.JButton();
-        salesNextBtn = new javax.swing.JButton();
-        salesComboBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemSalesTable = new javax.swing.JTable();
-        itemSalesPreviousBtn = new javax.swing.JToggleButton();
-        itemSalesNBextBtn = new javax.swing.JToggleButton();
-        itemSalesComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -346,7 +343,17 @@ public class Reports extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel6.setText("Best Seller");
 
+        coffeeBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         coffeeBeSLProductNameText.setText("jLabel2");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Quantity");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Category");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Product Name");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -358,31 +365,36 @@ public class Reports extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bestSellerQuatityTxt)
-                            .addComponent(bestSellerQuatityTxt4))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(snacksBeSLQuatityText, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bestSellerQuatityTxt4)
+                                    .addComponent(bestSellerQuatityTxt3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(72, 72, 72)
                                         .addComponent(bestSellerQuatityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(35, 35, 35)
-                                        .addComponent(snacksBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(coffeeBeSLQuatityText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(teaBeSLQuatityText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                                            .addComponent(jLabel7))
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(22, 22, 22)
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(teaBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(coffeeBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
+                                                .addComponent(jLabel9))))))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(coffeeBeSLQuatityText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(teaBeSLQuatityText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(teaBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(coffeeBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(bestSellerQuatityTxt)
+                                .addGap(20, 20, 20)
+                                .addComponent(snacksBeSLQuatityText, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(snacksBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,55 +403,62 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(47, 47, 47)
-                    .addComponent(bestSellerQuatityTxt3)
-                    .addContainerGap(546, Short.MAX_VALUE)))
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(47, 47, 47)
                     .addComponent(jLabel6)
                     .addContainerGap(481, Short.MAX_VALUE)))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(60, 60, 60)
+                    .addComponent(jLabel8)
+                    .addContainerGap(532, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(74, Short.MAX_VALUE)
-                        .addComponent(coffeeBeSLQuatityText)
+                        .addContainerGap(83, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(coffeeBeSLQuatityText)
+                                    .addComponent(coffeeBeSLProductNameText)))
+                            .addComponent(bestSellerQuatityTxt3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bestSellerQuatityTxt4)
                             .addComponent(teaBeSLQuatityText))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(bestSellerQuatityTxt)
-                                .addComponent(snacksBeSLQuatityText))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(bestSellerQuatityTxt1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(snacksBeSLProductNameText)))
-                        .addGap(12, 12, 12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(coffeeBeSLProductNameText)
-                        .addGap(26, 26, 26)
                         .addComponent(teaBeSLProductNameText)
-                        .addGap(66, 66, 66)))
+                        .addGap(12, 12, 12)))
+                .addComponent(bestSellerQuatityTxt1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bestSellerQuatityTxt)
+                        .addComponent(snacksBeSLQuatityText))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(snacksBeSLProductNameText)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bestSellerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(70, 70, 70)
-                    .addComponent(bestSellerQuatityTxt3)
-                    .addContainerGap(158, Short.MAX_VALUE)))
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabel6)
                     .addContainerGap(212, Short.MAX_VALUE)))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(79, 79, 79)
+                    .addComponent(jLabel8)
+                    .addContainerGap(192, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -494,52 +513,18 @@ public class Reports extends javax.swing.JFrame {
             salesTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        salesPreviousBtn.setText("Previous");
-        salesPreviousBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesPreviousBtnActionPerformed(evt);
-            }
-        });
-
-        salesNextBtn.setText("Next");
-        salesNextBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesNextBtnActionPerformed(evt);
-            }
-        });
-
-        salesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        salesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesComboBoxActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1321, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addComponent(salesPreviousBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salesNextBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salesPreviousBtn)
-                    .addComponent(salesNextBtn)
-                    .addComponent(salesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sales", jPanel2);
@@ -573,27 +558,6 @@ public class Reports extends javax.swing.JFrame {
             itemSalesTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        itemSalesPreviousBtn.setText("Previous");
-        itemSalesPreviousBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSalesPreviousBtnActionPerformed(evt);
-            }
-        });
-
-        itemSalesNBextBtn.setText("Next");
-        itemSalesNBextBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSalesNBextBtnActionPerformed(evt);
-            }
-        });
-
-        itemSalesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        itemSalesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemSalesComboBoxActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -601,25 +565,12 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 197, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(itemSalesPreviousBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(itemSalesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(itemSalesNBextBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(602, 602, 602))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemSalesNBextBtn)
-                    .addComponent(itemSalesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(itemSalesPreviousBtn))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Item Sales", jPanel3);
@@ -733,11 +684,6 @@ public class Reports extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void salesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesComboBoxActionPerformed
-//        
-
-    }//GEN-LAST:event_salesComboBoxActionPerformed
-
     // Method to refresh the sales report and total sales
     private void refreshReport() {
         ReportMethods reportMethods = new ReportMethods();
@@ -804,14 +750,6 @@ public class Reports extends javax.swing.JFrame {
     }
 
 
-    private void salesPreviousBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesPreviousBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salesPreviousBtnActionPerformed
-
-    private void itemSalesPreviousBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalesPreviousBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itemSalesPreviousBtnActionPerformed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         ReportMethods reportMethods = new ReportMethods();
@@ -831,18 +769,6 @@ public class Reports extends javax.swing.JFrame {
         // TODO add your handling code here:
         refreshBestSellers();
     }//GEN-LAST:event_bestSellerComboBoxActionPerformed
-
-    private void itemSalesNBextBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalesNBextBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itemSalesNBextBtnActionPerformed
-
-    private void itemSalesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalesComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itemSalesComboBoxActionPerformed
-
-    private void salesNextBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesNextBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salesNextBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -895,9 +821,6 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> frequencyComboBox;
     private javax.swing.JPanel header;
     private javax.swing.JPanel itemDetails;
-    private javax.swing.JComboBox<String> itemSalesComboBox;
-    private javax.swing.JToggleButton itemSalesNBextBtn;
-    private javax.swing.JToggleButton itemSalesPreviousBtn;
     private javax.swing.JTable itemSalesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -908,6 +831,9 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -917,9 +843,6 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel navbarLeft;
-    private javax.swing.JComboBox<String> salesComboBox;
-    private javax.swing.JButton salesNextBtn;
-    private javax.swing.JButton salesPreviousBtn;
     private javax.swing.JTable salesTable;
     private javax.swing.JLabel salesTxtNumber;
     private javax.swing.JLabel snacksBeSLProductNameText;
