@@ -85,7 +85,7 @@ public class Products extends javax.swing.JFrame {
         }
     }
 
-     sqlConnector conn = new sqlConnector();
+    sqlConnector conn = new sqlConnector();
     PreparedStatement prepState;
     ResultSet rs;
     
@@ -121,38 +121,47 @@ public class Products extends javax.swing.JFrame {
         }
     }
     
-    private void selectImage(){
-        JFileChooser fileChooser = new JFileChooser();
-        int response = fileChooser.showOpenDialog(null);
-        if(response == JFileChooser.APPROVE_OPTION){
-            imageLocation = fileChooser.getSelectedFile().getAbsolutePath();
-        }
+    private void displayImage() {
+    if (imageLocation != null) {
+        ImageIcon originalIcon = new ImageIcon(imageLocation);
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        jLabel2.setIcon(scaledIcon);
     }
-    //display image (hiniwalay yung add kasi nag aadd din
-    private void displayImage(){
-        if(imageLocation != null){
-            ImageIcon originalIcon = new ImageIcon(imageLocation);
-            Image originalImage = originalIcon.getImage();
-            Image scaledImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
-            jLabel2.setIcon(scaledIcon);
-        }
-    }
-    private void addImageToFolder() {
-        String destinationFolder = "src/Employees/";
-        String imageName = System.currentTimeMillis() + ".jpg";
-        File file = new File(destinationFolder + imageName);
+}
 
+    private void addImageToFolder() {
+        if (imageLocation == null) {
+            JOptionPane.showMessageDialog(null, "Please select an image first.");
+            return;
+        }
+
+        String destinationFolder = "src/products/";
+        String extension = getFileExtension(imageLocation);
+
+        if (!extension.equalsIgnoreCase("jpg") && !extension.equalsIgnoreCase("png")) {
+            JOptionPane.showMessageDialog(null, "Only jpg and png are allowed");
+            return;
+        }
+
+        String imageName = System.currentTimeMillis() + "." + extension;
+        File file = new File(destinationFolder + imageName);
         try {
-            // Read the image from the specified location
             BufferedImage image = ImageIO.read(new File(imageLocation));
-            // Write the image to the new location
-            ImageIO.write(image, "jpg", file);
-            System.out.println("Image added successfully at: " + file.getAbsolutePath());
+            ImageIO.write(image, extension, file);
             isEmpty = false;
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error adding image: " + e.getMessage());
+        }
+    }
+
+    private String getFileExtension(String path) {
+        int dotIndex = path.lastIndexOf('.');
+        if (dotIndex >= 0) {
+            return path.substring(dotIndex + 1);
+        } else {
+            return "";
         }
     }
 
@@ -405,6 +414,7 @@ public class Products extends javax.swing.JFrame {
                 txtPrice.setText(String.valueOf(price));
             }
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
