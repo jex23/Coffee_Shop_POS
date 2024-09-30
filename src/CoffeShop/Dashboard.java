@@ -718,91 +718,92 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No items in the order to proceed with the payment.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return; // Exit if the order table is empty
-        }
 
-        // Retrieve amount and change from the input fields
-        double amount = 0.0;
-        double amountChange = 0.0;
+    // Check if there are no items in the order table
+    if (model.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No items in the order to proceed with the payment.", "Warning", JOptionPane.WARNING_MESSAGE);
+        return; // Exit if the order table is empty
+    }
 
-        try {
-            // Get amount from the amountFld JTextField
-            amount = Double.parseDouble(amountFld.getText());
-            // Get change from the changeFld JTextField
-            amountChange = Double.parseDouble(changeFld.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid amount or change value.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Exit if the values are invalid
-        }
+    // Retrieve amount and change from input fields
+    double amount = 0.0;
+    double amountChange = 0.0;
 
-        // Check for validation conditions
-        if (amount <= 0) {
-            JOptionPane.showMessageDialog(this, "The amount must be greater than zero.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return; // Exit if the amount is zero or less
-        }
+    try {
+        amount = Double.parseDouble(amountFld.getText()); // Amount from amountFld
+        amountChange = Double.parseDouble(changeFld.getText()); // Change from changeFld
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid amount or change value.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Exit if the input values are invalid
+    }
 
-        if (amountChange < 0) {
-            JOptionPane.showMessageDialog(this, "Change cannot be negative.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return; // Exit if the change is negative
-        }
+    // Validation checks
+    if (amount <= 0) {
+        JOptionPane.showMessageDialog(this, "The amount must be greater than zero.", "Warning", JOptionPane.WARNING_MESSAGE);
+        return; // Exit if the amount is zero or less
+    }
 
-        // Show confirmation dialog
-        int confirm = JOptionPane.showConfirmDialog(this,
-                "Are you sure you want to proceed with this sale?",
-                "Confirm Sale",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+    if (amountChange < 0) {
+        JOptionPane.showMessageDialog(this, "Change cannot be negative.", "Warning", JOptionPane.WARNING_MESSAGE);
+        return; // Exit if the change is negative
+    }
 
-        // If the user confirmed the sale
-        if (confirm == JOptionPane.YES_OPTION) {
-            // Prepare details for the receipt
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            String time = new SimpleDateFormat("HH:mm").format(new Date());
-            String orderNo = generateOrderNumber(); // Implement this method to generate order number
-            String employeeName = loggedInUser.getName();
+    // Show confirmation dialog for sale
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to proceed with this sale?",
+        "Confirm Sale",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE);
 
-            double subtotal = calculateSubtotal(); // Implement this method to calculate subtotal from order table
-            double vat = subtotal * 0.12; // Adjust VAT calculation as needed
-            double total = subtotal + vat;
+    if (confirm == JOptionPane.YES_OPTION) {
+        // Proceed with sale if confirmed
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String time = new SimpleDateFormat("HH:mm").format(new Date());
+        String orderNo = generateOrderNumber(); // Helper method to generate order number
+        String employeeName = loggedInUser.getName();
 
-            List<SaleItem> saleItems = getSaleItemsFromOrderTable(); // Implement this method to get SaleItems from order table
+        // Calculate subtotal, VAT, and total
+        double subtotal = calculateSubtotal(); // Helper method to calculate subtotal
+        double vat = subtotal * 0.12; // Assuming VAT is 12%
+        double total = subtotal + vat;
 
-            // Create an instance of SalesManagementMethod to add the sale
-            SalesManagementMethod salesManager = new SalesManagementMethod();
+        // Get sale items from the order table
+        List<SaleItem> saleItems = getSaleItemsFromOrderTable();
 
-            // Call the method to add the sale and get the sale ID
-            int saleId = salesManager.addSale(Integer.parseInt(loggedInUser.getId()), employeeName, subtotal, vat, total, amount, amountChange, saleItems);
+        // Add the sale using SalesManagementMethod
+        SalesManagementMethod salesManager = new SalesManagementMethod();
+        int saleId = salesManager.addSale(Integer.parseInt(loggedInUser.getId()), employeeName, subtotal, vat, total, amount, amountChange, saleItems);
 
-            // Create an instance of the Receipt class
-            Receipt callReceipt = new Receipt();
+        // Create a new Receipt instance and display the receipt details
+        Receipt callReceipt = new Receipt();
+        callReceipt.displayReceipt(date, time, String.valueOf(saleId), employeeName, saleItems, subtotal, vat, total, "Credit Card", amount, amountChange, total);
 
-            // Display receipt, including amount and change details
-            callReceipt.displayReceipt(date, time, String.valueOf(saleId), employeeName, saleItems, subtotal, vat, total, "Credit Card", amount, amountChange, total);
+        // Make the Receipt JFrame visible
+        callReceipt.setVisible(true);
 
-            // Set the totalFld to the calculated total amount
-            totalFld.setText(String.format("%.2f", total)); // Update total field with total amount
+        // Reset fields and table after successful sale
+        resetFieldsAndTable();
 
-            // Make the Receipt JFrame visible
-            callReceipt.setVisible(true);
-
-            // Reset the fields after successful sale
-            totalFld.setText("0"); // Reset total field
-            vatFld.setText("0"); // Reset change field
-            subtotalFld.setText("0"); // Reset change field
-            amountFld.setText("0"); // Reset amount field
-            changeFld.setText("0"); // Reset change field
-            model.setRowCount(0); // Clear order table
-
-            // Notify user of success
-            JOptionPane.showMessageDialog(this, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            // User cancelled the transaction
-            JOptionPane.showMessageDialog(this, "Transaction cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
-        }
+        // Notify the user of a successful sale
+        JOptionPane.showMessageDialog(this, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        // Notify the user if the transaction is cancelled
+        JOptionPane.showMessageDialog(this, "Transaction cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+    }
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private void resetFieldsAndTable() {
+    totalFld.setText("0"); // Reset total field
+    vatFld.setText("0"); // Reset VAT field
+    subtotalFld.setText("0"); // Reset subtotal field
+    amountFld.setText("0"); // Reset amount field
+    changeFld.setText("0"); // Reset change field
+
+    // Clear the order table
+    DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+    model.setRowCount(0);
+}
+    
     private List<SaleItem> getSaleItemsFromOrderTable(DefaultTableModel model) {
         List<SaleItem> saleItems = new ArrayList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
@@ -829,17 +830,32 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     private List<SaleItem> getSaleItemsFromOrderTable() {
-        List<SaleItem> saleItems = new ArrayList<>();
-        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++) {
-            String productName = (String) model.getValueAt(i, 0);
-            double price = (Double) model.getValueAt(i, 1);
-            int quantity = (Integer) model.getValueAt(i, 2);
-            int productId = getProductIdByName(productName); // Retrieve product ID
-            saleItems.add(new SaleItem(productId, quantity, price)); // Create SaleItem instance
+    List<SaleItem> saleItems = new ArrayList<>();
+    DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+
+    // Loop through each row in the order table
+    for (int i = 0; i < model.getRowCount(); i++) {
+        try {
+            // Retrieve the product details from the table
+            String productName = (String) model.getValueAt(i, 0); // Product name in column 0
+            double price = Double.parseDouble(model.getValueAt(i, 1).toString()); // Price in column 1
+            int quantity = Integer.parseInt(model.getValueAt(i, 2).toString()); // Quantity in column 2
+
+            // Get product ID using the helper method
+            int productId = getProductIdByName(productName); 
+
+            // Create a new SaleItem and add it to the list
+            saleItems.add(new SaleItem(productId, quantity, price));
+
+        } catch (ClassCastException | NumberFormatException e) {
+            // If any conversion fails, log or handle the error
+            JOptionPane.showMessageDialog(this, "Error retrieving sale items from the order table.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return saleItems;
     }
+
+    return saleItems; // Return the list of SaleItem objects
+    }
+    
     private void nxtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxtButtonActionPerformed
         // Check if the next page has products
         List<Product> nextPageProducts = productMethods.getProductsByCategory(getCurrentCategory(), currentPage + 1, PAGE_SIZE);

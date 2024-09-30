@@ -48,11 +48,32 @@ CREATE TABLE IF NOT EXISTS tbl_sales_items (
     sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
     sale_id INT,  -- Link each sale (this could be a foreign key referencing tbl_sales)
     product_id INT,  -- Reference each product sold (this could be a foreign key referencing products table)
+    product_name VARCHAR(255) NOT NULL,  -- Name of the product sold (added column)
     quantity INT NOT NULL,  -- Quantity of the product sold
     price DECIMAL(10, 2) NOT NULL,  -- Price per item sold (at the time of sale)
-    total_item_price DECIMAL(10, 2) NOT NULL, -- Total Price per item sold (at the time of sale)
+    total_item_price DECIMAL(10, 2) NOT NULL,  -- Total Price per item sold (at the time of sale)
     sale_item_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- Time when the item was added to the sale
 );
+
+-- Alter the existing tbl_sales_items to add product_name column
+ALTER TABLE tbl_sales_items
+ADD COLUMN product_name VARCHAR(255) NOT NULL AFTER product_id;
+
+ALTER TABLE tbl_sales_items
+ADD COLUMN product_category VARCHAR(255) NOT NULL AFTER product_name;
+
+
+
+-- Update the product_category in tbl_sales_items based on the product_id from tbl_products
+UPDATE tbl_sales_items si
+JOIN tbl_products p ON si.product_id = p.product_id
+SET si.product_name = p.product_name;
+
+-- Update the product_category in tbl_sales_items based on the product_id from tbl_products
+UPDATE tbl_sales_items AS si
+JOIN tbl_products AS p ON si.product_id = p.product_id
+SET si.product_category = p.product_category;
+
 
 
 -- 

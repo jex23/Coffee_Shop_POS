@@ -6,21 +6,21 @@ import java.sql.ResultSet; // Import ResultSet for generated keys
 import java.sql.SQLException;
 import java.util.List;
 
-public class SalesManagementMethod { // Renamed class
+public class SalesManagementMethod {
 
     private sqlConnector dbConnector;
 
-    public SalesManagementMethod() { // Constructor
+    public SalesManagementMethod() {
         dbConnector = new sqlConnector();
     }
 
     // Method to add a new sale and return the generated sale ID
     public int addSale(int employeeId, String employeeName, double subtotal, double vat, double total, double amount, double amountChange, List<SaleItem> saleItems) {
-        // Updated SQL query to include amount and amount_change
         String insertSaleQuery = "INSERT INTO tbl_sales (employee_id, employee_name, subtotal, vat, total, amount, amount_change) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        String insertSaleItemQuery = "INSERT INTO tbl_sales_items (sale_id, product_id, quantity, price, total_item_price) VALUES (?, ?, ?, ?, ?)"; // Include total_item_price
+        String insertSaleItemQuery = "INSERT INTO tbl_sales_items (sale_id, product_id, product_name, product_category, quantity, price, total_item_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String getProductDetailsQuery = "SELECT product_name, product_category FROM tbl_products WHERE product_id = ?"; // Query to get product details
 
-        int saleId = 0; // Initialize saleId
+        int saleId = 0;
 
         try (Connection conn = dbConnector.createConnection()) {
             conn.setAutoCommit(false); // Start transaction
@@ -46,14 +46,30 @@ public class SalesManagementMethod { // Renamed class
                 }
 
                 // Insert sale items
-                try (PreparedStatement itemStmt = conn.prepareStatement(insertSaleItemQuery)) {
+                try (PreparedStatement itemStmt = conn.prepareStatement(insertSaleItemQuery);
+                     PreparedStatement productStmt = conn.prepareStatement(getProductDetailsQuery)) {
+
                     for (SaleItem item : saleItems) {
-                        itemStmt.setInt(1, saleId); // Set the sale ID
-                        itemStmt.setInt(2, item.getProductId());
-                        itemStmt.setInt(3, item.getQuantity());
-                        itemStmt.setDouble(4, item.getPrice());
-                        itemStmt.setDouble(5, item.getPrice() * item.getQuantity()); // Set total_item_price
-                        itemStmt.addBatch(); // Add to batch
+                        // Retrieve product details from tbl_products using product_id
+                        productStmt.setInt(1, item.getProductId());
+                        try (ResultSet productRs = productStmt.executeQuery()) {
+                            if (productRs.next()) {
+                                String productName = productRs.getString("product_name");
+                                String productCategory = productRs.getString("product_category"); // Get product category
+
+                                // Insert sale item with product name and category
+                                itemStmt.setInt(1, saleId); // Set the sale ID
+                                itemStmt.setInt(2, item.getProductId());
+                                itemStmt.setString(3, productName); // Set product name
+                                itemStmt.setString(4, productCategory); // Set product category
+                                itemStmt.setInt(5, item.getQuantity());
+                                itemStmt.setDouble(6, item.getPrice());
+                                itemStmt.setDouble(7, item.getPrice() * item.getQuantity()); // Set total_item_price
+                                itemStmt.addBatch(); // Add to batch
+                            } else {
+                                throw new SQLException("Product not found for product_id: " + item.getProductId());
+                            }
+                        }
                     }
                     itemStmt.executeBatch(); // Execute all inserts at once
                 }
@@ -69,7 +85,7 @@ public class SalesManagementMethod { // Renamed class
                 rollbackEx.printStackTrace();
             }
         }
-        
+
         return saleId; // Return the generated sale ID
     }
 }
