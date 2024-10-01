@@ -708,9 +708,9 @@ public class Reports extends javax.swing.JFrame {
             BigDecimal totalSales = reportMethods.calculateTotalSales(selectedFrequency); // Call the method
 
             // Update the label to display total sales
-            salesTxtNumber.setText(String.format("Total Sales: $%.2f", totalSales));
+            salesTxtNumber.setText(String.format("Total Sales: ₱%.2f", totalSales));
         } else {
-            salesTxtNumber.setText("Total Sales: $0.00"); // Handle case where no selection is made
+            salesTxtNumber.setText("Total Sales: ₱0.00"); // Handle case where no selection is made
         }
     }
 
