@@ -12,7 +12,7 @@ public class LoginMethod {
         sqlConnector callConnector = new sqlConnector();
 
         // SQL query to check the user credentials and fetch additional details
-        String query = "SELECT employee_id, employee_password, employee_name, employee_role, employee_image_path FROM tbl_employees WHERE employee_username = ?";
+        String query = "SELECT employee_id, employee_password, employee_name, employee_role, employee_ImagePath FROM tbl_employees WHERE employee_username = ?";
         // SQL query to update the last login time
         String updateLoginQuery = "UPDATE tbl_employees SET last_Login = NOW() WHERE employee_username = ?";
 
@@ -27,7 +27,7 @@ public class LoginMethod {
                 String storedPassword = rs.getString("employee_password");
                 String employeeName = rs.getString("employee_name");
                 String employeeRole = rs.getString("employee_role");
-                String employeeImagePath = rs.getString("employee_image_path");
+                String employeeImagePath = rs.getString("employee_ImagePath");
                 String employeeId = rs.getString("employee_id"); // Fetch the employee ID
 
                 // Check if the entered password matches the stored password

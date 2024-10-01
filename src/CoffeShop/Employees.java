@@ -750,7 +750,7 @@ public class Employees extends javax.swing.JFrame {
         Timestamp employmentTimestamp = new Timestamp(System.currentTimeMillis());
         Timestamp lastLogin = new Timestamp(System.currentTimeMillis());
 
-        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_password, employee_name, employee_role, employee_date_of_employment, last_Login, employee_image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_password, employee_name, employee_role, employee_date_of_employment, last_Login, employee_ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {

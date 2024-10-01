@@ -58,7 +58,7 @@ public class EmployeesMethods {
     
     public Employee getEmployeeById(int employeeID) {
         Employee employee = null;
-        String query = "SELECT employee_username, employee_password, employee_name, employee_role, employee_image_path FROM tbl_employees WHERE employee_id = ?";
+        String query = "SELECT employee_username, employee_password, employee_name, employee_role, employee_ImagePath FROM tbl_employees WHERE employee_id = ?";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -71,7 +71,7 @@ public class EmployeesMethods {
                 String password = rs.getString("employee_password");
                 String name = rs.getString("employee_name");
                 String role = rs.getString("employee_role");
-                String imagePath = rs.getString("employee_image_path");
+                String imagePath = rs.getString("employee_ImagePath");
                 LocalDateTime dateOfEmployment = LocalDateTime.now(); 
                 LocalDateTime lastLogin = LocalDateTime.now(); 
 
@@ -87,7 +87,7 @@ public class EmployeesMethods {
 
 
     public void updateEmployee(Employee employee) {
-        String query = "UPDATE tbl_employees SET employee_name = ?, employee_role = ?, employee_username = ?, employee_password = ?, employee_image_path = ? WHERE employee_id = ?";
+        String query = "UPDATE tbl_employees SET employee_name = ?, employee_role = ?, employee_username = ?, employee_password = ?, employee_ImagePath = ? WHERE employee_id = ?";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
