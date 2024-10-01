@@ -274,17 +274,17 @@ public class Employees extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Role", "Date of Employment", "Last Login"
+                "Employee ID", "Name", "Role", "Date of Employment"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -607,34 +607,6 @@ public class Employees extends javax.swing.JFrame {
     }    
     
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Reports callReports = new Reports();
-        callReports.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
-        callReports.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         Dashboard callDashboard = new Dashboard(); // Instantiate Dashboard
-        callDashboard.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
-        callDashboard.setVisible(true);
-        this.dispose(); // Close the current frame
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Products callProducts = new Products();
-        callProducts.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
-        callProducts.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Employees callEmployees = new Employees();
-        callEmployees.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
-        callEmployees.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         selectImage();
     }//GEN-LAST:event_addActionPerformed
@@ -715,6 +687,34 @@ public class Employees extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Employees callEmployees = new Employees();
+        callEmployees.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
+        callEmployees.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Products callProducts = new Products();
+        callProducts.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
+        callProducts.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Dashboard callDashboard = new Dashboard(); // Instantiate Dashboard
+        callDashboard.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
+        callDashboard.setVisible(true);
+        this.dispose(); // Close the current frame
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Reports callReports = new Reports();
+        callReports.setAuthenticatedUser(authenticatedUser); // Pass the authenticated user
+        callReports.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // for add method
     
