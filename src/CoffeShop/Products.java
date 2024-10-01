@@ -23,6 +23,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import CoffeShop.UserAuthenticate; // Adjust the package name as needed
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Products extends javax.swing.JFrame {
 
@@ -48,6 +50,14 @@ public class Products extends javax.swing.JFrame {
         jComboBox1.removeItem("Item 4");
         setIconImage(img);
         Fetch();
+        txtPrice.addKeyListener(new KeyAdapter() {
+        public void keyTyped(KeyEvent e) {
+        char c = e.getKeyChar();
+        if (!(Character.isDigit(c) || c == '.' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            e.consume();
+        }
+    }
+});
 
     }
   private ImageIcon resizeImage(String imagePath, int width, int height) {
@@ -251,8 +261,8 @@ public class Products extends javax.swing.JFrame {
         return name.chars().allMatch(c -> Character.isLetter(c) || Character.isSpaceChar(c) || c == '-');
     }
     private boolean isValidPrice(String price) {
-        return price.chars().allMatch(Character::isDigit);
-    }
+    return price.matches("\\d+(\\.\\d+)?");
+}
     private void clearFields() {
          ImageIcon clear = new ImageIcon();
         txtName.setText("");
@@ -295,6 +305,9 @@ public class Products extends javax.swing.JFrame {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private boolean isDecimal(String price) {
+    return price.matches("\\d+(\\.\\d+)?");
+}
     //update table and database
    private void updateProduct() {
         checkEmptyFields();
@@ -309,9 +322,9 @@ public class Products extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
             return;
         }
-        if (!isValidPrice(priceText)) {
-            JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
-            return;
+        if (!isValidPrice(priceText) && isDecimal(priceText)) {
+        JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
+        return;
         }
 
         int selectedRow = imageLabel.getSelectedRow();
