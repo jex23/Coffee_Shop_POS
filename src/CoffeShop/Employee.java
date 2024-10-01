@@ -17,23 +17,26 @@ public class Employee {
     private String employeeName;
     private String employeeRole;
     private LocalDateTime employeeDateOfEmployment;
+    private LocalDateTime lastLogin;
     private String imagePath;
  
 
-    public Employee(int employeeID, String employeeName, String employeeRole, LocalDateTime employeeDateOfEmployment) {
+    public Employee(int employeeID, String employeeName, String employeeRole, LocalDateTime employeeDateOfEmployment, LocalDateTime lastLogin) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.employeeRole = employeeRole;
         this.employeeDateOfEmployment = employeeDateOfEmployment;
+        this.lastLogin = lastLogin;
     }
     
-    public Employee(int employeeID, String employeeUsername, String employeePassword, String employeeName, String employeeRole, LocalDateTime employeeDateOfEmployment, String imagePath) {
+    public Employee(int employeeID, String employeeUsername, String employeePassword, String employeeName, String employeeRole, LocalDateTime employeeDateOfEmployment, LocalDateTime lastLogin, String imagePath) {
         this.employeeID = employeeID;
         this.employeeUsername = employeeUsername;
         this.employeePassword = employeePassword;
         this.employeeName = employeeName;
         this.employeeRole = employeeRole;
         this.employeeDateOfEmployment = employeeDateOfEmployment;
+        this.lastLogin = lastLogin;
         this.imagePath = imagePath;
     }
 
@@ -60,6 +63,10 @@ public class Employee {
     
     public LocalDateTime getEmployeeDateOfEmployment(){
         return employeeDateOfEmployment;
+    }
+    
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
     }
     
     public String getImagePath(){

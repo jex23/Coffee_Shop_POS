@@ -48,7 +48,7 @@ public class Employees extends javax.swing.JFrame {
         setIconImage(img);
         
         comboxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
-        "Administrator", "Cashier", "Chef", "Assistand Chef", "Waiter", "Owner/Manager"
+        "Administrator", "Cashier", "Chef", "Assistant Chef", "Waiter", "Owner/Manager"
         }));
         
         Fetch();
@@ -100,11 +100,11 @@ public class Employees extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -274,17 +274,17 @@ public class Employees extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Role", "Date of Employment"
+                "Employee ID", "Name", "Role", "Date of Employment", "Last Login"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -366,8 +366,6 @@ public class Employees extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel43.setText("Password");
 
-        txtPassword.setBackground(new java.awt.Color(255, 245, 238));
-
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,39 +394,43 @@ public class Employees extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout crudOption1Layout = new javax.swing.GroupLayout(crudOption1);
         crudOption1.setLayout(crudOption1Layout);
         crudOption1Layout.setHorizontalGroup(
             crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crudOption1Layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnAdd)
+                    .addGroup(crudOption1Layout.createSequentialGroup()
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addComponent(btnClear)
+                        .addGap(71, 71, 71))))
+            .addGroup(crudOption1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(crudOption1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(crudOption1Layout.createSequentialGroup()
-                                .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(add))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtName)
-                            .addComponent(comboxRole, 0, 305, Short.MAX_VALUE)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword)))
-                    .addGroup(crudOption1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
                         .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnAdd)
-                            .addGroup(crudOption1Layout.createSequentialGroup()
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                                .addComponent(btnClear)
-                                .addGap(25, 25, 25)))))
+                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(add))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName)
+                    .addComponent(comboxRole, 0, 305, Short.MAX_VALUE)
+                    .addComponent(txtUsername)
+                    .addComponent(txtPassword))
                 .addGap(46, 46, 46))
         );
         crudOption1Layout.setVerticalGroup(
@@ -450,7 +452,7 @@ public class Employees extends javax.swing.JFrame {
                 .addComponent(jLabel43)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel41)
                 .addGroup(crudOption1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(crudOption1Layout.createSequentialGroup()
@@ -596,7 +598,6 @@ public class Employees extends javax.swing.JFrame {
             destinationFile.getParentFile().mkdirs();
 
             Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            JOptionPane.showMessageDialog(this, "Image added successfully!");
             return destinationPath;
         } catch (IOException e) {
             e.printStackTrace();
@@ -711,43 +712,56 @@ public class Employees extends javax.swing.JFrame {
         clearFields();
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
     // for add method
     
     private void addEmployee() {
         String username = txtUsername.getText().trim();
-        String password = txtPassword.getText().trim();
+        char[] password = txtPassword.getPassword();
         String name = txtName.getText().trim();
         String selectedRole = comboxRole.getSelectedItem().toString();
+        String passwordStr = new String(password);
 
-        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || selectedRole.isEmpty()) {
+        if (username.isEmpty() || passwordStr.isEmpty() || name.isEmpty() || selectedRole.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please complete all required fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
+        if (selectedRole.equals("Administrator")) {
+            JOptionPane.showMessageDialog(this, "Cannot add another administrator.", "Role Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (!imageSelected) {
             JOptionPane.showMessageDialog(this, "Please select an image for the employee.", "Image Required", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-
         String storedImagePath = addImageToFolder();
         if (storedImagePath == null) {
             return;
         }
+        
+
 
         Timestamp employmentTimestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp lastLogin = new Timestamp(System.currentTimeMillis());
 
-        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_passsword, employee_name, employee_role, employee_date_of_employment, employee_ImagePath) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO tbl_employees (employee_username, employee_password, employee_name, employee_role, employee_date_of_employment, last_Login, employee_image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
 
             pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(2, passwordStr);
             pstmt.setString(3, name);
             pstmt.setString(4, selectedRole);
             pstmt.setTimestamp(5, employmentTimestamp);
-            pstmt.setString(6, storedImagePath);
+            pstmt.setTimestamp(6, lastLogin);
+            pstmt.setString(7, storedImagePath);
 
             int rowsAffected = pstmt.executeUpdate();
 
@@ -780,6 +794,7 @@ public class Employees extends javax.swing.JFrame {
             row.add(employee.getEmployeeName());
             row.add(employee.getEmployeeRole());
             row.add(String.valueOf(employee.getEmployeeDateOfEmployment()));
+            row.add(String.valueOf(employee.getLastLogin()));
             dtm.addRow(row);
         }
     }
@@ -819,22 +834,48 @@ public class Employees extends javax.swing.JFrame {
         String name = txtName.getText().trim();
         String role = comboxRole.getSelectedItem().toString();
         String username = txtUsername.getText().trim();
-        String password = txtPassword.getText().trim();
-        String imagePath = null;
+        char[] password = txtPassword.getPassword();
+        
+        String imagePath;
+        
+        if (password.length == 0) {
+            JOptionPane.showMessageDialog(this, "Password cannot be empty.");
+            return;
+        }
+        
+        String passwordStr = new String(password); 
 
+        if (imageSelected) {
+           imagePath = addImageToFolder(); 
+           if (imagePath == null) {
+               JOptionPane.showMessageDialog(this, "Failed to add image. Please try again.");
+               return;
+           }
+       } else {
+           imagePath = jTable4.getValueAt(selectedRow, 5).toString(); 
+       }
+     
         if (imageSelected) {
             imagePath = addImageToFolder(); 
             if (imagePath == null) {
-               
+                JOptionPane.showMessageDialog(this, "Failed to add image. Please try again.");
                 return;
             }
         } else {
             imagePath = jTable4.getValueAt(selectedRow, 5).toString(); 
         }
 
-        int employeeID = Integer.parseInt(jTable4.getValueAt(selectedRow, 0).toString());
+        int employeeID;
+        try {
+            employeeID = Integer.parseInt(jTable4.getValueAt(selectedRow, 0).toString());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid employee ID.");
+            return;
+        }
+        LocalDateTime employeeDateOfEmployment = LocalDateTime.now(); // or fetch existing if needed
+        LocalDateTime lastLogin = LocalDateTime.now(); // set this appropriately
 
-        Employee updatedEmployee = new Employee(employeeID, username, password, name, role, LocalDateTime.now(), imagePath);
+        Employee updatedEmployee = new Employee(employeeID, username, passwordStr, name, role, employeeDateOfEmployment, lastLogin, imagePath);
 
         EmployeesMethods employeeMethods = new EmployeesMethods();
         employeeMethods.updateEmployee(updatedEmployee);
@@ -922,7 +963,7 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JPanel navbarLeft;
     private javax.swing.JPanel tblEmployees;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 

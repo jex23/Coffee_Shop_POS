@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,7 @@ public class EmployeesMethods {
     
     public List<Employee> employeesMethod() {
         List<Employee> employees = new ArrayList<>();
-        String query = "SELECT employee_id, employee_name, employee_role, employee_date_of_employment FROM tbl_employees";
+        String query = "SELECT employee_id, employee_name, employee_role, employee_date_of_employment, last_Login FROM tbl_employees";
             try (Connection conn = connector.createConnection(); 
                 Statement stmt = conn.createStatement(); 
                 ResultSet rs = stmt.executeQuery(query)) {
@@ -40,9 +41,10 @@ public class EmployeesMethods {
                           String employeeRole = rs.getString("employee_role");
                           String dateStr = rs.getString("employee_date_of_employment");
                           LocalDateTime employeeDateOfEmployment = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                          LocalDateTime lastLogin = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
 
-                    Employee employee = new Employee(employeeID, employeeName, employeeRole, employeeDateOfEmployment);
+                    Employee employee = new Employee(employeeID, employeeName, employeeRole, employeeDateOfEmployment, lastLogin);
                     employees.add(employee);                    
             }
             rs.close();
@@ -56,7 +58,7 @@ public class EmployeesMethods {
     
     public Employee getEmployeeById(int employeeID) {
         Employee employee = null;
-        String query = "SELECT employee_username, employee_passsword, employee_name, employee_role, employee_ImagePath FROM tbl_employees WHERE employee_id = ?";
+        String query = "SELECT employee_username, employee_password, employee_name, employee_role, employee_image_path FROM tbl_employees WHERE employee_id = ?";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -66,14 +68,17 @@ public class EmployeesMethods {
 
             if (rs.next()) {
                 String username = rs.getString("employee_username");
-                String password = rs.getString("employee_passsword");
+                String password = rs.getString("employee_password");
                 String name = rs.getString("employee_name");
                 String role = rs.getString("employee_role");
-                String imagePath = rs.getString("employee_ImagePath");
-                LocalDateTime dateOfEmployment = LocalDateTime.now(); // Assuming you do not fetch this for updating
+                String imagePath = rs.getString("employee_image_path");
+                LocalDateTime dateOfEmployment = LocalDateTime.now(); 
+                LocalDateTime lastLogin = LocalDateTime.now(); 
 
-                employee = new Employee(employeeID, username, password, name, role, dateOfEmployment, imagePath);
+                employee = new Employee(employeeID, username, password, name, role, dateOfEmployment, lastLogin, imagePath);
             }
+            rs.close();
+            conn.close();  
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +87,7 @@ public class EmployeesMethods {
 
 
     public void updateEmployee(Employee employee) {
-        String query = "UPDATE tbl_employees SET employee_name = ?, employee_role = ?, employee_username = ?, employee_passsword = ?, employee_ImagePath = ? WHERE employee_id = ?";
+        String query = "UPDATE tbl_employees SET employee_name = ?, employee_role = ?, employee_username = ?, employee_password = ?, employee_image_path = ? WHERE employee_id = ?";
 
         try (Connection conn = connector.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -93,12 +98,19 @@ public class EmployeesMethods {
             pstmt.setString(4, employee.getEmployeePassword());
             pstmt.setString(5, employee.getImagePath());
             pstmt.setInt(6, employee.getEmployeeID());
-
-            pstmt.executeUpdate();
+            
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Employee updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Update failed. Employee not found.");
+            }
+            
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
         }
     }
+
 
     public boolean deleteEmployeeById(int employeeId) {
         String sql = "DELETE FROM tbl_employees WHERE employee_id = ?";
@@ -107,6 +119,7 @@ public class EmployeesMethods {
             pstmt.setInt(1, employeeId);
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0; 
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return false; 
