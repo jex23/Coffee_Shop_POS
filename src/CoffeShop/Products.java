@@ -339,6 +339,7 @@ public class Products extends javax.swing.JFrame {
             isEmpty = false;
             Fetch();
             clearFields();
+            resetLabel();
 
         } catch (SQLException ex) {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
@@ -870,7 +871,7 @@ public class Products extends javax.swing.JFrame {
 
     private void bUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateActionPerformed
         updateProduct();
-        resetLabel();
+        
     }//GEN-LAST:event_bUpdateActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
@@ -925,6 +926,7 @@ public class Products extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         clearFields();
+        resetLabel();
     }//GEN-LAST:event_jButton6ActionPerformed
   
     /**
