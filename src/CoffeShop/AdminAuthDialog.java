@@ -214,25 +214,27 @@ public class AdminAuthDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPasswordFocusLost
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        String userName = txtUsername.getText().trim(); // Use the correct field
-           String passWord = new String(txtPassword.getPassword()).trim(); // Get password
+        String userName = txtUsername.getText().trim();
+        String passWord = new String(txtPassword.getPassword()).trim();
 
-           // Check if username or password fields are empty
-           if (userName.isEmpty() || passWord.isEmpty() || userName.equals("Enter Admin Username") || passWord.equals("Enter Password")) {
-               JOptionPane.showMessageDialog(this, "Username and password cannot be empty!", "Input Error", JOptionPane.ERROR_MESSAGE);
-               return; // Exit the method if fields are empty
-           }
+        if (userName.isEmpty() || passWord.isEmpty() || userName.equals("Enter Admin Username") || passWord.equals("Enter Password")) {
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
 
-           LoginMethod callLogin = new LoginMethod();
+        LoginMethod callLogin = new LoginMethod();
+        UserAuthenticate user = callLogin.authenticate(userName, passWord);
 
-           UserAuthenticate user = callLogin.authenticate(userName, passWord);
-           if (user != null) {
-               authenticated = true;  // Set authenticated to true
-               this.dispose();        // Close the dialog
-           } else {
-               // If authentication failed, show an error message
-               JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-           }                      
+        if (user != null) {
+            if ("Administrator".equals(user.getRole())) {
+                authenticated = true;  
+                this.dispose();        
+            } else {
+                JOptionPane.showMessageDialog(this, "You do not have admin privileges!", "Access Denied", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        }                      
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOKKeyPressed
