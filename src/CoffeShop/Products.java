@@ -408,10 +408,13 @@ public class Products extends javax.swing.JFrame {
                 String name = (String) imageLabel.getValueAt(selectedRow, 1);
                 String category = (String) imageLabel.getValueAt(selectedRow, 2);
                 double price = Double.parseDouble((String) imageLabel.getValueAt(selectedRow, 3));
+                String imagePath = (String) imageLabel.getValueAt(selectedRow, 4);
                 //set depende sa kung ano pinli
                 txtName.setText(name);
                 jComboBox1.setSelectedItem(category);
                 txtPrice.setText(String.valueOf(price));
+                ImageIcon imageIcon = resizeImage(imagePath, 120, 120); 
+                jLabel2.setIcon(imageIcon);
             }
     }
 
