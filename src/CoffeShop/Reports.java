@@ -64,22 +64,22 @@ public class Reports extends javax.swing.JFrame {
         salesTxtNumber = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        bestSellerQuatityTxt = new javax.swing.JLabel();
         bestSellerComboBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        bestSellerQuatityTxt1 = new javax.swing.JLabel();
-        snacksBeSLQuatityText = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         bestSellerQuatityTxt3 = new javax.swing.JLabel();
         bestSellerQuatityTxt4 = new javax.swing.JLabel();
+        bestSellerQuatityTxt = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         coffeeBeSLQuatityText = new javax.swing.JLabel();
         teaBeSLQuatityText = new javax.swing.JLabel();
-        snacksBeSLProductNameText = new javax.swing.JLabel();
-        teaBeSLProductNameText = new javax.swing.JLabel();
-        coffeeBeSLProductNameText = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        snacksBeSLQuatityText = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        coffeeBeSLProductNameText = new javax.swing.JLabel();
+        teaBeSLProductNameText = new javax.swing.JLabel();
+        snacksBeSLProductNameText = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -100,7 +100,7 @@ public class Reports extends javax.swing.JFrame {
 
         employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         employeeRoleTxt.setForeground(new java.awt.Color(255, 255, 255));
-        employeeRoleTxt.setText("Role");
+        employeeRoleTxt.setText("User");
         employeeRoleTxt.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         UserImageIcon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -135,9 +135,9 @@ public class Reports extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(employeNamerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(295, 295, 295)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
                 .addComponent(logutIcon)
                 .addGap(30, 30, 30))
         );
@@ -274,18 +274,20 @@ public class Reports extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 292, Short.MAX_VALUE))
+                .addGap(0, 240, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
 
         itemDetails.setBackground(new java.awt.Color(255, 192, 135));
+        itemDetails.setLayout(new java.awt.BorderLayout());
 
         centerPanel.setBackground(new java.awt.Color(142, 104, 69));
 
         jPanel1.setBackground(new java.awt.Color(255, 241, 195));
 
         jPanel4.setBackground(new java.awt.Color(255, 241, 195));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         frequencyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Daily", "Weekly", "Monthly", "Yearly" }));
         frequencyComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -293,58 +295,31 @@ public class Reports extends javax.swing.JFrame {
                 frequencyComboBoxActionPerformed(evt);
             }
         });
+        jPanel4.add(frequencyComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 26, 127, 34));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Period");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 26, 55, 34));
 
         salesTxtNumber.setBackground(new java.awt.Color(255, 221, 187));
         salesTxtNumber.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
         salesTxtNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         salesTxtNumber.setText("0");
         salesTxtNumber.setOpaque(true);
+        jPanel4.add(salesTxtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 364, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sales.png"))); // NOI18N
         jLabel3.setText("Sales");
         jLabel3.setIconTextGap(5);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(frequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(salesTxtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(frequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(salesTxtNumber)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 161, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 221, 187));
-
-        bestSellerQuatityTxt.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
-        bestSellerQuatityTxt.setText("Snacks:");
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bestSellerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Daily", "Weekly", "Monthly", "Yearly" }));
         bestSellerComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -352,47 +327,14 @@ public class Reports extends javax.swing.JFrame {
                 bestSellerComboBoxActionPerformed(evt);
             }
         });
+        jPanel5.add(bestSellerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 29, 127, 34));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Period");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        bestSellerQuatityTxt1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-
-        snacksBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
-        snacksBeSLQuatityText.setText("0");
-
-        bestSellerQuatityTxt3.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
-        bestSellerQuatityTxt3.setText("Cofee:");
-
-        bestSellerQuatityTxt4.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
-        bestSellerQuatityTxt4.setText("Tea:");
-
-        coffeeBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
-        coffeeBeSLQuatityText.setText("0");
-
-        teaBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
-        teaBeSLQuatityText.setText("0");
-
-        snacksBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        snacksBeSLProductNameText.setText("jLabel2");
-
-        teaBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        teaBeSLProductNameText.setText("jLabel2");
-
-        coffeeBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        coffeeBeSLProductNameText.setText("jLabel2");
-
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Quantity");
-
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel8.setText("Category");
-
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel9.setText("Product Name");
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 33, 54, 30));
 
         jLabel6.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -400,95 +342,60 @@ public class Reports extends javax.swing.JFrame {
         jLabel6.setText("Item Sales");
         jLabel6.setToolTipText("");
         jLabel6.setIconTextGap(1);
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 328, 69));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bestSellerQuatityTxt4)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bestSellerQuatityTxt3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(bestSellerQuatityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(snacksBeSLQuatityText, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(coffeeBeSLQuatityText, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(teaBeSLQuatityText, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bestSellerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(snacksBeSLProductNameText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                                .addComponent(teaBeSLProductNameText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bestSellerQuatityTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coffeeBeSLProductNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bestSellerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bestSellerQuatityTxt1)
-                        .addGap(64, 64, 64))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(coffeeBeSLQuatityText)
-                            .addComponent(coffeeBeSLProductNameText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(teaBeSLQuatityText)
-                            .addComponent(teaBeSLProductNameText))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(bestSellerQuatityTxt3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bestSellerQuatityTxt4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bestSellerQuatityTxt)
-                            .addComponent(snacksBeSLQuatityText)
-                            .addComponent(snacksBeSLProductNameText))
-                        .addGap(0, 14, Short.MAX_VALUE))))
-        );
+        jPanel7.setBackground(new java.awt.Color(255, 221, 187));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setText("Category");
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 20));
+
+        bestSellerQuatityTxt3.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt3.setText("Cofee:");
+        jPanel7.add(bestSellerQuatityTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 88, -1));
+
+        bestSellerQuatityTxt4.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt4.setText("Tea:");
+        jPanel7.add(bestSellerQuatityTxt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 88, -1));
+
+        bestSellerQuatityTxt.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt.setText("Snacks:");
+        jPanel7.add(bestSellerQuatityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Quantity");
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 80, 20));
+
+        coffeeBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        coffeeBeSLQuatityText.setText("0");
+        jPanel7.add(coffeeBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 80, 30));
+
+        teaBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        teaBeSLQuatityText.setText("0");
+        jPanel7.add(teaBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, 30));
+
+        snacksBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        snacksBeSLQuatityText.setText("0");
+        jPanel7.add(snacksBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 80, 30));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setText("Product Name");
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 150, 20));
+
+        coffeeBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        coffeeBeSLProductNameText.setText("jLabel2");
+        jPanel7.add(coffeeBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 210, 28));
+
+        teaBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        teaBeSLProductNameText.setText("jLabel2");
+        jPanel7.add(teaBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 210, 31));
+
+        snacksBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        snacksBeSLProductNameText.setText("jLabel2");
+        jPanel7.add(snacksBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 210, 30));
+
+        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 82, -1, 170));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -498,7 +405,7 @@ public class Reports extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 566, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -509,9 +416,17 @@ public class Reports extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        centerPanel.add(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(142, 104, 69));
+        jPanel6.setBackground(new java.awt.Color(255, 241, 195));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 221, 187));
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTabbedPane1.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(255, 241, 195));
 
         salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -538,20 +453,20 @@ public class Reports extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Sales", jPanel2);
 
-        jPanel3.setBackground(new java.awt.Color(142, 104, 69));
+        jPanel3.setBackground(new java.awt.Color(255, 221, 187));
 
         itemSalesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -569,6 +484,8 @@ public class Reports extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        itemSalesTable.setMaximumSize(new java.awt.Dimension(500, 0));
+        itemSalesTable.setPreferredSize(new java.awt.Dimension(500, 0));
         itemSalesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(itemSalesTable);
         if (itemSalesTable.getColumnModel().getColumnCount() > 0) {
@@ -586,54 +503,24 @@ public class Reports extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 100, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Item Sales", jPanel3);
 
-        jPanel6.add(jTabbedPane1);
+        jPanel6.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout centerPanelLayout = new javax.swing.GroupLayout(centerPanel);
-        centerPanel.setLayout(centerPanelLayout);
-        centerPanelLayout.setHorizontalGroup(
-            centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(centerPanelLayout.createSequentialGroup()
-                .addGroup(centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, centerPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        centerPanelLayout.setVerticalGroup(
-            centerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(centerPanelLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(196, 196, 196))
-        );
+        centerPanel.add(jPanel6);
 
-        javax.swing.GroupLayout itemDetailsLayout = new javax.swing.GroupLayout(itemDetails);
-        itemDetails.setLayout(itemDetailsLayout);
-        itemDetailsLayout.setHorizontalGroup(
-            itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        itemDetailsLayout.setVerticalGroup(
-            itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        itemDetails.add(centerPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1171, 716));
+        setSize(new java.awt.Dimension(1148, 664));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -831,7 +718,6 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JLabel UserImageIcon;
     private javax.swing.JComboBox<String> bestSellerComboBox;
     private javax.swing.JLabel bestSellerQuatityTxt;
-    private javax.swing.JLabel bestSellerQuatityTxt1;
     private javax.swing.JLabel bestSellerQuatityTxt3;
     private javax.swing.JLabel bestSellerQuatityTxt4;
     private javax.swing.JPanel btnOption;
@@ -862,6 +748,7 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

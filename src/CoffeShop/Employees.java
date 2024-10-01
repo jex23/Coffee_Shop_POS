@@ -118,7 +118,7 @@ public class Employees extends javax.swing.JFrame {
 
         employeeRoleTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         employeeRoleTxt.setForeground(new java.awt.Color(255, 255, 255));
-        employeeRoleTxt.setText("Role");
+        employeeRoleTxt.setText("User");
         employeeRoleTxt.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         UserImageIcon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
