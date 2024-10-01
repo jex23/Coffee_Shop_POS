@@ -306,12 +306,14 @@ public class Reports extends javax.swing.JFrame {
 
         salesTxtNumber.setBackground(new java.awt.Color(255, 221, 187));
         salesTxtNumber.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        salesTxtNumber.setForeground(new java.awt.Color(81, 56, 33));
         salesTxtNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         salesTxtNumber.setText("0");
         salesTxtNumber.setOpaque(true);
         jPanel4.add(salesTxtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 364, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(53, 36, 20));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sales.png"))); // NOI18N
         jLabel3.setText("Sales");
         jLabel3.setIconTextGap(5);
@@ -337,6 +339,7 @@ public class Reports extends javax.swing.JFrame {
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 33, 54, 30));
 
         jLabel6.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(53, 36, 20));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bestSeller.png"))); // NOI18N
         jLabel6.setText("Item Sales");
@@ -348,50 +351,62 @@ public class Reports extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(170, 139, 108));
         jLabel8.setText("Category");
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 20));
 
         bestSellerQuatityTxt3.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt3.setForeground(new java.awt.Color(81, 56, 33));
         bestSellerQuatityTxt3.setText("Cofee:");
         jPanel7.add(bestSellerQuatityTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 88, -1));
 
         bestSellerQuatityTxt4.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt4.setForeground(new java.awt.Color(81, 56, 33));
         bestSellerQuatityTxt4.setText("Tea:");
         jPanel7.add(bestSellerQuatityTxt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 88, -1));
 
         bestSellerQuatityTxt.setFont(new java.awt.Font("Segoe Script", 0, 22)); // NOI18N
+        bestSellerQuatityTxt.setForeground(new java.awt.Color(81, 56, 33));
         bestSellerQuatityTxt.setText("Snacks:");
         jPanel7.add(bestSellerQuatityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(170, 139, 108));
         jLabel7.setText("Quantity");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 80, 20));
 
         coffeeBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        coffeeBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         coffeeBeSLQuatityText.setText("0");
         jPanel7.add(coffeeBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 80, 30));
 
         teaBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        teaBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         teaBeSLQuatityText.setText("0");
         jPanel7.add(teaBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, 30));
 
         snacksBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
+        snacksBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         snacksBeSLQuatityText.setText("0");
         jPanel7.add(snacksBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 80, 30));
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(170, 139, 108));
         jLabel9.setText("Product Name");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 150, 20));
 
         coffeeBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        coffeeBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         coffeeBeSLProductNameText.setText("jLabel2");
         jPanel7.add(coffeeBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 210, 28));
 
         teaBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        teaBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         teaBeSLProductNameText.setText("jLabel2");
         jPanel7.add(teaBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 210, 31));
 
         snacksBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        snacksBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         snacksBeSLProductNameText.setText("jLabel2");
         jPanel7.add(snacksBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 210, 30));
 

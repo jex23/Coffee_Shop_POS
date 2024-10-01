@@ -441,6 +441,9 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Serif" size="24" style="0"/>
                         </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="21" green="38" red="51" type="rgb"/>
+                        </Property>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="text" type="java.lang.String" value="0"/>
                         <Property name="opaque" type="boolean" value="true"/>
@@ -455,6 +458,9 @@
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Monotype Corsiva" size="36" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="14" green="24" red="35" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/sales.png"/>
@@ -527,6 +533,9 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Monotype Corsiva" size="36" style="0"/>
                         </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="14" green="24" red="35" type="rgb"/>
+                        </Property>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/bestSeller.png"/>
@@ -562,6 +571,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="12" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="6c" green="8b" red="aa" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Category"/>
                           </Properties>
                           <Constraints>
@@ -574,6 +586,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe Script" size="22" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Cofee:"/>
                           </Properties>
@@ -588,6 +603,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe Script" size="22" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Tea:"/>
                           </Properties>
                           <Constraints>
@@ -600,6 +618,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe Script" size="22" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Snacks:"/>
                           </Properties>
@@ -614,6 +635,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="12" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="6c" green="8b" red="aa" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Quantity"/>
                           </Properties>
                           <Constraints>
@@ -626,6 +650,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="SimSun" size="24" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="0"/>
                           </Properties>
@@ -640,6 +667,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="SimSun" size="24" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="0"/>
                           </Properties>
                           <Constraints>
@@ -652,6 +682,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="SimSun" size="24" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="0"/>
                           </Properties>
@@ -666,6 +699,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="12" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="6c" green="8b" red="aa" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Product Name"/>
                           </Properties>
                           <Constraints>
@@ -678,6 +714,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="16" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="jLabel2"/>
                           </Properties>
@@ -692,6 +731,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="16" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="jLabel2"/>
                           </Properties>
                           <Constraints>
@@ -704,6 +746,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="16" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="21" green="38" red="51" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="jLabel2"/>
                           </Properties>
