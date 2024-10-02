@@ -39,15 +39,104 @@ public class Receipt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        closeButton = new javax.swing.JButton();
-        printButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         receiptTxtArea = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        printButton = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(81, 56, 33));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo.png"))); // NOI18N
+        jLabel1.setText("KAPELICIOUS");
+        jLabel1.setIconTextGap(5);
+
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Bagumbayan St.");
+
+        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Ligao City, Centro");
+
+        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Mobile#: 09510074856");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 26, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 410, -1));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+
+        receiptTxtArea.setEditable(false);
+        receiptTxtArea.setBackground(new java.awt.Color(255, 255, 255));
+        receiptTxtArea.setColumns(20);
+        receiptTxtArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        receiptTxtArea.setRows(5);
+        receiptTxtArea.setAutoscrolls(false);
+        receiptTxtArea.setBorder(null);
+        receiptTxtArea.setPreferredSize(new java.awt.Dimension(200, 100));
+        jScrollPane2.setViewportView(receiptTxtArea);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 138, 420, 482));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        printButton.setText("Print");
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
             }
         });
 
@@ -58,41 +147,30 @@ public class Receipt extends javax.swing.JFrame {
             }
         });
 
-        printButton.setText("Print");
-        printButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printButtonActionPerformed(evt);
-            }
-        });
-
-        receiptTxtArea.setColumns(20);
-        receiptTxtArea.setRows(5);
-        jScrollPane2.setViewportView(receiptTxtArea);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addComponent(printButton)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(closeButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(closeButton)
-                    .addComponent(printButton))
-                .addContainerGap(14, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(printButton)
+                    .addComponent(closeButton))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 401, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -139,44 +217,40 @@ public class Receipt extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     public void displayReceipt(String date, String time, String saleId, String employeeName,
-            List<SaleItem> saleItems, double subtotal, double vat, double total,
-            String paymentMethod, double amount, double change, double totalAmount) {
+        List<SaleItem> saleItems, double subtotal, double vat, double total,
+        String paymentMethod, double amount, double change, double totalAmount) {
         StringBuilder receiptBuilder = new StringBuilder();
-        receiptBuilder.append("          Kapelecious\n");
-        receiptBuilder.append("          Bagumbayan St.\n");
-        receiptBuilder.append("         Ligao City, Centro\n");
-        receiptBuilder.append("        Mobile: 09510074856\n\n");
-        receiptBuilder.append("----------------------------------------\n");
-        receiptBuilder.append(String.format("Date:                %s\n", date));
-        receiptBuilder.append(String.format("Time:                %s\n", time));
-        receiptBuilder.append(String.format("Sale ID:             #%s\n", saleId)); // Display Sale ID
-        receiptBuilder.append(String.format("Employee:            %s\n", employeeName));
-        receiptBuilder.append("----------------------------------------\n\n");
-        receiptBuilder.append(String.format("%-40s %-6s %-6s\n", "Item", "Qty", "Price")); // Header with proper spacing
-        receiptBuilder.append("----------------------------------------\n");
+        receiptBuilder.append("   ---------------------------------------------\n");
+        receiptBuilder.append(String.format("   Date:                %s\n", date));
+        receiptBuilder.append(String.format("   Time:                %s\n", time));
+        receiptBuilder.append(String.format("   Sale ID:             #%s\n", saleId)); // Display Sale ID
+        receiptBuilder.append(String.format("   Employee:            %s\n", employeeName));
+        receiptBuilder.append("   ---------------------------------------------\n\n");
+        receiptBuilder.append(String.format("%-30s %-6s %-6s\n", "   Item", "Qty", "Price")); // Header with proper spacing
+        receiptBuilder.append("   ---------------------------------------------\n");
 
         for (SaleItem item : saleItems) {
             String productName = getProductNameById(item.getProductId()); // Retrieve product name using productId
-            receiptBuilder.append(String.format("%-40s %-6d ₱ %-6.2f\n",
+            receiptBuilder.append(String.format("   %-30s%-6d₱ %-6.2f\n",
                     productName, item.getQuantity(), item.getPrice() * item.getQuantity()));
         }
 
-        receiptBuilder.append("----------------------------------------\n");
-        receiptBuilder.append(String.format("Subtotal:                     ₱ %.2f\n", subtotal));
-        receiptBuilder.append(String.format("VAT (12%%):                    ₱ %.2f\n", vat));
-        receiptBuilder.append("----------------------------------------\n");
-        receiptBuilder.append(String.format("TOTAL:                       ₱ %.2f\n", total));
-        receiptBuilder.append("----------------------------------------\n");
+        receiptBuilder.append("   ---------------------------------------------\n");
+        receiptBuilder.append(String.format("   Subtotal:                           ₱ %.2f\n", subtotal));
+        receiptBuilder.append(String.format("   VAT(12%%):                           ₱ %.2f\n", vat));
+        receiptBuilder.append("   ---------------------------------------------\n");
+        receiptBuilder.append(String.format("   TOTAL:                              ₱ %.2f\n", total));
+        receiptBuilder.append("   ---------------------------------------------\n");
 
         // Add amount and change details to the receipt
-        receiptBuilder.append(String.format("Amount Given:                ₱ %.2f\n", amount));
-        receiptBuilder.append(String.format("Change:                     ₱ %.2f\n", change));
-        receiptBuilder.append(String.format("Total Amount to be Paid:    ₱ %.2f\n", totalAmount));
+        receiptBuilder.append(String.format("   Amount Given:                       ₱ %.2f\n", amount));
+        receiptBuilder.append(String.format("   Change:                             ₱ %.2f\n", change));
+        receiptBuilder.append(String.format("   Total Amount Paid:                  ₱ %.2f\n", totalAmount));
 
-        receiptBuilder.append("----------------------------------------\n\n");
-        receiptBuilder.append(String.format("Payment Method: %s\n", paymentMethod));
-        receiptBuilder.append("Thank you for your purchase!\n");
-        receiptBuilder.append("       Please come again!");
+        receiptBuilder.append("   ---------------------------------------------\n\n");
+        receiptBuilder.append(String.format("          Payment Cash: %s\n", paymentMethod));
+        receiptBuilder.append("           Thank you for your purchase!\n");
+        receiptBuilder.append("              Please come again!");
 
         // Set the text to the JTextArea
         receiptTxtArea.setText(receiptBuilder.toString());
@@ -240,6 +314,13 @@ public class Receipt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton printButton;
     private javax.swing.JTextArea receiptTxtArea;
