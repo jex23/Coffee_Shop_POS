@@ -487,44 +487,32 @@ public class Reports extends javax.swing.JFrame {
 
         itemSalesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Sales ID", "Name", "Category", "Quantity", "Price", "Total Price", "Date"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        itemSalesTable.setMaximumSize(new java.awt.Dimension(500, 0));
-        itemSalesTable.setPreferredSize(new java.awt.Dimension(500, 0));
+        ));
         itemSalesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(itemSalesTable);
-        if (itemSalesTable.getColumnModel().getColumnCount() > 0) {
-            itemSalesTable.getColumnModel().getColumn(0).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(1).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(2).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(3).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(4).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(5).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(6).setResizable(false);
-            itemSalesTable.getColumnModel().getColumn(7).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1074, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170))
         );
 
         jTabbedPane1.addTab("Item Sales", jPanel3);
