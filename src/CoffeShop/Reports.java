@@ -135,9 +135,9 @@ public class Reports extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(employeNamerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
                 .addComponent(logutIcon)
                 .addGap(30, 30, 30))
         );
@@ -297,14 +297,14 @@ public class Reports extends javax.swing.JFrame {
                 frequencyComboBoxActionPerformed(evt);
             }
         });
-        jPanel4.add(frequencyComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 26, 127, 34));
+        jPanel4.add(frequencyComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 127, 34));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Period");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 26, 55, 34));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 55, 34));
 
         salesTxtNumber.setBackground(new java.awt.Color(255, 221, 187));
         salesTxtNumber.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
@@ -313,7 +313,7 @@ public class Reports extends javax.swing.JFrame {
         salesTxtNumber.setText("0");
         salesTxtNumber.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         salesTxtNumber.setOpaque(true);
-        jPanel4.add(salesTxtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 364, -1));
+        jPanel4.add(salesTxtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 400, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(53, 36, 20));
@@ -333,14 +333,14 @@ public class Reports extends javax.swing.JFrame {
                 bestSellerComboBoxActionPerformed(evt);
             }
         });
-        jPanel5.add(bestSellerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 29, 127, 34));
+        jPanel5.add(bestSellerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 127, 34));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Period");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 33, 54, 30));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 54, 30));
 
         jLabel6.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(53, 36, 20));
@@ -377,42 +377,42 @@ public class Reports extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(170, 139, 108));
         jLabel7.setText("Quantity");
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 80, 20));
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 80, 20));
 
         coffeeBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
         coffeeBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         coffeeBeSLQuatityText.setText("0");
-        jPanel7.add(coffeeBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 80, 30));
+        jPanel7.add(coffeeBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 80, 30));
 
         teaBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
         teaBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         teaBeSLQuatityText.setText("0");
-        jPanel7.add(teaBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, 30));
+        jPanel7.add(teaBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 80, 30));
 
         snacksBeSLQuatityText.setFont(new java.awt.Font("SimSun", 0, 24)); // NOI18N
         snacksBeSLQuatityText.setForeground(new java.awt.Color(81, 56, 33));
         snacksBeSLQuatityText.setText("0");
-        jPanel7.add(snacksBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 80, 30));
+        jPanel7.add(snacksBeSLQuatityText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 80, 30));
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(170, 139, 108));
         jLabel9.setText("Product Name");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 150, 20));
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 150, 20));
 
         coffeeBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         coffeeBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         coffeeBeSLProductNameText.setText("jLabel2");
-        jPanel7.add(coffeeBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 210, 28));
+        jPanel7.add(coffeeBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 310, 28));
 
         teaBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         teaBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         teaBeSLProductNameText.setText("jLabel2");
-        jPanel7.add(teaBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 210, 31));
+        jPanel7.add(teaBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 310, 31));
 
         snacksBeSLProductNameText.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         snacksBeSLProductNameText.setForeground(new java.awt.Color(81, 56, 33));
         snacksBeSLProductNameText.setText("jLabel2");
-        jPanel7.add(snacksBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 210, 30));
+        jPanel7.add(snacksBeSLProductNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 310, 30));
 
         jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 82, -1, 170));
 
@@ -423,8 +423,8 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,7 +435,7 @@ public class Reports extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        centerPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, -1, 250));
+        centerPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 15, 1080, 260));
 
         jPanel6.setBackground(new java.awt.Color(142, 104, 69));
 
@@ -473,9 +473,7 @@ public class Reports extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,28 +487,44 @@ public class Reports extends javax.swing.JFrame {
 
         itemSalesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+                "Item ID", "Sales ID", "Name", "Category", "Quantity", "Price", "Total Price", "Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        itemSalesTable.setMaximumSize(new java.awt.Dimension(500, 0));
+        itemSalesTable.setPreferredSize(new java.awt.Dimension(500, 0));
+        itemSalesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(itemSalesTable);
+        if (itemSalesTable.getColumnModel().getColumnCount() > 0) {
+            itemSalesTable.getColumnModel().getColumn(0).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(1).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(2).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(3).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(4).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(5).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(6).setResizable(false);
+            itemSalesTable.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Item Sales", jPanel3);
@@ -519,10 +533,10 @@ public class Reports extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,13 +546,13 @@ public class Reports extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        centerPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 266, 950, 320));
+        centerPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 266, 1110, 320));
 
         itemDetails.add(centerPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1148, 709));
+        setSize(new java.awt.Dimension(1341, 709));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
