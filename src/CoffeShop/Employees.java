@@ -353,8 +353,8 @@ public class Employees extends javax.swing.JFrame {
             tblEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tblEmployeesLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(employeeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(employeeTable, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         crudOption1.setBackground(new java.awt.Color(255, 192, 135));
@@ -401,7 +401,6 @@ public class Employees extends javax.swing.JFrame {
         jLabel43.setText("Password");
 
         btnAdd.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.icon.checkmarkColor"));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -410,7 +409,6 @@ public class Employees extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,7 +416,6 @@ public class Employees extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +423,6 @@ public class Employees extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,7 +527,7 @@ public class Employees extends javax.swing.JFrame {
             .addGroup(itemDetailsLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(crudOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);

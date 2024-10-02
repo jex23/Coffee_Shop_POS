@@ -792,6 +792,7 @@ public class Products extends javax.swing.JFrame {
         jComboBox1.setMaximumSize(null);
         jComboBox1.setPreferredSize(new java.awt.Dimension(68, 26));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(60, 60));
         jPanel1.setMinimumSize(new java.awt.Dimension(60, 60));
         jPanel1.add(jLabel2);
