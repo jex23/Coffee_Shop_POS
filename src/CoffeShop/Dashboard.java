@@ -884,7 +884,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         // Create a new Receipt instance and display the receipt details
         Receipt callReceipt = new Receipt();
-        callReceipt.displayReceipt(date, time, String.valueOf(saleId), employeeName, saleItems, subtotal, vat, total, "Credit Card", amount, amountChange, total);
+        callReceipt.displayReceipt(date, time, String.valueOf(saleId), employeeName, saleItems, subtotal, vat, total, "Cash", amount, amountChange, total);
 
         // Make the Receipt JFrame visible
         callReceipt.setVisible(true);
