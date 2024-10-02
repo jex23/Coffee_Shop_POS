@@ -5,6 +5,7 @@
 package CoffeShop;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea; // Import JTextArea for setting the receipt text
 
@@ -28,6 +30,11 @@ public class Receipt extends javax.swing.JFrame {
      */
     public Receipt() {
         initComponents();
+        setTitle("Receipt");
+
+        ImageIcon icon = IconLoader.getIcon();
+        Image img = icon.getImage();
+        setIconImage(img);
     }
 
     /**
@@ -129,7 +136,7 @@ public class Receipt extends javax.swing.JFrame {
         receiptTxtArea.setPreferredSize(new java.awt.Dimension(200, 100));
         jScrollPane2.setViewportView(receiptTxtArea);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 138, 420, 482));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 138, 400, 482));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -180,8 +187,9 @@ public class Receipt extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-    
+     
+    PrinterJob printerJob = PrinterJob.getPrinterJob();
+
     printerJob.setPrintable(new Printable() {
         @Override
         public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
@@ -189,13 +197,35 @@ public class Receipt extends javax.swing.JFrame {
                 return Printable.NO_SUCH_PAGE; // Only one page to print
             }
 
+            // Set margins
+            int margin = 50;
+            int y = margin;
+
+            // Print the header
+            g.setFont(jLabel1.getFont());
+            g.drawString(jLabel1.getText(), margin, y);
+            y += g.getFontMetrics().getHeight(); // Move down by the font height
+
+            g.setFont(jLabel2.getFont());
+            g.drawString(jLabel2.getText(), margin, y);
+            y += g.getFontMetrics().getHeight();
+
+            g.drawString(jLabel3.getText(), margin, y);
+            y += g.getFontMetrics().getHeight();
+
+            g.drawString(jLabel4.getText(), margin, y);
+            y += g.getFontMetrics().getHeight();
+
+            // Draw a separator line
+            g.drawLine(margin, y, (int) pf.getWidth() - margin, y);
+            y += 5; // Add a little space after the line
+
             // Retrieve the receipt text and draw it on the graphics context
-            String receiptText = receiptTxtArea.getText(); // Assuming you have a JTextArea for the receipt
+            String receiptText = receiptTxtArea.getText(); 
             String[] lines = receiptText.split("\n");
-            int y = 100; // Starting Y position for drawing text
             for (String line : lines) {
-                g.drawString(line, 50, y); // Draw each line with X and Y offset
-                y += 15; // Increment Y position for the next line
+                g.drawString(line, margin, y); // Draw each line with X and Y offset
+                y += g.getFontMetrics().getHeight(); // Increment Y position based on the font height
             }
 
             return Printable.PAGE_EXISTS; // Indicate that the page exists
@@ -210,6 +240,7 @@ public class Receipt extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Printing error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     }//GEN-LAST:event_printButtonActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -221,34 +252,34 @@ public class Receipt extends javax.swing.JFrame {
         String paymentMethod, double amount, double change, double totalAmount) {
         StringBuilder receiptBuilder = new StringBuilder();
         receiptBuilder.append("   ----------------------------------------\n");
-        receiptBuilder.append(String.format("   Date:                %s\n", date));
-        receiptBuilder.append(String.format("   Time:                %s\n", time));
-        receiptBuilder.append(String.format("   Sale ID:             #%s\n", saleId)); // Display Sale ID
-        receiptBuilder.append(String.format("   Employee:            %s\n", employeeName));
+        receiptBuilder.append(String.format("Date:                %s\n", date));
+        receiptBuilder.append(String.format("Time:                %s\n", time));
+        receiptBuilder.append(String.format("Sale ID:             #%s\n", saleId)); // Display Sale ID
+        receiptBuilder.append(String.format("Employee:            %s\n", employeeName));
         receiptBuilder.append("   ----------------------------------------\n\n");
-        receiptBuilder.append(String.format("%-40s %-6s %-6s\n", "   Item", "Qty", "Price")); // Header with proper spacing
+        receiptBuilder.append(String.format("%-40s %-6s %-6s\n", "Item", "Qty", "Price")); // Header with proper spacing
         receiptBuilder.append("   ----------------------------------------\n");
 
         for (SaleItem item : saleItems) {
             String productName = getProductNameById(item.getProductId()); // Retrieve product name using productId
-            receiptBuilder.append(String.format("   %-40s%-6d₱ %-6.2f\n",
+            receiptBuilder.append(String.format("%-40s%-6d₱ %-6.2f\n",
                     productName, item.getQuantity(), item.getPrice() * item.getQuantity()));
         }
 
         receiptBuilder.append("   ----------------------------------------\n");
-        receiptBuilder.append(String.format("   Subtotal:                   ₱ %.2f\n", subtotal));
-        receiptBuilder.append(String.format("   VAT(12%%):                   ₱ %.2f\n", vat));
+        receiptBuilder.append(String.format("Subtotal:                   ₱ %.2f\n", subtotal));
+        receiptBuilder.append(String.format("VAT(12%%):                   ₱ %.2f\n", vat));
         receiptBuilder.append("   ----------------------------------------\n");
-        receiptBuilder.append(String.format("   TOTAL:                      ₱ %.2f\n", total));
+        receiptBuilder.append(String.format("TOTAL:                      ₱ %.2f\n", total));
         receiptBuilder.append("   ----------------------------------------\n");
 
         // Add amount and change details to the receipt
-        receiptBuilder.append(String.format("   Amount Given:               ₱ %.2f\n", amount));
-        receiptBuilder.append(String.format("   Change:                     ₱ %.2f\n", change));
-        receiptBuilder.append(String.format("   Total Amount to be Paid:    ₱ %.2f\n", totalAmount));
+        receiptBuilder.append(String.format("Amount Given:               ₱ %.2f\n", amount));
+        receiptBuilder.append(String.format("Change:                     ₱ %.2f\n", change));
+        receiptBuilder.append(String.format("Total Amount to be Paid:    ₱ %.2f\n", totalAmount));
 
         receiptBuilder.append("   ----------------------------------------\n\n");
-        receiptBuilder.append(String.format("  Payment Method: %s\n", paymentMethod));
+        receiptBuilder.append(String.format("Payment Method: %s\n", paymentMethod));
         receiptBuilder.append("   Thank you for your purchase!\n");
         receiptBuilder.append("       Please come again!");
 
