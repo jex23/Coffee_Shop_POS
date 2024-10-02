@@ -406,7 +406,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        coffeeGrid.setBackground(new java.awt.Color(255, 245, 238));
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        coffeeGrid.setBackground(new java.awt.Color(255, 255, 255));
         coffeeGrid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 coffeeGridMouseClicked(evt);
@@ -422,10 +424,14 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Coffee", jScrollPane1);
 
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
         teaGrid.setLayout(new java.awt.GridLayout(0, 3));
         jScrollPane2.setViewportView(teaGrid);
 
         jTabbedPane2.addTab("Tea", jScrollPane2);
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
 
         snackGrid.setLayout(new java.awt.GridLayout(0, 3));
         jScrollPane3.setViewportView(snackGrid);
@@ -1245,7 +1251,7 @@ public class Dashboard extends javax.swing.JFrame {
           BorderFactory.createLineBorder(customColor, 1),
           BorderFactory.createEmptyBorder(padding, padding, padding, padding)
       ));
-      productPanel.setBackground(new Color(255, 245, 238));
+      productPanel.setBackground(new Color(255, 255, 255));
 
       // Set up image label
       JLabel imageLabel = new JLabel();

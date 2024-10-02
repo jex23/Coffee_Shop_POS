@@ -71,7 +71,7 @@ CREATE TABLE `tbl_products` (
 
 INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_category`, `product_price`, `product_ImagePath`) VALUES
 (2, 'French Pressed Brewed Coffee', 'Coffee', 90, 'src\\products\\Brewed toon.jpg'),
-(3, 'Caffe Latte', 'Coffee', 90, 'src\\products\\Caffe Latte.jpg'),
+(3, 'Caffe Latte', 'Coffee', 90, 'src\\products\\Caffe Latte.jpeg'),
 (4, 'Cappuccino', 'Coffee', 90, 'src\\products\\Cappuccino.jpg'),
 (5, 'Caffe Mocha', 'Coffee', 100, 'src\\products\\Caffe Mocha.jpg'),
 (6, 'Caramel Macchiato', 'Coffee', 105, 'src\\products\\Caramel Macchiato.jpg'),
