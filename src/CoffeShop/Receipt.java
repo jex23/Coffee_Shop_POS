@@ -220,37 +220,37 @@ public class Receipt extends javax.swing.JFrame {
         List<SaleItem> saleItems, double subtotal, double vat, double total,
         String paymentMethod, double amount, double change, double totalAmount) {
         StringBuilder receiptBuilder = new StringBuilder();
-        receiptBuilder.append("   ----------------------------------------\n");
+        receiptBuilder.append("   ---------------------------------------------\n");
         receiptBuilder.append(String.format("   Date:                %s\n", date));
         receiptBuilder.append(String.format("   Time:                %s\n", time));
         receiptBuilder.append(String.format("   Sale ID:             #%s\n", saleId)); // Display Sale ID
         receiptBuilder.append(String.format("   Employee:            %s\n", employeeName));
-        receiptBuilder.append("   ----------------------------------------\n\n");
-        receiptBuilder.append(String.format("%-40s %-6s %-6s\n", "   Item", "Qty", "Price")); // Header with proper spacing
-        receiptBuilder.append("   ----------------------------------------\n");
+        receiptBuilder.append("   ---------------------------------------------\n\n");
+        receiptBuilder.append(String.format("%-30s %-6s %-6s\n", "   Item", "Qty", "Price")); // Header with proper spacing
+        receiptBuilder.append("   ---------------------------------------------\n");
 
         for (SaleItem item : saleItems) {
             String productName = getProductNameById(item.getProductId()); // Retrieve product name using productId
-            receiptBuilder.append(String.format("   %-40s%-6d₱ %-6.2f\n",
+            receiptBuilder.append(String.format("   %-30s%-6d₱ %-6.2f\n",
                     productName, item.getQuantity(), item.getPrice() * item.getQuantity()));
         }
 
-        receiptBuilder.append("   ----------------------------------------\n");
-        receiptBuilder.append(String.format("   Subtotal:                   ₱ %.2f\n", subtotal));
-        receiptBuilder.append(String.format("   VAT(12%%):                   ₱ %.2f\n", vat));
-        receiptBuilder.append("   ----------------------------------------\n");
-        receiptBuilder.append(String.format("   TOTAL:                      ₱ %.2f\n", total));
-        receiptBuilder.append("   ----------------------------------------\n");
+        receiptBuilder.append("   ---------------------------------------------\n");
+        receiptBuilder.append(String.format("   Subtotal:                           ₱ %.2f\n", subtotal));
+        receiptBuilder.append(String.format("   VAT(12%%):                           ₱ %.2f\n", vat));
+        receiptBuilder.append("   ---------------------------------------------\n");
+        receiptBuilder.append(String.format("   TOTAL:                              ₱ %.2f\n", total));
+        receiptBuilder.append("   ---------------------------------------------\n");
 
         // Add amount and change details to the receipt
-        receiptBuilder.append(String.format("   Amount Given:               ₱ %.2f\n", amount));
-        receiptBuilder.append(String.format("   Change:                     ₱ %.2f\n", change));
-        receiptBuilder.append(String.format("   Total Amount to be Paid:    ₱ %.2f\n", totalAmount));
+        receiptBuilder.append(String.format("   Amount Given:                       ₱ %.2f\n", amount));
+        receiptBuilder.append(String.format("   Change:                             ₱ %.2f\n", change));
+        receiptBuilder.append(String.format("   Total Amount Paid:                  ₱ %.2f\n", totalAmount));
 
-        receiptBuilder.append("   ----------------------------------------\n\n");
-        receiptBuilder.append(String.format("  Payment Method: %s\n", paymentMethod));
-        receiptBuilder.append("   Thank you for your purchase!\n");
-        receiptBuilder.append("       Please come again!");
+        receiptBuilder.append("   ---------------------------------------------\n\n");
+        receiptBuilder.append(String.format("          Payment Cash: %s\n", paymentMethod));
+        receiptBuilder.append("           Thank you for your purchase!\n");
+        receiptBuilder.append("              Please come again!");
 
         // Set the text to the JTextArea
         receiptTxtArea.setText(receiptBuilder.toString());
