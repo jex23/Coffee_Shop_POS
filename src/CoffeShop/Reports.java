@@ -135,9 +135,9 @@ public class Reports extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(employeNamerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(logutIcon)
                 .addGap(30, 30, 30))
         );
@@ -274,7 +274,7 @@ public class Reports extends javax.swing.JFrame {
             navbarLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLeftLayout.createSequentialGroup()
                 .addComponent(btnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 240, Short.MAX_VALUE))
+                .addGap(0, 285, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbarLeft, java.awt.BorderLayout.LINE_START);
@@ -283,10 +283,12 @@ public class Reports extends javax.swing.JFrame {
         itemDetails.setLayout(new java.awt.BorderLayout());
 
         centerPanel.setBackground(new java.awt.Color(142, 104, 69));
+        centerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 241, 195));
+        jPanel1.setBackground(new java.awt.Color(255, 237, 178));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.darkGray));
 
-        jPanel4.setBackground(new java.awt.Color(255, 241, 195));
+        jPanel4.setBackground(new java.awt.Color(255, 237, 178));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         frequencyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Daily", "Weekly", "Monthly", "Yearly" }));
@@ -309,6 +311,7 @@ public class Reports extends javax.swing.JFrame {
         salesTxtNumber.setForeground(new java.awt.Color(81, 56, 33));
         salesTxtNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         salesTxtNumber.setText("0");
+        salesTxtNumber.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         salesTxtNumber.setOpaque(true);
         jPanel4.add(salesTxtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 364, -1));
 
@@ -321,6 +324,7 @@ public class Reports extends javax.swing.JFrame {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 161, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 221, 187));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bestSellerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Daily", "Weekly", "Monthly", "Yearly" }));
@@ -431,17 +435,18 @@ public class Reports extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        centerPanel.add(jPanel1);
+        centerPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, -1, 250));
 
-        jPanel6.setBackground(new java.awt.Color(255, 241, 195));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.setBackground(new java.awt.Color(142, 104, 69));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 221, 187));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(940, 280));
 
         jPanel2.setBackground(new java.awt.Color(255, 241, 195));
+        jPanel2.setPreferredSize(new java.awt.Dimension(940, 280));
 
         salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -474,14 +479,13 @@ public class Reports extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Sales", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 221, 187));
+        jPanel3.setPreferredSize(new java.awt.Dimension(940, 280));
 
         itemSalesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -522,20 +526,35 @@ public class Reports extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Item Sales", jPanel3);
 
-        jPanel6.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        centerPanel.add(jPanel6);
+        centerPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 266, 950, 320));
 
         itemDetails.add(centerPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1148, 664));
+        setSize(new java.awt.Dimension(1148, 709));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
