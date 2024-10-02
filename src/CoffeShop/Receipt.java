@@ -4,6 +4,7 @@
  */
 package CoffeShop;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.print.PageFormat;
@@ -52,11 +53,12 @@ public class Receipt extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        receiptTxtArea = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         printButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
+        receiptTxtArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -123,23 +125,6 @@ public class Receipt extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 410, -1));
 
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        receiptTxtArea.setEditable(false);
-        receiptTxtArea.setBackground(new java.awt.Color(255, 255, 255));
-        receiptTxtArea.setColumns(20);
-        receiptTxtArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        receiptTxtArea.setLineWrap(true);
-        receiptTxtArea.setRows(5);
-        receiptTxtArea.setWrapStyleWord(true);
-        receiptTxtArea.setBorder(null);
-        receiptTxtArea.setPreferredSize(new java.awt.Dimension(200, 100));
-        jScrollPane2.setViewportView(receiptTxtArea);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 138, 380, 482));
-
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         printButton.setText("Print");
@@ -170,14 +155,53 @@ public class Receipt extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(printButton)
                     .addComponent(closeButton))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 401, -1));
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 648, 401, 60));
+
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        receiptTxtArea.setEditable(false);
+        receiptTxtArea.setBackground(new java.awt.Color(255, 255, 255));
+        receiptTxtArea.setColumns(20);
+        receiptTxtArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        receiptTxtArea.setRows(5);
+        receiptTxtArea.setAutoscrolls(false);
+        receiptTxtArea.setBorder(null);
+        receiptTxtArea.setPreferredSize(new java.awt.Dimension(200, 100));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 392, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(receiptTxtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(39, Short.MAX_VALUE)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(receiptTxtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jScrollPane3.setViewportView(jPanel5);
+
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 360, 490));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 720));
 
@@ -189,42 +213,58 @@ public class Receipt extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
-     
+    
     PrinterJob printerJob = PrinterJob.getPrinterJob();
 
     printerJob.setPrintable(new Printable() {
         @Override
         public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
-            if (pageIndex > 0) {
-                return Printable.NO_SUCH_PAGE; // Only one page to print
-            }
-
             // Set margins
-            int margin = 50;
+            int margin = 50; // Top and left margin
+            int bottomMargin = 100; // Bottom margin
+            int lineHeight = g.getFontMetrics().getHeight();
+            int pageHeight = (int) pf.getImageableHeight();
             int y = margin;
 
-            // Print the header
+            // Calculate total content height and lines
+            String receiptText = receiptTxtArea.getText(); 
+            String[] lines = receiptText.split("\n");
+            int totalContentHeight = (lines.length + 4) * lineHeight; // 4 extra lines for the header
+
+            // Calculate lines per page, considering bottom margin
+            int linesPerPage = (pageHeight - margin - bottomMargin) / lineHeight;
+            int numPages = (int) Math.ceil((double) totalContentHeight / lineHeight / linesPerPage);
+
+            if (pageIndex >= numPages) {
+                return Printable.NO_SUCH_PAGE; // No more pages
+            }
+
+            // Draw header on each page
             g.setFont(jLabel1.getFont());
             g.drawString(jLabel1.getText(), margin, y);
-            y += g.getFontMetrics().getHeight(); // Move down by the font height
+            y += lineHeight;
 
             g.setFont(jLabel2.getFont());
             g.drawString(jLabel2.getText(), margin, y);
-            y += g.getFontMetrics().getHeight();
+            y += lineHeight;
 
             g.drawString(jLabel3.getText(), margin, y);
-            y += g.getFontMetrics().getHeight();
+            y += lineHeight;
 
             g.drawString(jLabel4.getText(), margin, y);
-            y += g.getFontMetrics().getHeight();
+            y += lineHeight;
 
+            // Draw receipt content
+            g.setFont(receiptTxtArea.getFont());
+            int startLine = pageIndex * linesPerPage;
+            int endLine = Math.min(lines.length, startLine + linesPerPage);
 
-            // Retrieve the receipt text and draw it on the graphics context
-            String receiptText = receiptTxtArea.getText(); 
-            String[] lines = receiptText.split("\n");
-            for (String line : lines) {
-                g.drawString(line, margin, y); // Draw each line with X and Y offset
-                y += g.getFontMetrics().getHeight(); // Increment Y position based on the font height
+            for (int i = startLine; i < endLine; i++) {
+                if (y + lineHeight > pageHeight - bottomMargin) {
+                    break; // Stop drawing if we reach the bottom margin
+                }
+                g.drawString(lines[i], margin, y);
+                y += lineHeight;
             }
 
             return Printable.PAGE_EXISTS; // Indicate that the page exists
@@ -239,9 +279,9 @@ public class Receipt extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Printing error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     }//GEN-LAST:event_printButtonActionPerformed
 
+    
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
@@ -351,7 +391,8 @@ public class Receipt extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton printButton;
     private javax.swing.JTextArea receiptTxtArea;
     // End of variables declaration//GEN-END:variables
