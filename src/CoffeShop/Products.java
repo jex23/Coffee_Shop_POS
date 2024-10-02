@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import CoffeShop.UserAuthenticate; // Adjust the package name as needed
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Products extends javax.swing.JFrame {
 
@@ -110,26 +111,28 @@ public class Products extends javax.swing.JFrame {
     
     private String imageLocation;
     private String imagePath() {
-        if (imageSelected) {
+    if (imageSelected) {
+        return imageLocation;
+    } else {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image files", "jpg", "png"));
+        int response = fileChooser.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            imageLocation = fileChooser.getSelectedFile().getAbsolutePath();
+            imageSelected = true;
+
+            ImageIcon originalIcon = new ImageIcon(imageLocation);
+            Image originalImage = originalIcon.getImage();
+            Image scaledImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            jLabel2.setIcon(scaledIcon);
+
             return imageLocation;
-        } else {
-            JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                imageLocation = fileChooser.getSelectedFile().getAbsolutePath();
-                imageSelected = true;
-
-                ImageIcon originalIcon = new ImageIcon(imageLocation);
-                Image originalImage = originalIcon.getImage();
-                Image scaledImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                jLabel2.setIcon(scaledIcon);
-
-                return imageLocation;
-            }
-            return null;
         }
+        return null;
     }
+}
     
     private void displayImage() {
     if (imageLocation != null) {
@@ -152,6 +155,7 @@ public class Products extends javax.swing.JFrame {
 
         if (!extension.equalsIgnoreCase("jpg") && !extension.equalsIgnoreCase("png")) {
             JOptionPane.showMessageDialog(null, "Only jpg and png are allowed");
+            resetLabel();
             return;
         }
 
@@ -309,61 +313,67 @@ public class Products extends javax.swing.JFrame {
     return price.matches("\\d+(\\.\\d+)?");
 }
     //update table and database
-   private void updateProduct() {
-        checkEmptyFields();
-        if (isEmpty) {
-            return;
-        }
-        String productName = txtName.getText();
-        String priceText = txtPrice.getText();
-        String category = (String) jComboBox1.getSelectedItem();
-        String imagePath = this.imagePath();
-        if (!isValidProductName(productName)) {
-            JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
-            return;
-        }
-        if (!isValidPrice(priceText) && isDecimal(priceText)) {
+  private void updateProduct() {
+    checkEmptyFields();
+    if (isEmpty) {
+        return;
+    }
+    String productName = txtName.getText();
+    String priceText = txtPrice.getText();
+    String category = (String) jComboBox1.getSelectedItem();
+    if (!isValidProductName(productName)) {
+        JOptionPane.showMessageDialog(this, "Product name can only contain letters, spaces, and hyphens.");
+        return;
+    }
+    if (!isValidPrice(priceText) && isDecimal(priceText)) {
         JOptionPane.showMessageDialog(this, "Price can only contain numbers.");
         return;
+    }
+
+    int selectedRow = imageLabel.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a product to update.");
+        return;
+    }
+
+    // id na lang gamit. id din naman pala gagamitin >:|
+    int productId = Integer.parseInt((String) imageLabel.getValueAt(selectedRow, 0));
+
+    // Get the current image path from the table
+    String currentImagePath = (String) imageLabel.getValueAt(selectedRow, 4);
+
+    // Update gamit selected id
+    try {
+        PreparedStatement prepState = conn.createConnection().prepareStatement(
+            "UPDATE tbl_products SET product_name = ?, product_category = ?, product_price = ?, product_ImagePath = ? WHERE product_id = ?"
+        );
+        prepState.setString(1, productName);
+        prepState.setString(2, category);
+        prepState.setDouble(3, Double.parseDouble(priceText));
+        if (imageLocation != null) {
+            prepState.setString(4, imageLocation);
+        } else {
+            prepState.setString(4, currentImagePath);
         }
+        prepState.setInt(5, productId);
+        prepState.executeUpdate();
 
-        int selectedRow = imageLabel.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a product to update.");
-            return;
-        }
+        JOptionPane.showMessageDialog(this, "Updated successfully");
+        isEmpty = false;
+        Fetch();
+        clearFields();
+        resetLabel();
 
-        // id na lang gamit. id din naman pala gagamitin >:|
-        int productId = Integer.parseInt((String) imageLabel.getValueAt(selectedRow, 0)); 
-
-        // Update gamit selected id
+    } catch (SQLException ex) {
+        Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(this, "Error: " + ex.toString());
+    } finally {
         try {
-            PreparedStatement prepState = conn.createConnection().prepareStatement(
-                "UPDATE tbl_products SET product_name = ?, product_category = ?, product_price = ?, product_ImagePath = ? WHERE product_id = ?"
-            );
-            prepState.setString(1, productName);
-            prepState.setString(2, category);
-            prepState.setDouble(3, Double.parseDouble(priceText));
-            prepState.setString(4, imagePath);
-            prepState.setInt(5, productId);
-            prepState.executeUpdate();
-
-            JOptionPane.showMessageDialog(this, "Updated successfully");
-            isEmpty = false;
-            Fetch();
-            clearFields();
-            resetLabel();
-
+            conn.createConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error: " + ex.toString());
-        } finally {
-            try {
-                conn.createConnection().close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+    }
 }
     //delete product
     private void deleteProduct() {
