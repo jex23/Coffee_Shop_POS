@@ -125,13 +125,15 @@ public class Receipt extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(null);
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         receiptTxtArea.setEditable(false);
         receiptTxtArea.setBackground(new java.awt.Color(255, 255, 255));
         receiptTxtArea.setColumns(20);
         receiptTxtArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        receiptTxtArea.setLineWrap(true);
         receiptTxtArea.setRows(5);
-        receiptTxtArea.setAutoscrolls(false);
+        receiptTxtArea.setWrapStyleWord(true);
         receiptTxtArea.setBorder(null);
         receiptTxtArea.setPreferredSize(new java.awt.Dimension(200, 100));
         jScrollPane2.setViewportView(receiptTxtArea);
