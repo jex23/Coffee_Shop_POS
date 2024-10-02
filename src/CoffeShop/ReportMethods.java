@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ReportMethods {
-    
+
     private sqlConnector connector; // Instance of sqlConnector
 
     public ReportMethods() {
@@ -24,11 +24,11 @@ public class ReportMethods {
             "Sale ID", "Sale Date", "Employee Name", "Amount", "Change", 
             "Subtotal", "VAT", "Total"
         }, 0);
-        
+
         try (Connection conn = connector.createConnection(); 
              Statement stmt = conn.createStatement(); 
              ResultSet rs = stmt.executeQuery(query)) {
-             
+
             while (rs.next()) {
                 Object[] row = {
                     rs.getInt("sale_id"),
@@ -52,45 +52,45 @@ public class ReportMethods {
         }
         return model; // Return the model instead of displaying a new JFrame
     }
-
-    // Method to get the sales items report as a DefaultTableModel, including product name and category
+    
+    
     public DefaultTableModel getSalesItemsReportModel() {
-        String query = "SELECT si.sale_item_id, si.sale_id, p.product_name, p.product_category, si.quantity, si.price, si.total_item_price, si.sale_item_time " +
-                       "FROM tbl_sales_items si " +
-                       "JOIN tbl_products p ON si.product_id = p.product_id"; // Assuming product_id links both tables
+    String query = "SELECT * FROM tbl_sales_items"; // Query to select all sales items
+    DefaultTableModel model = new DefaultTableModel(new String[]{
+        "Sale Item ID", "Sale ID", "Product ID", "Product Name", 
+        "Product Category", "Quantity", "Price", 
+        "Total Item Price", "Sale Item Time"
+    }, 0); // Column names for the model
 
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Sale Item ID", "Sale ID", "Product Name", "Product Category", "Quantity", "Price", 
-            "Total Item Price", "Sale Item Time"
-        }, 0);
+    try (Connection conn = connector.createConnection(); 
+         Statement stmt = conn.createStatement(); 
+         ResultSet rs = stmt.executeQuery(query)) {
 
-        try (Connection conn = connector.createConnection(); 
-             Statement stmt = conn.createStatement(); 
-             ResultSet rs = stmt.executeQuery(query)) {
-             
-            while (rs.next()) {
-                Object[] row = {
-                    rs.getInt("sale_item_id"),
-                    rs.getInt("sale_id"),
-                    rs.getString("product_name"), // Fetch product name
-                    rs.getString("product_category"), // Fetch product category
-                    rs.getInt("quantity"),
-                    rs.getBigDecimal("price"),
-                    rs.getBigDecimal("total_item_price"),
-                    rs.getTimestamp("sale_item_time")
-                };
-                model.addRow(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, 
-                "Error retrieving sales items report: " + e.getMessage(), 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE
-            );
+        while (rs.next()) {
+            Object[] row = {
+                rs.getInt("sale_item_id"),
+                rs.getInt("sale_id"),
+                rs.getInt("product_id"),
+                rs.getString("product_name"),
+                rs.getString("product_category"),
+                rs.getInt("quantity"),
+                rs.getBigDecimal("price"),
+                rs.getBigDecimal("total_item_price"),
+                rs.getTimestamp("sale_item_time")
+            };
+            model.addRow(row); // Add each row to the model
         }
-        return model; // Return the model instead of displaying a new JFrame
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, 
+            "Error retrieving sales items report: " + e.getMessage(), 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE
+        );
     }
+    return model; // Return the model containing sales item data
+}
+    
 
     // Method to calculate total sales based on a given period (daily, weekly, monthly, yearly, or all-time)
     public BigDecimal calculateTotalSales(String period) {
@@ -118,7 +118,7 @@ public class ReportMethods {
         try (Connection conn = connector.createConnection(); 
              Statement stmt = conn.createStatement(); 
              ResultSet rs = stmt.executeQuery(query)) {
-             
+
             if (rs.next()) {
                 return rs.getBigDecimal(1) != null ? rs.getBigDecimal(1) : BigDecimal.ZERO; // Return total or zero if null
             }
@@ -134,16 +134,16 @@ public class ReportMethods {
     }
 
     // Method to calculate the best-selling product based on the selected period
-   public void getBestSellerProduct(String period, 
-                                  JLabel coffeeBeSLProductNameText, 
-                                  JLabel coffeeBeSLQuantityText, 
-                                  JLabel teaBeSLProductNameText, 
-                                  JLabel teaBeSLQuantityText, 
-                                  JLabel snacksBeSLProductNameText, 
-                                  JLabel snacksBeSLQuantityText)   {
-        
+    public void getBestSellerProduct(String period, 
+                                     JLabel coffeeBeSLProductNameText, 
+                                     JLabel coffeeBeSLQuantityText, 
+                                     JLabel teaBeSLProductNameText, 
+                                     JLabel teaBeSLQuantityText, 
+                                     JLabel snacksBeSLProductNameText, 
+                                     JLabel snacksBeSLQuantityText) {
+
         String[] categories = {"Coffee", "Tea", "Snacks"};
-        
+
         for (String category : categories) {
             String query = String.format(
                 "SELECT p.product_name, SUM(si.quantity) AS total_quantity " +
@@ -221,6 +221,7 @@ public class ReportMethods {
                 return "1=1"; // Fallback to no date filtering
         }
     }
+
 
     // New method to refresh the best-selling products
    public void refreshBestSellers(String period,

@@ -525,14 +525,14 @@ public class Products extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(employeNamerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeRoleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 953, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 760, Short.MAX_VALUE)
                 .addComponent(logutIcon)
                 .addGap(30, 30, 30))
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(headerLayout.createSequentialGroup()
-                    .addGap(439, 439, 439)
+                    .addGap(420, 420, 420)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(564, Short.MAX_VALUE)))
+                    .addContainerGap(390, Short.MAX_VALUE)))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -717,7 +717,7 @@ public class Products extends javax.swing.JFrame {
             tblProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tblProductsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productTable, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                .addComponent(productTable, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tblProductsLayout.setVerticalGroup(
@@ -753,7 +753,9 @@ public class Products extends javax.swing.JFrame {
 
         txtPrice.setBackground(new java.awt.Color(255, 245, 238));
 
-        bUpdate.setForeground(new java.awt.Color(0, 0, 0));
+        bUpdate.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        bUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bUpdate.setForeground(new java.awt.Color(255, 245, 238));
         bUpdate.setText("Update");
         bUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bUpdate.setPreferredSize(new java.awt.Dimension(80, 40));
@@ -763,7 +765,9 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jButton24.setForeground(new java.awt.Color(0, 0, 0));
+        jButton24.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
+        jButton24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton24.setForeground(new java.awt.Color(255, 245, 238));
         jButton24.setText("Delete");
         jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton24.setPreferredSize(new java.awt.Dimension(80, 40));
@@ -773,7 +777,9 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jButton25.setForeground(new java.awt.Color(0, 0, 0));
+        jButton25.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jButton25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton25.setForeground(new java.awt.Color(255, 245, 238));
         jButton25.setText("Add");
         jButton25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton25.setPreferredSize(new java.awt.Dimension(80, 40));
@@ -783,7 +789,8 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jButton5.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.hoverBorderColor"));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Add Image");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -800,7 +807,9 @@ public class Products extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(60, 60));
         jPanel1.add(jLabel2);
 
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Clear");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -878,8 +887,8 @@ public class Products extends javax.swing.JFrame {
         itemDetailsLayout.setHorizontalGroup(
             itemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemDetailsLayout.createSequentialGroup()
-                .addComponent(tblProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tblProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(crudOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -894,7 +903,7 @@ public class Products extends javax.swing.JFrame {
 
         getContentPane().add(itemDetails, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1341, 709));
+        setSize(new java.awt.Dimension(1148, 709));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
