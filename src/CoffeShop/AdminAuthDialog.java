@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author jenal
+ * @author jenalyn
  */
 public class AdminAuthDialog extends javax.swing.JDialog {
     private boolean authenticated = false;

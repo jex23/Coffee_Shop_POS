@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author Asus
+ * @author jenalyn
  */
 public class Employee {
     private int employeeID;

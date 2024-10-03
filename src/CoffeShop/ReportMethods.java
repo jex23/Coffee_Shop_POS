@@ -9,6 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ *
+ * @author James
+ */
 public class ReportMethods {
     
     private sqlConnector connector; // Instance of sqlConnector

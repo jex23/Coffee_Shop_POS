@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author jenal
+ * @author jenalyn
  */
 public class IconLoader {
     private static final String ICON_PATH = "icon/kape.png"; 

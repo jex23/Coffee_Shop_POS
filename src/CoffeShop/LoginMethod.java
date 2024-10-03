@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author jenalyn
+ */
 public class LoginMethod {
 
     public UserAuthenticate authenticate(String username, String password) {
